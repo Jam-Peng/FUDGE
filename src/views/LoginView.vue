@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     signIn() {
-      const api = `${process.env.VUE_APP_API}/admin/signin`
+      const api = `${process.env.VUE_APP_API}admin/signin`
 
       this.$http
         .post(api, this.user)
@@ -57,8 +57,7 @@ export default {
           if (res.data.success) {
             const { token, expired } = res.data
             document.cookie = `pengToken=${token}; expires=${new Date(expired)}`
-            // console.log(token, expired)
-            this.$router.push('/dashboard')
+            this.$router.push('/dashboard/products')
           }
         })
         .catch((err) => {
