@@ -50,11 +50,13 @@ export default {
   methods: {
     signIn() {
       const api = `${process.env.VUE_APP_API}/admin/signin`
-      console.log(api)
+      // console.log(api)
       this.$http
         .post(api, this.user)
         .then((res) => {
-          console.log(res)
+          const { token, expired } = res.data
+          document.cookie = `pengToken=${token}; expires=${new Date(expired)}`
+          // console.log(token, expired)
         })
         .catch((err) => {
           console.log(err.response)
