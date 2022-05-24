@@ -1,4 +1,13 @@
 <template>
+  <div class="text-end">
+    <button
+      class="btn btn-primary"
+      type="button"
+      @click="$refs.ProductModals.showModel()"
+    >
+      新增產品
+    </button>
+  </div>
   <table class="table mt-4">
     <thead>
       <tr>
@@ -29,9 +38,11 @@
       </tr>
     </tbody>
   </table>
+  <ProductModal ref="ProductModals" />
 </template>
 
 <script>
+import ProductModal from '../components/ProductModal.vue'
 export default {
   data() {
     return {
@@ -39,13 +50,14 @@ export default {
       pagination: {}
     }
   },
+  components: { ProductModal },
   methods: {
     getProudcts() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products?page=:page`
       this.$http
         .get(api)
         .then((res) => {
-          console.log(res.data)
+          // console.log(res.data)
           this.products = res.data.products
           this.pagination = res.data.pagination
         })
