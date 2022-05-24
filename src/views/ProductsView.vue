@@ -91,13 +91,12 @@ export default {
       // 新增狀態
       let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
       let httpMethod = 'post'
-
       // 編輯狀態
       if (!this.isNew) {
         api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${data.id}`
         httpMethod = 'put'
       }
-
+      // 發送API
       this.$http[httpMethod](api, { data: this.tempProduct })
         .then((res) => {
           if (res.data.success) {
