@@ -1,14 +1,10 @@
 <template>
-  <div class="text-end">
-    <button
-      class="btn btn-primary"
-      type="button"
-      @click="$refs.ProductModals.showModel()"
-    >
+  <div class="text-end mt-4">
+    <button class="btn btn-primary" type="button" @click="openModal">
       新增產品
     </button>
   </div>
-  <table class="table mt-4">
+  <table class="table mt-2 align-middle">
     <thead>
       <tr>
         <th width="120">分類</th>
@@ -38,7 +34,11 @@
       </tr>
     </tbody>
   </table>
-  <ProductModal ref="ProductModals" />
+  <ProductModal
+    ref="ProductModal"
+    :product="tempProduct"
+    @updat-Product="updatProduct"
+  />
 </template>
 
 <script>
@@ -47,19 +47,42 @@ export default {
   data() {
     return {
       products: [],
-      pagination: {}
+      pagination: {},
+      tempProduct: {}
     }
   },
   components: { ProductModal },
   methods: {
+    // 取得商品列表
     getProudcts() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products?page=:page`
       this.$http
         .get(api)
         .then((res) => {
-          // console.log(res.data)
-          this.products = res.data.products
-          this.pagination = res.data.pagination
+          if (res.data.success) {
+            this.products = res.data.products
+            this.pagination = res.data.pagination
+          }
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
+    },
+    openModal() {
+      this.tempProduct = {}
+      const modalComponent = this.$refs.ProductModal
+      modalComponent.showModel()
+    },
+    updatProduct(data) {
+      this.tempProduct = data
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
+      this.$http
+        .post(api, { data: this.tempProduct })
+        .then((res) => {
+          if (res.data.success) {
+            this.$refs.ProductModal.hideModal()
+            this.getProudcts()
+          }
         })
         .catch((err) => {
           console.log(err.response)
