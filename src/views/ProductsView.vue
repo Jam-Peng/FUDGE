@@ -1,6 +1,6 @@
 <template>
   <div class="text-end mt-4">
-    <button class="btn btn-primary" type="button" @click="openModal">
+    <button class="btn btn-primary" type="button" @click="openModal(true)">
       新增產品
     </button>
   </div>
@@ -27,7 +27,12 @@
         </td>
         <td>
           <div class="btn-group">
-            <button class="btn btn-outline-primary btn-sm">編輯</button>
+            <button
+              class="btn btn-outline-primary btn-sm"
+              @click="openModal(false, product)"
+            >
+              編輯
+            </button>
             <button class="btn btn-outline-danger btn-sm">刪除</button>
           </div>
         </td>
@@ -48,7 +53,8 @@ export default {
     return {
       products: [],
       pagination: {},
-      tempProduct: {}
+      tempProduct: {},
+      isNew: false
     }
   },
   components: { ProductModal },
@@ -68,16 +74,31 @@ export default {
           console.log(err.response)
         })
     },
-    openModal() {
-      this.tempProduct = {}
+    openModal(isNew, item) {
+      // console.log(isNew, item)
+      if (isNew) {
+        this.tempProduct = {}
+      } else {
+        this.tempProduct = { ...item }
+      }
+      this.isNew = isNew
       const modalComponent = this.$refs.ProductModal
       modalComponent.showModel()
     },
+    // 新增商品與更新商品
     updatProduct(data) {
       this.tempProduct = data
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
-      this.$http
-        .post(api, { data: this.tempProduct })
+      // 新增狀態
+      let api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`
+      let httpMethod = 'post'
+
+      // 編輯狀態
+      if (!this.isNew) {
+        api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product/${data.id}`
+        httpMethod = 'put'
+      }
+
+      this.$http[httpMethod](api, { data: this.tempProduct })
         .then((res) => {
           if (res.data.success) {
             this.$refs.ProductModal.hideModal()
