@@ -1,8 +1,9 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-light">
-    <div class="container">
-      <a class="navbar-brand" href="#">FUDGE-SHOP</a>
-      <button
+  <nav class="navbar navbar-expand-lg bg-light vh-100 align-items-start">
+    <div class="container d-flex flex-lg-column my-3">
+      <a class="navbar-brand fw-semibold" href="#">FUDGE</a>
+
+      <!-- <button
         class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
@@ -12,24 +13,23 @@
         aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      </button> -->
+      <div class="collapse navbar-collapse d-flex flex-column" id="navbarText">
+        <ul class="navbar-nav py-1 mb-lg-0 d-flex flex-column me-auto">
           <li class="nav-item">
             <router-link to="/dashboard/products" class="nav-link"
-              >產品
+              >商品管理
             </router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">訂單</a>
+            <a class="nav-link" href="#">訂單管理</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">優惠卷</a>
+            <a class="nav-link" href="#">優惠卷管理</a>
           </li>
         </ul>
-        <!-- <span class="navbar-text"> Navbar text with an inline element </span> -->
         <button
-          class="btn btn-outline-success"
+          class="btn btn-outline-success mt-3"
           type="submit"
           @click.prevent="logout"
         >

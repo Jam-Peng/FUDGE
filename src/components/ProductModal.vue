@@ -7,7 +7,7 @@
     aria-hidden="true"
     ref="modal"
   >
-    <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
           <h5 class="modal-title" id="exampleModalLabel">
@@ -38,7 +38,13 @@
                   >或 上傳圖片
                   <i class="fas fa-spinner fa-spin"></i>
                 </label>
-                <input type="file" id="customFile" class="form-control" />
+                <input
+                  type="file"
+                  id="customFile"
+                  class="form-control"
+                  @change="uploadFile"
+                  ref="fileInput"
+                />
               </div>
               <img class="img-fluid" alt="" :src="tempProduct.imageUrl" />
               <!-- 延伸技巧，多圖 -->
@@ -179,7 +185,8 @@
 </template>
 
 <script>
-import Modal from 'bootstrap/js/dist/modal'
+// import Modal from 'bootstrap/js/dist/modal'
+import modalMixin from '@/mixins/modalMixin'
 export default {
   data() {
     return {
@@ -196,21 +203,39 @@ export default {
     }
   },
   emits: ['updat-Product'],
+  mixins: [modalMixin],
   watch: {
     product() {
       this.tempProduct = { ...this.product }
     }
   },
   methods: {
-    showModel() {
-      this.modal.show()
-    },
-    hideModal() {
-      this.modal.hide()
+    // showModel() {
+    //   this.modal.show()
+    // },
+    // hideModal() {
+    //   this.modal.hide()
+    // },
+    uploadFile() {
+      const uploadFile = this.$refs.fileInput.files[0]
+      // console.dir(uploadFile)
+      const formData = new FormData()
+      formData.append('file-to-upload', uploadFile)
+      // 發送API
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
+      this.$http
+        .post(url, formData)
+        .then((res) => {
+          console.log(res)
+          this.tempProduct.imageUrl = res.data.imageUrl
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
     }
-  },
-  mounted() {
-    this.modal = new Modal(this.$refs.modal)
   }
+  // mounted() {
+  //   this.modal = new Modal(this.$refs.modal)
+  // }
 }
 </script>

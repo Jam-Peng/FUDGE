@@ -1,7 +1,15 @@
 <template>
-  <NavBar />
-  <div class="container">
-    <router-view />
+  <div class="container-fliod">
+    <div class="row">
+      <div class="col col-lg-3">
+        <NavBar />
+      </div>
+      <div class="col col-lg-9">
+        <div class="d-flex flex-column p-4 mx-4 ms-auto">
+          <router-view />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
