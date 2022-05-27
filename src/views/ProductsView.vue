@@ -1,4 +1,5 @@
 <template>
+  <OverLoading :active="isLoading"></OverLoading>
   <div class="shadow-sm p-3 mt-2 bg-body rounded">
     <div>
       <div class="d-flex justify-content-between pt-3 px-3">
@@ -81,7 +82,8 @@ export default {
       products: [],
       pagination: {},
       tempProduct: {},
-      isNew: false
+      isNew: false,
+      isLoading: false
     }
   },
   components: { ProductModal, DeleteModal },
@@ -89,9 +91,11 @@ export default {
     // 取得商品列表
     getProudcts() {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products?page=:page`
+      this.isLoading = true
       this.$http
         .get(api)
         .then((res) => {
+          this.isLoading = false
           if (res.data.success) {
             this.products = res.data.products
             this.pagination = res.data.pagination

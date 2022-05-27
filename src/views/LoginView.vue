@@ -4,7 +4,7 @@
       <div class="col-md-6">
         <h1 class="h3 mb-3 font-weight-normal">請先登入</h1>
         <div class="mb-2">
-          <label for="inputEmail" class="sr-only">Email address</label>
+          <label for="inputEmail" class="sr-only">帳號</label>
           <input
             type="email"
             id="inputEmail"
@@ -16,7 +16,7 @@
           />
         </div>
         <div class="mb-2">
-          <label for="inputPassword" class="sr-only">Password</label>
+          <label for="inputPassword" class="sr-only">密碼</label>
           <input
             type="password"
             id="inputPassword"
