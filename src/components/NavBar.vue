@@ -1,7 +1,10 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-light vh-100 align-items-start">
-    <div class="container d-flex flex-lg-column my-3">
-      <router-link to="/dashboard/products" class="navbar-brand fw-semibold">
+    <div class="container d-flex flex-lg-column my-4">
+      <router-link
+        to="/dashboard/products"
+        class="navbar-brand fw-semibold mt-2"
+      >
         FUDGE
       </router-link>
       <!-- <button

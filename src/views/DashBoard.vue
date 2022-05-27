@@ -5,7 +5,7 @@
         <NavBar />
       </div>
       <div class="col col-lg-9">
-        <div class="d-flex flex-column p-4 mx-4 ms-auto">
+        <div class="d-flex flex-column p-3 mx-3 ms-auto">
           <ToastMessages />
           <router-view />
         </div>

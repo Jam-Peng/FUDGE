@@ -2,7 +2,7 @@
   <OverLoading :active="isLoading"></OverLoading>
   <div class="shadow-sm p-3 mt-2 bg-body rounded">
     <div>
-      <div class="d-flex justify-content-between pt-3 px-3">
+      <div class="d-flex justify-content-between px-3">
         <p class="fs-3">商品管理表</p>
         <span
           ><button
@@ -105,7 +105,7 @@ export default {
         .then((res) => {
           this.isLoading = false
           if (res.data.success) {
-            console.log(res.data)
+            // console.log(res.data)
             this.products = res.data.products
             this.pagination = res.data.pagination
           }

@@ -1,6 +1,6 @@
 <template>
-  <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
+  <nav aria-label="Page navigation example ">
+    <ul class="pagination justify-content-center mt-4">
       <li class="page-item" :class="{ disabled: pages.has_pre === false }">
         <a
           class="page-link"
