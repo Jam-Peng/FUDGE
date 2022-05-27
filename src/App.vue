@@ -6,7 +6,9 @@
 @import './assets/all';
 </style>
 
+//
 <script>
-import 'bootstrap/dist/js/bootstrap.bundle'
-export default {}
+// import 'bootstrap/dist/js/bootstrap.bundle'
+// export default {}
+//
 </script>

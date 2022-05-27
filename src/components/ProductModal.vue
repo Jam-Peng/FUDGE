@@ -203,7 +203,6 @@ export default {
     }
   },
   emits: ['updat-Product'],
-  mixins: [modalMixin],
   watch: {
     product() {
       this.tempProduct = { ...this.product }
@@ -233,7 +232,8 @@ export default {
           console.log(err.response)
         })
     }
-  }
+  },
+  mixins: [modalMixin]
   // mounted() {
   //   this.modal = new Modal(this.$refs.modal)
   // }

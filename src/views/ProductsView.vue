@@ -70,11 +70,13 @@
     :del-Product="tempProduct"
     @emit-delete="deleteProductModal"
   />
+  <PagiNation />
 </template>
 
 <script>
 import ProductModal from '../components/ProductModal.vue'
 import DeleteModal from '../components/DeleteModal.vue'
+import PagiNation from '@/components/PagiNation.vue'
 
 export default {
   data() {
@@ -86,17 +88,19 @@ export default {
       isLoading: false
     }
   },
-  components: { ProductModal, DeleteModal },
+  components: { ProductModal, DeleteModal, PagiNation },
+  inject: ['emitter'],
   methods: {
     // 取得商品列表
-    getProudcts() {
-      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products?page=:page`
+    getProudcts(page = 1) {
+      const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`
       this.isLoading = true
       this.$http
         .get(api)
         .then((res) => {
           this.isLoading = false
           if (res.data.success) {
+            console.log(res.data)
             this.products = res.data.products
             this.pagination = res.data.pagination
           }
@@ -117,7 +121,7 @@ export default {
       const modalComponent = this.$refs.ProductModal
       modalComponent.showModel()
     },
-    // 新增商品與更新商品
+    // 新增商品與更新商品、傳遞吐司元件資料
     updatProduct(data) {
       this.tempProduct = data
       // 新增狀態
@@ -131,9 +135,20 @@ export default {
       // 發送API
       this.$http[httpMethod](api, { data: this.tempProduct })
         .then((res) => {
+          // console.log(res)
+          this.$refs.ProductModal.hideModal()
           if (res.data.success) {
-            this.$refs.ProductModal.hideModal()
             this.getProudcts()
+            this.emitter.emit('pushMessages', {
+              style: 'success',
+              title: '更新成功'
+            })
+          } else {
+            this.emitter.emit('pushMessages', {
+              style: 'danger',
+              title: '更新失敗',
+              content: res.data.message.join('、')
+            })
           }
         })
         .catch((err) => {
@@ -156,6 +171,10 @@ export default {
           if (res.data.success) {
             this.$refs.DeleteProductModal.hideModal()
             this.getProudcts()
+            this.emitter.emit('pushMessages', {
+              style: 'success',
+              title: '刪除成功'
+            })
           }
         })
         .catch((err) => {

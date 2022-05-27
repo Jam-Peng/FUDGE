@@ -6,6 +6,7 @@
       </div>
       <div class="col col-lg-9">
         <div class="d-flex flex-column p-4 mx-4 ms-auto">
+          <ToastMessages />
           <router-view />
         </div>
       </div>
@@ -15,8 +16,16 @@
 
 <script>
 import NavBar from '../components/NavBar.vue'
+import emitter from '@/methods/emitter'
+import ToastMessages from '@/components/ToastMessages.vue'
+
 export default {
-  components: { NavBar },
+  components: { NavBar, ToastMessages },
+  provide() {
+    return {
+      emitter
+    }
+  },
   created() {
     // 取得 token
     const token = document.cookie.replace(
