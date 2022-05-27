@@ -1,8 +1,9 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-light vh-100 align-items-start">
     <div class="container d-flex flex-lg-column my-3">
-      <a class="navbar-brand fw-semibold" href="#">FUDGE</a>
-
+      <router-link to="/dashboard/products" class="navbar-brand fw-semibold">
+        FUDGE
+      </router-link>
       <!-- <button
         class="navbar-toggler"
         type="button"
