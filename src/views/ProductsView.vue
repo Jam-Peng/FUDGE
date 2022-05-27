@@ -70,7 +70,12 @@
     :del-Product="tempProduct"
     @emit-delete="deleteProductModal"
   />
-  <PagiNation />
+  <PagiNation
+    :pages="pagination"
+    @emit-Page="getProudcts"
+    @emit-Pre="getProudcts"
+    @emit-Next="getProudcts"
+  />
 </template>
 
 <script>
