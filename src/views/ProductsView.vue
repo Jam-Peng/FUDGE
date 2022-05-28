@@ -32,8 +32,10 @@
             <td class="text-center">{{ index + 1 }}</td>
             <td>{{ product.category }}</td>
             <td>{{ product.title }}</td>
-            <td class="text-center">{{ product.origin_price }}</td>
-            <td class="text-center">{{ product.price }}</td>
+            <td class="text-center">
+              {{ $filters.currency(product.origin_price) }}
+            </td>
+            <td class="text-center">{{ $filters.currency(product.price) }}</td>
             <td class="text-center">
               <span class="text-success" v-if="product.is_enabled">啟用</span>
               <span class="text-muted" v-else>未啟用</span>
@@ -103,7 +105,10 @@ export default {
       this.$http
         .get(api)
         .then((res) => {
-          this.isLoading = false
+          // this.isLoading = false  改成使用 setTimeout
+          setTimeout(() => {
+            this.isLoading = false
+          }, 500)
           if (res.data.success) {
             // console.log(res.data)
             this.products = res.data.products
@@ -142,19 +147,22 @@ export default {
         .then((res) => {
           // console.log(res)
           this.$refs.ProductModal.hideModal()
-          if (res.data.success) {
-            this.getProudcts()
-            this.emitter.emit('pushMessages', {
-              style: 'success',
-              title: '更新成功'
-            })
-          } else {
-            this.emitter.emit('pushMessages', {
-              style: 'danger',
-              title: '更新失敗',
-              content: res.data.message.join('、')
-            })
-          }
+          this.getProudcts()
+          this.$httpMessageState(res)
+          // 刪除 原本的吐司狀態
+          // if (res.data.success) {
+          //   this.getProudcts()
+          //   this.emitter.emit('pushMessages', {
+          //     style: 'success',
+          //     title: '更新成功'
+          //   })
+          // } else {
+          //   this.emitter.emit('pushMessages', {
+          //     style: 'danger',
+          //     title: '更新失敗',
+          //     content: res.data.message.join('、')
+          //   })
+          // }
         })
         .catch((err) => {
           console.log(err.response)
@@ -173,14 +181,18 @@ export default {
       this.$http
         .delete(url)
         .then((res) => {
-          if (res.data.success) {
-            this.$refs.DeleteProductModal.hideModal()
-            this.getProudcts()
-            this.emitter.emit('pushMessages', {
-              style: 'success',
-              title: '刪除成功'
-            })
-          }
+          this.$refs.DeleteProductModal.hideModal()
+          this.getProudcts()
+          this.$httpMessageState(res, '刪除商品成功')
+          // 刪除原本的吐司狀態
+          // if (res.data.success) {
+          //   this.$refs.DeleteProductModal.hideModal()
+          //   this.getProudcts()
+          //   this.emitter.emit('pushMessages', {
+          //     style: 'success',
+          //     title: '刪除成功'
+          //   })
+          // }
         })
         .catch((err) => {
           console.log(err.response)
