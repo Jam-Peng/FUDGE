@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <div class="col col-lg-3">
+      <div class="col col-lg-3 col-md-2">
         <NavBar />
       </div>
-      <div class="col col-lg-9">
+      <div class="col col-lg-9 col-md-10">
         <div class="d-flex flex-column p-3 mx-3 ms-auto">
           <ToastMessages />
           <router-view />

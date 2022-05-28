@@ -11,14 +11,17 @@
         class="navbar-toggler"
         type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#navbarText"
-        aria-controls="navbarText"
+        data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
       </button> -->
-      <div class="collapse navbar-collapse d-flex flex-column" id="navbarText">
+      <div
+        class="collapse navbar-collapse d-flex flex-column"
+        id="navbarNavAltMarkup"
+      >
         <ul class="navbar-nav py-1 mb-lg-0 d-flex flex-column me-auto">
           <li class="nav-item">
             <router-link to="/dashboard/products" class="nav-link"

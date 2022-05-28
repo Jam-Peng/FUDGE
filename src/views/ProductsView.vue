@@ -148,21 +148,8 @@ export default {
           // console.log(res)
           this.$refs.ProductModal.hideModal()
           this.getProudcts()
+          // 全域屬性發送吐司訊息
           this.$httpMessageState(res)
-          // 刪除 原本的吐司狀態
-          // if (res.data.success) {
-          //   this.getProudcts()
-          //   this.emitter.emit('pushMessages', {
-          //     style: 'success',
-          //     title: '更新成功'
-          //   })
-          // } else {
-          //   this.emitter.emit('pushMessages', {
-          //     style: 'danger',
-          //     title: '更新失敗',
-          //     content: res.data.message.join('、')
-          //   })
-          // }
         })
         .catch((err) => {
           console.log(err.response)
@@ -183,16 +170,8 @@ export default {
         .then((res) => {
           this.$refs.DeleteProductModal.hideModal()
           this.getProudcts()
+          // 全域屬性發送吐司訊息
           this.$httpMessageState(res, '刪除商品成功')
-          // 刪除原本的吐司狀態
-          // if (res.data.success) {
-          //   this.$refs.DeleteProductModal.hideModal()
-          //   this.getProudcts()
-          //   this.emitter.emit('pushMessages', {
-          //     style: 'success',
-          //     title: '刪除成功'
-          //   })
-          // }
         })
         .catch((err) => {
           console.log(err.response)
