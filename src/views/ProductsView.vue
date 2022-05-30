@@ -119,7 +119,7 @@ export default {
           console.log(err.response)
         })
     },
-    // 打開新增或編輯商品Ｍodal
+    // 打開新增或編輯 Modal
     openModal(isNew, item) {
       // console.log(isNew, item)
       if (isNew) {

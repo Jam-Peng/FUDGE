@@ -50,13 +50,14 @@
 <script>
 // import Modal from 'bootstrap/js/dist/modal'
 import modalMixin from '../mixins/modalMixin'
+
 export default {
   data() {
     return {
       modal: {}
     }
   },
-  props: ['delProduct'],
+  props: { delProduct: {} },
   emits: ['emit-delete'],
   // methods: {
   //   showModel() {

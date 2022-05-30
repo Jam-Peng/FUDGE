@@ -29,10 +29,14 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">訂單管理</a>
+            <router-link to="/dashboard/orders" class="nav-link"
+              >訂單管理
+            </router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">優惠卷管理</a>
+            <router-link to="/dashboard/coupons" class="nav-link"
+              >優惠卷管理
+            </router-link>
           </li>
         </ul>
         <button
