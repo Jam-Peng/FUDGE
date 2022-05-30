@@ -43,7 +43,12 @@
                 >
                   編輯
                 </button>
-                <button class="btn btn-outline-danger btn-sm">刪除</button>
+                <button
+                  class="btn btn-outline-danger btn-sm"
+                  @click="openDeleteCoupon(coupon)"
+                >
+                  刪除
+                </button>
               </div>
             </td>
           </tr>
@@ -56,10 +61,23 @@
     :coupon="tempCoupon"
     @update-Coupon="updateCoupon"
   />
+  <DeleteCouponModal
+    ref="DeleteCouponModal"
+    :coupon="tempCoupon"
+    @del-Coupon="DeleteCoupon"
+  />
+  <PagiNation
+    :pages="pagination"
+    @emit-Page="getCoupons"
+    @emit-Pre="getCoupons"
+    @emit-Next="getCoupons"
+  />
 </template>
 
 <script>
 import CouponModal from '@/components/CouponModal.vue'
+import DeleteCouponModal from '@/components/DeleteCouponModal.vue'
+import PagiNation from '@/components/PagiNation.vue'
 
 export default {
   data() {
@@ -71,10 +89,10 @@ export default {
       isLoading: false
     }
   },
-  components: { CouponModal },
+  components: { CouponModal, DeleteCouponModal, PagiNation },
   methods: {
     // 取得優惠卷列表
-    getCoupons(page = 1) {
+    getCoupons(page) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupons?page=${page}`
       this.isLoading = true
       this.$http
@@ -117,9 +135,27 @@ export default {
       this.$http[httpMethod](url, { data: this.tempCoupon })
         .then((res) => {
           this.$refs.CouponModal.hideModal()
-          if (res.data.success) {
-            this.getCoupons()
-          }
+          this.getCoupons()
+          this.$httpMessageState(res, '更新優惠卷')
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
+    },
+    // 打開刪除 Modal
+    openDeleteCoupon(coupon) {
+      this.tempCoupon = coupon
+      this.$refs.DeleteCouponModal.showModel()
+    },
+    // 刪除優惠卷
+    DeleteCoupon() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupon/${this.tempCoupon.id}`
+      this.$http
+        .delete(url)
+        .then((res) => {
+          this.$refs.DeleteCouponModal.hideModal()
+          this.getCoupons()
+          this.$httpMessageState(res, '刪除優惠卷')
         })
         .catch((err) => {
           console.log(err.response)

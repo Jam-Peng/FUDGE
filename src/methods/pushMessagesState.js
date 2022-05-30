@@ -2,7 +2,6 @@ import emitter from '@/methods/emitter'
 
 export default function (res, title = '更新') {
   if (res.data.success) {
-    this.getProudcts()
     emitter.emit('pushMessages', {
       style: 'success',
       title: `${title}成功`
