@@ -8,7 +8,7 @@
 
 //
 <script>
+// 為了讓Bootstrap的 Navbar 可以正常收合
 // import 'bootstrap/dist/js/bootstrap.bundle'
 // export default {}
-//
 </script>
