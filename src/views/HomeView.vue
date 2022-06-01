@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
+  <div class="container-fluid">
     <div class="row">
       <NavBar />
     </div>
   </div>
 
-  <div class="container mt-3">
+  <div class="container-fluid mt-3">
     <div class="row">
       <div class="col text-center">
         <p class="fs-3">登入後台管理系統</p>

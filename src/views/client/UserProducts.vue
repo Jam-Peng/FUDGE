@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
-    <div class="row px-lg-3">
+  <div class="container-fluid">
+    <div class="row">
       <NavBar />
     </div>
   </div>
 
-  <div class="container">
+  <div class="container-fluid">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
         <li class="breadcrumb-item">

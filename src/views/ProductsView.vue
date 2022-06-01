@@ -105,6 +105,7 @@ export default {
       this.$http
         .get(api)
         .then((res) => {
+          console.log(res)
           // this.isLoading = false  改成使用 setTimeout
           setTimeout(() => {
             this.isLoading = false

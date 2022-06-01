@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-light px-3">
+  <nav class="navbar navbar-expand-lg bg-light px-4">
     <div class="container">
       <a class="navbar-brand" href="#">FUDGE</a>
       <button
@@ -35,26 +35,39 @@
     <div class="container">
       <div class="row ms-lg-auto">
         <div
-          class="col d-flex flex-column align-items-center justify-content-center"
+          class="col d-flex flex-column align-items-center justify-content-center position-relative"
           role="search"
         >
           <input
-            class="me-0"
+            class="search me-0"
             type="search"
             placeholder="Search"
             aria-label="Search"
+          />
+          <font-awesome-icon
+            class="icons icon-search position-absolute"
+            :icon="['fas', 'magnifying-glass']"
           />
         </div>
         <div class="col">
           <ul class="navbar-nav d-flex flex-row justify-content-end">
             <li class="nav-item">
-              <a class="nav-link">登入</a>
+              <a class="nav-link"
+                ><font-awesome-icon class="icons" :icon="['fas', 'user']" />
+              </a>
             </li>
-            <li class="nav-item mx-2">
-              <a class="nav-link">最愛 </a>
+            <li class="nav-item mx-1">
+              <a class="nav-link"
+                ><font-awesome-icon class="icons" :icon="['far', 'star']" />
+              </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link">購物車 </a>
+              <a class="nav-link"
+                ><font-awesome-icon
+                  class="icons"
+                  :icon="['fas', 'cart-shopping']"
+                />
+              </a>
             </li>
           </ul>
         </div>
@@ -62,6 +75,23 @@
     </div>
   </nav>
 </template>
+
+<style lang="scss">
+ul li {
+  cursor: pointer;
+}
+.icons {
+  font-size: 1.2rem;
+}
+.icon-search {
+  right: 11%;
+  cursor: pointer;
+  color: #6f7479;
+}
+.search {
+  outline: none;
+}
+</style>
 
 <script>
 // 為了讓Bootstrap的 Navbar 可以正常收合
