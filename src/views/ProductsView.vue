@@ -105,13 +105,13 @@ export default {
       this.$http
         .get(api)
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           // this.isLoading = false  改成使用 setTimeout
           setTimeout(() => {
             this.isLoading = false
           }, 500)
           if (res.data.success) {
-            // console.log(res.data)
+            console.log(res.data)
             this.products = res.data.products
             this.pagination = res.data.pagination
           }

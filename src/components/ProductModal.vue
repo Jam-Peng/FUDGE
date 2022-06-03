@@ -7,7 +7,7 @@
     aria-hidden="true"
     ref="modal"
   >
-    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
           <h5 class="modal-title" id="exampleModalLabel">
@@ -22,51 +22,8 @@
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col-sm-4">
-              <div class="mb-3">
-                <label for="image" class="form-label">輸入圖片網址</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="image"
-                  placeholder="請輸入圖片連結"
-                  v-model="tempProduct.imageUrl"
-                />
-              </div>
-              <div class="mb-3">
-                <label for="customFile" class="form-label"
-                  >或 上傳圖片
-                  <i class="fas fa-spinner fa-spin"></i>
-                </label>
-                <input
-                  type="file"
-                  id="customFile"
-                  class="form-control"
-                  @change="uploadFile"
-                  ref="fileInput"
-                />
-              </div>
-              <img class="img-fluid" alt="" :src="tempProduct.imageUrl" />
-              <!-- 延伸技巧，多圖 -->
-              <div class="mt-5">
-                <div class="mb-3 input-group">
-                  <input
-                    type="url"
-                    class="form-control form-control"
-                    placeholder="請輸入連結"
-                  />
-                  <button type="button" class="btn btn-outline-danger">
-                    移除
-                  </button>
-                </div>
-                <div>
-                  <button class="btn btn-outline-primary btn-sm d-block w-100">
-                    新增圖片
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-8">
+            <!-- 左側資料區 -->
+            <div class="col-3">
               <div class="mb-3">
                 <label for="title" class="form-label">標題</label>
                 <input
@@ -160,24 +117,58 @@
                   </label>
                 </div>
               </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  取消
+                </button>
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  @click="$emit('updat-Product', tempProduct)"
+                >
+                  確認
+                </button>
+              </div>
+            </div>
+            <!-- 右側上傳圖片 -->
+            <div class="col-9">
+              <div class="row">
+                <div class="mb-3">
+                  <label for="customFile" class="form-label">上傳圖片 </label>
+                  <input
+                    type="file"
+                    id="customFile"
+                    class="form-control"
+                    @change="uploadFile"
+                    ref="fileInput"
+                    multiple
+                  />
+                </div>
+                <div
+                  class="col-4 g-3 mt-2"
+                  v-for="item in tempProduct.images"
+                  :key="item"
+                >
+                  <img class="img-fluid" alt="" :src="item" />
+
+                  <button
+                    type="button"
+                    class="btn btn-outline-danger btn-sm mt-2 col-4"
+                    @click="removeImage(item)"
+                  >
+                    <font-awesome-icon
+                      class="icons icon-trash-can me-2"
+                      :icon="['fas', 'trash-can']"
+                    />移除
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-outline-secondary"
-            data-bs-dismiss="modal"
-          >
-            取消
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            @click="$emit('updat-Product', tempProduct)"
-          >
-            確認
-          </button>
         </div>
       </div>
     </div>
@@ -206,36 +197,52 @@ export default {
   watch: {
     product() {
       this.tempProduct = { ...this.product }
+      // 多圖範例 使用url建立多圖時，先在物件裡新增一個images屬性
+      if (!this.tempProduct.images) {
+        this.tempProduct.images = []
+      }
     }
   },
   methods: {
-    // showModel() {
-    //   this.modal.show()
-    // },
-    // hideModal() {
-    //   this.modal.hide()
-    // },
+    // 改寫成多圖上傳
     uploadFile() {
-      const uploadFile = this.$refs.fileInput.files[0]
-      // console.dir(uploadFile)
-      const formData = new FormData()
-      formData.append('file-to-upload', uploadFile)
-      // 發送API
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
-      this.$http
-        .post(url, formData)
-        .then((res) => {
-          console.log(res)
-          this.tempProduct.imageUrl = res.data.imageUrl
+      if (
+        // 限制圖片張數
+        Array.from(this.$refs.fileInput.files).length +
+          this.tempProduct.images.length >
+        5
+      ) {
+        alert('照片多餘5張')
+      } else {
+        // console.dir(this.$refs.fileInput)
+        // 抓取Ｄom元素，為了清空input的value
+        const select = this.$refs.fileInput.id
+        Array.from(this.$refs.fileInput.files).forEach((item) => {
+          const uploadFile = item
+          const formData = new FormData()
+          formData.append('file-to-upload', uploadFile)
+          const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/upload`
+          this.$http
+            .post(url, formData)
+            .then((res) => {
+              // console.log(res)
+              document.getElementById(select).value = ''
+              if (res.data.success) {
+                this.tempProduct.images.push(res.data.imageUrl)
+              }
+            })
+            .catch((err) => {
+              console.log(err.response)
+            })
         })
-        .catch((err) => {
-          console.log(err.response)
-        })
+      }
+    },
+    // 移除照片
+    removeImage(item) {
+      const index = this.tempProduct.images.indexOf(item)
+      this.tempProduct.images.splice(index, 1)
     }
   },
   mixins: [modalMixin]
-  // mounted() {
-  //   this.modal = new Modal(this.$refs.modal)
-  // }
 }
 </script>

@@ -88,6 +88,9 @@ ul li {
   cursor: pointer;
   color: #6f7479;
 }
+.icon-trash-can {
+  font-size: 1rem;
+}
 .search {
   outline: none;
 }

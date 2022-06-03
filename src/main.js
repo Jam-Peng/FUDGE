@@ -14,7 +14,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import {
   faUser,
   faCartShopping,
-  faMagnifyingGlass
+  faMagnifyingGlass,
+  faTrashCan
 } from '@fortawesome/free-solid-svg-icons'
 import { faStar } from '@fortawesome/free-regular-svg-icons'
 import {
@@ -32,7 +33,8 @@ library.add(
   faFacebookSquare,
   faInstagramSquare,
   faYoutubeSquare,
-  faLine
+  faLine,
+  faTrashCan
 )
 
 const app = createApp(App)
