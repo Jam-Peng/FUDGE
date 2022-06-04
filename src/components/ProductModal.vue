@@ -210,9 +210,9 @@ export default {
         // 限制圖片張數
         Array.from(this.$refs.fileInput.files).length +
           this.tempProduct.images.length >
-        5
+        9
       ) {
-        alert('照片多餘5張')
+        alert('照片多餘9張')
       } else {
         // console.dir(this.$refs.fileInput)
         // 抓取Ｄom元素，為了清空input的value

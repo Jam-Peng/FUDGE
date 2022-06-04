@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg bg-light px-4">
+  <nav class="navbar navbar-expand-lg bg-light px-3">
     <div class="container">
       <a class="navbar-brand" href="#">FUDGE</a>
       <button
@@ -43,6 +43,8 @@
             type="search"
             placeholder="Search"
             aria-label="Search"
+            @keyup.enter="$emit('update:search', $event.target.value)"
+            :value="search"
           />
           <font-awesome-icon
             class="icons icon-search position-absolute"
@@ -76,17 +78,28 @@
   </nav>
 </template>
 
-<style lang="scss">
-ul li {
-  cursor: pointer;
+<script>
+// 為了讓Bootstrap的 Navbar 可以正常收合
+import 'bootstrap/dist/js/bootstrap.bundle'
+export default {
+  props: {
+    search: String
+  }
 }
+</script>
+
+<style lang="scss">
+// ul li {
+//   cursor: pointer;
+// }
 .icons {
   font-size: 1.2rem;
 }
 .icon-search {
-  right: 11%;
-  cursor: pointer;
+  right: 8%;
+  // cursor: pointer;
   color: #6f7479;
+  background: rgb(255, 255, 255);
 }
 .icon-trash-can {
   font-size: 1rem;
@@ -95,9 +108,3 @@ ul li {
   outline: none;
 }
 </style>
-
-<script>
-// 為了讓Bootstrap的 Navbar 可以正常收合
-import 'bootstrap/dist/js/bootstrap.bundle'
-export default {}
-</script>

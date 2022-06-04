@@ -111,7 +111,7 @@ export default {
             this.isLoading = false
           }, 500)
           if (res.data.success) {
-            console.log(res.data)
+            // console.log(res.data)
             this.products = res.data.products
             this.pagination = res.data.pagination
           }
