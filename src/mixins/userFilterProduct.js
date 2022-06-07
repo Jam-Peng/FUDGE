@@ -1,7 +1,7 @@
 export default {
   methods: {
     // 側邊商品的篩選功能
-    filterProductAll() {
+    filterProductAll(e) {
       this.filterProducts = []
       this.filterProducts.push(
         ...this.products.filter((item) => {
@@ -9,46 +9,52 @@ export default {
         })
       )
       // console.log(this.filterProducts)
+      this.breadcrumb = e.target.innerText
     },
-    filterProductCloth() {
+    filterProductCloth(e) {
       this.filterProducts = []
       this.filterProducts.push(
         ...this.products.filter((item) => {
           return item.category === '上半身'
         })
       )
+      this.breadcrumb = e.target.innerText
     },
-    filterProductPants() {
+    filterProductPants(e) {
       this.filterProducts = []
       this.filterProducts.push(
         ...this.products.filter((item) => {
           return item.category === '下半身'
         })
       )
+      this.breadcrumb = e.target.innerText
     },
-    filterProductHats() {
+    filterProductHats(e) {
       this.filterProducts = []
       this.filterProducts.push(
         ...this.products.filter((item) => {
           return item.category === '配件'
         })
       )
+      this.breadcrumb = e.target.innerText
     },
-    filterProductPack() {
+    filterProductPack(e) {
       this.filterProducts = []
       this.filterProducts.push(
         ...this.products.filter((item) => {
           return item.category === '包包'
         })
       )
+      this.breadcrumb = e.target.innerText
     },
-    filterProductShoes() {
+    filterProductShoes(e) {
       this.filterProducts = []
       this.filterProducts.push(
         ...this.products.filter((item) => {
           return item.category === '鞋子'
         })
       )
+      this.breadcrumb = e.target.innerText
     }
   }
 }

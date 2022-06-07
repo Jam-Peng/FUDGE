@@ -15,7 +15,10 @@ import {
   faUser,
   faCartShopping,
   faMagnifyingGlass,
-  faTrashCan
+  faTrashCan,
+  faPlus,
+  faMinus,
+  faAngleDown
 } from '@fortawesome/free-solid-svg-icons'
 import { faStar } from '@fortawesome/free-regular-svg-icons'
 import {
@@ -34,7 +37,10 @@ library.add(
   faInstagramSquare,
   faYoutubeSquare,
   faLine,
-  faTrashCan
+  faTrashCan,
+  faPlus,
+  faMinus,
+  faAngleDown
 )
 
 const app = createApp(App)

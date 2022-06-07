@@ -8,6 +8,7 @@
   <div class="container-fluid mt-4 position-relative px-4">
     <div class="row ms-auto">
       <div class="col-lg-2 col-md-3 col-sm-12 mb-3">
+        <!-- 側邊sideBar -->
         <ul class="list-group">
           <a
             href="#"
@@ -63,7 +64,7 @@
               </li>
               <li class="breadcrumb-item active">產品列表</li>
               <li class="breadcrumb-item active" aria-current="page">
-                全部商品
+                {{ breadcrumb }}
               </li>
             </ol>
           </nav>
@@ -78,12 +79,10 @@
                     :src="item.images[0]"
                     class="card-img-top"
                     alt="..."
-                    @click.prevent="intoProduct(item.id)"
+                    @click="intoProduct(item.id)"
                   />
                 </div>
-                <!-- <div class="favorite position-absolute top-0 end-0 pe-3 pt-2">
-                  <a href="">最愛</a>
-                </div> -->
+
                 <div class="card-body py-2 mb-5">
                   <p class="card-title mb-1">{{ item.title }}</p>
                   <div class="d-flex align-items-baseline">
@@ -122,6 +121,7 @@
 
 <script>
 import NavBar from '@/components/user/UserNavBar.vue'
+
 import emitter from '@/methods/emitter'
 import ToastMessages from '@/components/ToastMessages.vue'
 // 將側邊商品的篩選功能匯入並加到 mixins裡
@@ -133,7 +133,8 @@ export default {
     return {
       products: [],
       productSearch: '',
-      filterProducts: []
+      filterProducts: [],
+      breadcrumb: '全部商品'
     }
   },
   provide() {
@@ -142,6 +143,7 @@ export default {
     }
   },
   watch: {
+    // 監聽搜尋的值，執行篩選
     productSearch() {
       this.filterProducts = this.products.filter((item) => {
         return item.title.match(this.productSearch)

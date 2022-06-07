@@ -38,18 +38,24 @@
           class="col d-flex flex-column align-items-center justify-content-center position-relative"
           role="search"
         >
-          <input
-            class="search me-0"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-            @keyup.enter="$emit('update:search', $event.target.value)"
-            :value="search"
-          />
-          <font-awesome-icon
-            class="icons icon-search position-absolute"
-            :icon="['fas', 'magnifying-glass']"
-          />
+          <label for="search">
+            <input
+              class="search me-0"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              :value="search"
+              @keyup.enter="$emit('update:search', $event.target.value)"
+              @change="valueSearch"
+              ref="searchValue"
+              id="search"
+            />
+            <font-awesome-icon
+              class="icons icon-search position-absolute"
+              :icon="['fas', 'magnifying-glass']"
+              @click="valueSearch"
+            />
+          </label>
         </div>
         <div class="col">
           <ul class="navbar-nav d-flex flex-row justify-content-end">
@@ -84,6 +90,11 @@ import 'bootstrap/dist/js/bootstrap.bundle'
 export default {
   props: {
     search: String
+  },
+  methods: {
+    valueSearch() {
+      this.$refs.searchValue.value = ''
+    }
   }
 }
 </script>
@@ -96,8 +107,9 @@ export default {
   font-size: 1.2rem;
 }
 .icon-search {
+  top: 25%;
   right: 8%;
-  // cursor: pointer;
+  cursor: pointer;
   color: #6f7479;
   background: rgb(255, 255, 255);
 }
