@@ -4,11 +4,11 @@
       <NavBar />
     </div>
   </div>
-
-  <div class="container-fluid mt-4 position-relative px-4">
+  <ToastMessages class="top-10 end-0 me-3" />
+  <div class="container mt-4 position-relative px-4">
     <div class="row ms-auto">
       <!-- breadcrumb麵包屑 -->
-      <div class="container">
+      <div class="container px-3">
         <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
@@ -19,27 +19,29 @@
                 >產品列表</router-link
               >
             </li>
-            <li class="breadcrumb-item active" aria-current="page">類別</li>
             <li class="breadcrumb-item active" aria-current="page">
-              指定商品細節
+              {{ product.category }}
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              {{ product.title }}
             </li>
           </ol>
         </nav>
       </div>
-      <!-- 左邊 -->
-      <div class="col-lg-8 mb-3">
-        <div>
-          <img src="" class="img-fluid mb-3" alt="..." />
+      <!-- 左邊照片 -->
+      <div class="col-lg-8 mb-3 px-3">
+        <div class="" v-for="img in product.images" :key="img">
+          <img :src="img" class="img-fluid mb-4" alt="..." />
         </div>
       </div>
       <!-- 右邊 -->
-      <div class="col-lg-4">
+      <div class="col-lg-4 px-3">
         <div class="container">
           <div class="row">
             <div class="col">
               <article>
                 <div class="mb-4 d-flex">
-                  <p class="card-title mb-1">商品名稱</p>
+                  <p class="card-title mb-1">{{ product.title }}</p>
                   <span class="icon-star ms-auto"
                     ><font-awesome-icon class="icons" :icon="['far', 'star']"
                   /></span>
@@ -47,10 +49,13 @@
                 <div class="d-flex align-items-baseline">
                   <p
                     class="card-text text-secondary text-decoration-line-through mb-0 me-4"
+                    v-if="product.origin_price !== product.price"
                   >
-                    NT.原價1000
+                    NT.{{ $filters.currency(product.origin_price) }}
                   </p>
-                  <p class="card-text text-danger">NT.現價500</p>
+                  <p class="card-text text-danger">
+                    NT.{{ $filters.currency(product.price) }}
+                  </p>
                 </div>
               </article>
               <hr />
@@ -58,7 +63,10 @@
               <div>
                 <div class="row px-2">
                   <div class="col-6 px-0">
-                    <select class="form-select form-select-sm text-center">
+                    <select
+                      class="form-select form-select-sm text-center"
+                      v-model="size"
+                    >
                       <option selected disabled value="">SIZE</option>
                       <option value="S">S</option>
                       <option value="M">M</option>
@@ -74,11 +82,13 @@
                       <font-awesome-icon
                         class="icons icons-minus"
                         :icon="['fas', 'minus']"
+                        @click="deleteQty"
                       />
-                      <span class="count">0</span>
+                      <span class="count">{{ qtyNumber }}</span>
                       <font-awesome-icon
                         class="icons icons-plus"
                         :icon="['fas', 'plus']"
+                        @click="addQty"
                       />
                     </div>
                   </div>
@@ -86,6 +96,8 @@
                     <button
                       type="button"
                       class="btn btn-outline-danger btn-sm col-12"
+                      :disabled="this.status.loadingItem === product.id"
+                      @click="addToCart(product.id)"
                     >
                       加到購物車
                     </button>
@@ -94,7 +106,7 @@
               </div>
               <!-- 商品資訊 -->
               <div>
-                <ProductScript />
+                <ProductScript :product="product" />
               </div>
               <!-- 商品資訊 end -->
             </div>
@@ -103,18 +115,86 @@
       </div>
     </div>
   </div>
-
-  <div class="container-fluid">
-    <div class="row justify-content-center"></div>
-  </div>
 </template>
 
 <script>
 import NavBar from '@/components/user/UserNavBar.vue'
 import ProductScript from '@/components/user/ProductScript.vue'
+import emitter from '@/methods/emitter'
+import ToastMessages from '@/components/ToastMessages.vue'
 
 export default {
-  components: { NavBar, ProductScript }
+  components: { NavBar, ProductScript, ToastMessages },
+  provide() {
+    return { emitter }
+  },
+  data() {
+    return {
+      id: '',
+      product: {},
+      // image: '' // 取得第一張照片
+      status: {
+        loadingItem: ''
+      },
+      qtyNumber: 1, // 預設數量為 1
+      size: '' // 尺寸
+    }
+  },
+  methods: {
+    // 取得單一指定商品資料
+    getProduct() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`
+      this.$http
+        .get(url)
+        .then((res) => {
+          // console.log(res.data)
+          if (res.data.success) {
+            this.product = res.data.product
+            // 分別取出第一張照片和其他照片
+            // this.image = res.data.product.images[0]
+            // res.data.product.images.shift()
+          }
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
+    },
+    // 加入購物車serve
+    addToCart(id, qty, size) {
+      qty = this.qtyNumber
+      size = this.size
+      const cart = { product_id: id, qty, size }
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      this.status.loadingItem = id
+      this.$http
+        .post(url, { data: cart })
+        .then((res) => {
+          console.log(res)
+          this.status.loadingItem = ''
+          this.qtyNumber = 1
+          this.size = ''
+          this.$httpMessageState(res, '加入購物車')
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
+    },
+    // 增加商品數量
+    addQty() {
+      this.qtyNumber += 1
+    },
+    // 減少商品數量
+    deleteQty() {
+      if (this.qtyNumber > 1) {
+        this.qtyNumber -= 1
+      }
+    }
+  },
+  created() {
+    this.id = this.$route.params.productId
+    // console.log(this.$route.params.productId)
+    this.getProduct()
+  }
 }
 </script>
 
@@ -135,42 +215,5 @@ export default {
   :hover {
     color: #ffc107;
   }
-}
-.icons_arrow {
-  transition: 0.4s;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-.descript_title,
-.wash_title {
-  font-size: 0.9rem;
-}
-// 商品描述
-.descript_close .descript_list {
-  height: 0;
-  overflow: hidden;
-}
-.descript_open .descript_list {
-  height: max-content;
-}
-.sdescript_open .icons_arrow {
-  transform: rotate(0deg);
-}
-.descript_close .icons_arrow {
-  transform: rotate(-180deg);
-}
-// 洗滌方式
-.wash_close .wash_list {
-  height: 0;
-  overflow: hidden;
-}
-.wash_open .wash_list {
-  height: max-content;
-}
-.wash_open .icons_arrow {
-  transform: rotate(0deg);
-}
-.wash_close .icons_arrow {
-  transform: rotate(-180deg);
 }
 </style>

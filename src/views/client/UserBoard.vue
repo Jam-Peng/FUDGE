@@ -4,7 +4,7 @@
       <NavBar v-model:search="productSearch" />
     </div>
   </div>
-
+  <ToastMessages class="top-10 end-0 me-3" />
   <div class="container-fluid mt-4 position-relative px-4">
     <div class="row ms-auto">
       <div class="col-lg-2 col-md-3 col-sm-12 mb-3">
@@ -97,14 +97,26 @@
                       NT.{{ $filters.currency(item.price) }}
                     </p>
                   </div>
-                  <div class="product-more">
-                    <a href="" class="link-dark"
+                  <div class="product-cart">
+                    <a
+                      href=""
+                      class="link-dark"
+                      @click.prevent="addToCart(item.id)"
+                      :disabled="this.status.loadingItem === item.id"
                       ><font-awesome-icon
                         class="icons icons-cart me-2"
                         :icon="['fas', 'cart-shopping']"
                       />
-                      加到購物車</a
+                      加到購物車
+                    </a>
+                    <!--單一讀取效果 Spinner -->
+                    <div
+                      class="spinner-grow spinner-grow-sm text-success ms-2"
+                      role="status"
+                      v-if="this.status.loadingItem === item.id"
                     >
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -116,12 +128,10 @@
       <!-- 購物車底 -->
     </div>
   </div>
-  <ToastMessages />
 </template>
 
 <script>
 import NavBar from '@/components/user/UserNavBar.vue'
-
 import emitter from '@/methods/emitter'
 import ToastMessages from '@/components/ToastMessages.vue'
 // 將側邊商品的篩選功能匯入並加到 mixins裡
@@ -134,7 +144,10 @@ export default {
       products: [],
       productSearch: '',
       filterProducts: [],
-      breadcrumb: '全部商品'
+      breadcrumb: '全部商品',
+      status: {
+        loadingItem: '' // 狀態對應品項的 id
+      }
     }
   },
   provide() {
@@ -171,6 +184,22 @@ export default {
     // 進入特定商品詳細頁面
     intoProduct(id) {
       this.$router.push(`/ProductList/${id}`)
+    },
+    // 加入購物車serve
+    addToCart(id, qty = 1) {
+      const cart = { product_id: id, qty }
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
+      this.status.loadingItem = id
+      this.$http
+        .post(url, { data: cart })
+        .then((res) => {
+          console.log(res)
+          this.status.loadingItem = ''
+          this.$httpMessageState(res, '加入購物車')
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
     }
   },
   mixins: [userFilterProduct], // 將側邊商品的篩選功能

@@ -51,7 +51,7 @@
               id="search"
             />
             <font-awesome-icon
-              class="icons icon-search position-absolute"
+              class="icons icons-search position-absolute"
               :icon="['fas', 'magnifying-glass']"
               @click="valueSearch"
             />
@@ -61,18 +61,24 @@
           <ul class="navbar-nav d-flex flex-row justify-content-end">
             <li class="nav-item">
               <a class="nav-link"
-                ><font-awesome-icon class="icons" :icon="['fas', 'user']" />
+                ><font-awesome-icon
+                  class="icons icons_user"
+                  :icon="['fas', 'user']"
+                />
               </a>
             </li>
             <li class="nav-item mx-1">
               <a class="nav-link"
-                ><font-awesome-icon class="icons" :icon="['far', 'star']" />
+                ><font-awesome-icon
+                  class="icons icons_star"
+                  :icon="['far', 'star']"
+                />
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link"
                 ><font-awesome-icon
-                  class="icons"
+                  class="icons icons_art"
                   :icon="['fas', 'cart-shopping']"
                 />
               </a>
@@ -103,12 +109,14 @@ export default {
 // ul li {
 //   cursor: pointer;
 // }
-.icons {
+.icons_user,
+.icons_star,
+.icons_cart {
   font-size: 1.2rem;
 }
-.icon-search {
-  top: 25%;
-  right: 8%;
+.icons-search {
+  top: 30%;
+  right: 9%;
   cursor: pointer;
   color: #6f7479;
   background: rgb(255, 255, 255);
