@@ -9,34 +9,44 @@ export default {
         })
       )
       // console.log(this.filterProducts)
+
       this.breadcrumb = e.target.innerText
     },
     filterProductCloth(e) {
       this.filterProducts = []
       this.filterProducts.push(
         ...this.products.filter((item) => {
-          return item.category === '上半身'
+          return item.category === '上身類'
         })
       )
       this.breadcrumb = e.target.innerText
+      this.category = this.breadcrumb
+
+      this.$router.push('categoryProducts?category=上身類')
     },
     filterProductPants(e) {
       this.filterProducts = []
       this.filterProducts.push(
         ...this.products.filter((item) => {
-          return item.category === '下半身'
+          return item.category === '下身類'
         })
       )
       this.breadcrumb = e.target.innerText
+      this.category = this.breadcrumb
+
+      this.$router.push('categoryProducts?category=下身類')
     },
     filterProductHats(e) {
       this.filterProducts = []
       this.filterProducts.push(
         ...this.products.filter((item) => {
-          return item.category === '配件'
+          return item.category === '帽子'
         })
       )
       this.breadcrumb = e.target.innerText
+      this.category = this.breadcrumb
+
+      this.$router.push('categoryProducts?category=帽子')
     },
     filterProductPack(e) {
       this.filterProducts = []
@@ -46,6 +56,9 @@ export default {
         })
       )
       this.breadcrumb = e.target.innerText
+      this.category = this.breadcrumb
+
+      this.$router.push('categoryProducts?category=包包')
     },
     filterProductShoes(e) {
       this.filterProducts = []
@@ -55,6 +68,9 @@ export default {
         })
       )
       this.breadcrumb = e.target.innerText
+      this.category = this.breadcrumb
+
+      this.$router.push('categoryProducts?category=鞋子')
     }
   }
 }

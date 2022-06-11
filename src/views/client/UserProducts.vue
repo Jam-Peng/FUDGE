@@ -15,12 +15,15 @@
               <router-link to="/" class="link-dark">首頁</router-link>
             </li>
             <li class="breadcrumb-item">
-              <router-link to="/ProductList" class="link-dark"
+              <router-link to="/productList" class="link-dark"
                 >產品列表</router-link
               >
             </li>
-            <li class="breadcrumb-item active" aria-current="page">
-              {{ product.category }}
+            <li
+              class="breadcrumb-item"
+              @click.prevent="CategoryProduct(product.category)"
+            >
+              <a>{{ product.category }}</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
               {{ product.title }}
@@ -188,6 +191,9 @@ export default {
       if (this.qtyNumber > 1) {
         this.qtyNumber -= 1
       }
+    },
+    CategoryProduct(category) {
+      this.$router.push(`/categoryProducts?category=${category}`)
     }
   },
   created() {
