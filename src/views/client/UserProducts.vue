@@ -193,12 +193,11 @@ export default {
       }
     },
     CategoryProduct(category) {
-      this.$router.push(`/categoryProducts?category=${category}`)
+      this.$router.push(`/productList?category=${category}`)
     }
   },
   created() {
     this.id = this.$route.params.productId
-    // console.log(this.$route.params.productId)
     this.getProduct()
   }
 }

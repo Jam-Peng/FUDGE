@@ -11,18 +11,18 @@
         <!-- 側邊sideBar -->
         <SideBar
           @emit-All="filterProductAll"
-          @emit-Clothes="filterProductCloth"
-          @emit-Pants="filterProductPants"
-          @emit-Hats="filterProductHats"
-          @emit-Pack="filterProductPack"
-          @emit-Shoes="filterProductShoes"
+          @emit-Clothes="filterCategory"
+          @emit-Pants="filterCategory"
+          @emit-Hats="filterCategory"
+          @emit-Pack="filterCategory"
+          @emit-Shoes="filterCategory"
           :breadcrumb="breadcrumb"
         />
       </div>
 
       <div class="col-lg-10 col-md-9 col-sm-12 mb-4">
         <div class="container">
-          <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+          <nav style="--bs-breadcrumb-divider: '/'" aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
                 <router-link to="/" class="link-dark">首頁</router-link>
@@ -113,11 +113,11 @@ export default {
       productSearch: '',
       filterProducts: [],
       breadcrumb: '全部商品',
+      category: '',
       status: {
         loadingItem: '' // 狀態對應品項的 id
       },
       size: ''
-      // categoryProduct: ''
     }
   },
   provide() {
@@ -126,10 +126,25 @@ export default {
     }
   },
   watch: {
+    // 渲染篩選的商品類別
+    categoryProduct() {
+      this.filterProducts = this.categoryProduct
+      if (this.category !== undefined) {
+        this.breadcrumb = this.category
+      }
+    },
     // 監聽搜尋的值，執行篩選
     productSearch() {
       this.filterProducts = this.products.filter((item) => {
         return item.title.match(this.productSearch)
+      })
+    }
+  },
+  computed: {
+    // 單一指定商品的麵包屑類別點選進來時，篩選對應的類別商品
+    categoryProduct() {
+      return this.products.filter((item) => {
+        return item.category.match(this.category)
       })
     }
   },
@@ -173,20 +188,10 @@ export default {
     // }
   },
   mixins: [userFilterProduct], // 將側邊商品的篩選功能
-  // mounted() {
-  //   emitter.on('sendCategory', (category) => {
-  //     this.categoryProduct = category
-  //     // console.log(this.categoryProduct)
-
-  //     this.filterProducts = this.products.filter((item) => {
-  //       return item.category.match(this.categoryProduct)
-  //     })
-
-  //     console.log(this.filterProducts)
-  //   })
-  // },
   created() {
     this.getProduct()
+    // 從單一指定商品的類別中將類別的參數經路由搜尋參數過來
+    this.category = this.$route.query.category
   }
 }
 </script>

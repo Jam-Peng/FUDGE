@@ -21,14 +21,7 @@ const routes = [
     path: '/productList/:productId',
     component: () => import('../views/client/UserProducts.vue')
   },
-  {
-    path: '/categoryProducts',
-    component: () => import('../views/client/CategoryView.vue')
-  },
-  // {
-  //   path: '/Category',
-  //   component: () => import('../views/client/CategoryView.vue')
-  // },
+
   // 後台
   {
     path: '/login',
