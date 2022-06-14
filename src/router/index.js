@@ -21,7 +21,11 @@ const routes = [
     path: '/productList/:productId',
     component: () => import('../views/client/UserProducts.vue')
   },
-
+  {
+    path: '/search',
+    name: 'search',
+    component: () => import('../views/client/SearchView.vue')
+  },
   // 後台
   {
     path: '/login',

@@ -66,6 +66,14 @@
 
 <script>
 export default {
-  props: ['breadcrumb']
+  props: ['breadcrumb'],
+  emits: [
+    'emit-All',
+    'emit-Clothes',
+    'emit-Pants',
+    'emit-Hats',
+    'emit-Pack',
+    'emit-Shoes'
+  ]
 }
 </script>

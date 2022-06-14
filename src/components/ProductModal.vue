@@ -60,6 +60,29 @@
 
               <div class="row gx-2">
                 <div class="mb-3 col-md-6">
+                  <label for="size" class="form-label">尺寸</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="size"
+                    placeholder="請輸入尺寸"
+                    v-model.trim="tempProduct.size"
+                  />
+                </div>
+                <div class="mb-3 col-md-6">
+                  <label for="pre_size" class="form-label">預購尺寸</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="pre_size"
+                    placeholder="輸入尺寸+(預）"
+                    v-model.trim="tempProduct.preSize"
+                  />
+                </div>
+              </div>
+
+              <div class="row gx-2">
+                <div class="mb-3 col-md-6">
                   <label for="origin_price" class="form-label">原價</label>
                   <input
                     type="number"
@@ -200,7 +223,10 @@ export default {
       // 多圖範例 使用url建立多圖時，先在物件裡新增一個images屬性
       if (!this.tempProduct.images) {
         this.tempProduct.images = []
+        this.tempProduct.size = []
+        this.tempProduct.preSize = []
       }
+      // console.log(this.tempProduct)
     }
   },
   methods: {

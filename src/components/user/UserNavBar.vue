@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 <template>
   <nav class="navbar navbar-expand-lg bg-light px-3">
     <div class="container">
@@ -32,6 +33,7 @@
         </ul>
       </div>
     </div>
+
     <div class="container">
       <div class="row ms-lg-auto">
         <div
@@ -39,7 +41,7 @@
           role="search"
         >
           <label for="search">
-            <input
+            <!-- <input
               class="search me-0"
               type="search"
               placeholder="Search"
@@ -49,11 +51,29 @@
               @change="valueSearch"
               ref="searchValue"
               id="search"
+            /> -->
+            <!-- <input
+              class="search me-0"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              @keyup.enter="searchKeyword(keyword)"
+              id="search"
+              v-model="keyword"
+            /> -->
+            <input
+              class="search me-0"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              id="search"
+              @keyup.enter="searchKeyword($event)"
+              :value="keyword"
             />
+            <!-- :value="$route.query.keyword" -->
             <font-awesome-icon
               class="icons icons-search position-absolute"
               :icon="['fas', 'magnifying-glass']"
-              @click="valueSearch"
             />
           </label>
         </div>
@@ -94,12 +114,37 @@
 // 為了讓Bootstrap的 Navbar 可以正常收合
 import 'bootstrap/dist/js/bootstrap.bundle'
 export default {
-  props: {
-    search: String
+  data() {
+    return {
+      keyword: ''
+    }
   },
+
   methods: {
-    valueSearch() {
-      this.$refs.searchValue.value = ''
+    // searchKeyword(keyword) {
+    //   this.$router.replace(`/search?Keyword=${keyword}`)
+    //   // this.keyword = ''
+    // }
+    // searchKeyword(e) {
+    //   this.$router.replace({
+    //     query: {
+    //       ...this.$route.query,
+    //       keyword: e.target.value
+    //     },
+    //     path: '/search'
+    //   })
+    //   // e.target.value = ''
+    //   console.log(this.$route)
+    // }
+    searchKeyword(e) {
+      this.keyword = e.target.value
+      this.$router.replace({
+        name: this.$route.name,
+        query: { keyword: e.target.value },
+        path: '/search'
+      })
+      e.target.value = ''
+      console.log(this.$route)
     }
   }
 }

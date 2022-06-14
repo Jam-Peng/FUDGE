@@ -68,12 +68,12 @@
                   <div class="col-6 px-0">
                     <select
                       class="form-select form-select-sm text-center"
-                      v-model="size"
+                      v-model="selectSize"
                     >
                       <option selected disabled value="">SIZE</option>
-                      <option value="S">S</option>
-                      <option value="M">M</option>
-                      <option value="L">L</option>
+                      <option v-for="item in sizes" :key="item" :value="item">
+                        {{ item }}
+                      </option>
                     </select>
                   </div>
                   <div
@@ -140,7 +140,8 @@ export default {
         loadingItem: ''
       },
       qtyNumber: 1, // 預設數量為 1
-      size: '' // 尺寸
+      sizes: [], // 取得所有尺寸
+      selectSize: '' // 選擇加到購物車的尺寸
     }
   },
   methods: {
@@ -156,16 +157,18 @@ export default {
             // 分別取出第一張照片和其他照片
             // this.image = res.data.product.images[0]
             // res.data.product.images.shift()
+            this.sizes.push(...this.product.size.split(' '))
           }
         })
         .catch((err) => {
           console.log(err.response)
         })
     },
+
     // 加入購物車serve
     addToCart(id, qty, size) {
       qty = this.qtyNumber
-      size = this.size
+      size = this.selectSize
       const cart = { product_id: id, qty, size }
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.status.loadingItem = id
@@ -175,7 +178,7 @@ export default {
           console.log(res)
           this.status.loadingItem = ''
           this.qtyNumber = 1
-          this.size = ''
+          this.selectSize = ''
           this.$httpMessageState(res, '加入購物車')
         })
         .catch((err) => {

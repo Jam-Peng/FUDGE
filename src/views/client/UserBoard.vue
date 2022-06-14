@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row">
-      <NavBar v-model:search="productSearch" />
+      <NavBar />
     </div>
   </div>
   <ToastMessages class="top-10 end-0 me-3" />
@@ -42,6 +42,20 @@
             <div class="col" v-for="item in filterProducts" :key="item.id">
               <div class="position-relative">
                 <div>
+                  <div
+                    class="position-absolute text-white fw-semibold d-flex align-items-center justify-content-center"
+                    style="
+                      top: 0;
+                      bottom: 0;
+                      left: 0;
+                      right: 0;
+                      background-color: rgba(0, 0, 0, 0.5);
+                      z-index: 100;
+                    "
+                    v-if="!item.size"
+                  >
+                    SOLD OUT
+                  </div>
                   <img
                     :src="item.images[0]"
                     class="card-img-top"
@@ -52,6 +66,15 @@
 
                 <div class="card-body py-2 mb-5">
                   <p class="card-title mb-1">{{ item.title }}</p>
+                  <div class="d-flex align-items-baseline">
+                    <p class="card-text mb-1" v-if="!item.size">
+                      {{ item.preSize }}
+                    </p>
+                    <p class="card-text mb-1 text-secondary">
+                      {{ item.size }}
+                    </p>
+                  </div>
+
                   <div class="d-flex align-items-baseline">
                     <p
                       class="card-text text-secondary text-decoration-line-through mb-1 me-2"
@@ -64,7 +87,8 @@
                       NT.{{ $filters.currency(item.price) }}
                     </p>
                   </div>
-                  <div class="product-cart">
+                  <!-- 刪除加到購物車功能 -->
+                  <!-- <div class="product-cart">
                     <a
                       href=""
                       class="link-dark"
@@ -75,16 +99,16 @@
                         :icon="['fas', 'cart-shopping']"
                       />
                       加到購物車
-                    </a>
-                    <!--單一讀取效果 Spinner -->
-                    <div
+                    </a> -->
+                  <!--單一讀取效果 Spinner -->
+                  <!-- <div
                       class="spinner-grow spinner-grow-sm text-success ms-2"
                       role="status"
                       v-if="this.status.loadingItem === item.id"
                     >
                       <span class="visually-hidden">Loading...</span>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -110,14 +134,13 @@ export default {
   data() {
     return {
       products: [],
-      productSearch: '',
+      // productSearch: '',
       filterProducts: [],
       breadcrumb: '全部商品',
       category: '',
       status: {
         loadingItem: '' // 狀態對應品項的 id
-      },
-      size: ''
+      }
     }
   },
   provide() {
@@ -126,18 +149,12 @@ export default {
     }
   },
   watch: {
-    // 渲染篩選的商品類別
+    // 渲染篩選的商品類別 這個判斷是為了讓全部商品的active可以正常運作
     categoryProduct() {
       this.filterProducts = this.categoryProduct
       if (this.category !== undefined) {
         this.breadcrumb = this.category
       }
-    },
-    // 監聽搜尋的值，執行篩選
-    productSearch() {
-      this.filterProducts = this.products.filter((item) => {
-        return item.title.match(this.productSearch)
-      })
     }
   },
   computed: {
@@ -156,7 +173,7 @@ export default {
         .get(url)
         .then((res) => {
           if (res.data.success) {
-            // console.log(res.data)
+            console.log(res.data)
             this.products = res.data.products
             // 將原本的資料放到另一個陣列中 filterProducts 方便做篩選功能
             this.filterProducts = this.products
