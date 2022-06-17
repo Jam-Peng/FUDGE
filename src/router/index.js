@@ -22,6 +22,11 @@ const routes = [
     component: () => import('../views/client/UserProducts.vue')
   },
   {
+    path: '/checkout',
+    component: () => import('../views/client/CheckOut.vue')
+  },
+  // 搜尋關鍵字功能
+  {
     path: '/search',
     name: 'search',
     component: () => import('../views/client/SearchView.vue')

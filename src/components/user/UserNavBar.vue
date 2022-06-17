@@ -98,8 +98,9 @@
             <li class="nav-item">
               <a class="nav-link"
                 ><font-awesome-icon
-                  class="icons icons_art"
+                  class="icons icons_cart"
                   :icon="['fas', 'cart-shopping']"
+                  @click="toCheckOut"
                 />
               </a>
             </li>
@@ -145,6 +146,9 @@ export default {
       })
       e.target.value = ''
       console.log(this.$route)
+    },
+    toCheckOut() {
+      this.$router.push('/checkout')
     }
   }
 }

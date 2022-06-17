@@ -67,9 +67,6 @@
                 <div class="card-body py-2 mb-5">
                   <p class="card-title mb-1">{{ item.title }}</p>
                   <div class="d-flex align-items-baseline">
-                    <p class="card-text mb-1" v-if="!item.size">
-                      {{ item.preSize }}
-                    </p>
                     <p class="card-text mb-1 text-secondary">
                       {{ item.size }}
                     </p>
@@ -173,7 +170,7 @@ export default {
         .get(url)
         .then((res) => {
           if (res.data.success) {
-            console.log(res.data)
+            // console.log(res.data)
             this.products = res.data.products
             // 將原本的資料放到另一個陣列中 filterProducts 方便做篩選功能
             this.filterProducts = this.products

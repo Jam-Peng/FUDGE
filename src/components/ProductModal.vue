@@ -57,9 +57,9 @@
                   />
                 </div>
               </div>
-
+              <!-- 設定 size -->
               <div class="row gx-2">
-                <div class="mb-3 col-md-6">
+                <div class="mb-3">
                   <label for="size" class="form-label">尺寸</label>
                   <input
                     type="text"
@@ -69,7 +69,7 @@
                     v-model.trim="tempProduct.size"
                   />
                 </div>
-                <div class="mb-3 col-md-6">
+                <!-- <div class="mb-3 col-md-6">
                   <label for="pre_size" class="form-label">預購尺寸</label>
                   <input
                     type="text"
@@ -78,7 +78,7 @@
                     placeholder="輸入尺寸+(預）"
                     v-model.trim="tempProduct.preSize"
                   />
-                </div>
+                </div> -->
               </div>
 
               <div class="row gx-2">
@@ -223,10 +223,10 @@ export default {
       // 多圖範例 使用url建立多圖時，先在物件裡新增一個images屬性
       if (!this.tempProduct.images) {
         this.tempProduct.images = []
+        // 新增size資料
         this.tempProduct.size = []
         this.tempProduct.preSize = []
       }
-      // console.log(this.tempProduct)
     }
   },
   methods: {

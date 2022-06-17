@@ -5,6 +5,8 @@ import VueAxios from 'vue-axios'
 import Loading from 'vue3-loading-overlay'
 // 匯入 vue3-loading-overlay stylesheet樣式
 import 'vue3-loading-overlay/dist/vue3-loading-overlay.css'
+// 匯入 Bootstrap Icon
+import 'bootstrap-icons/font/bootstrap-icons.css'
 import App from './App.vue'
 import router from './router'
 import { currency, date } from '@/methods/filters'
