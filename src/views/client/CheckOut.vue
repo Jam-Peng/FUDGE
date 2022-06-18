@@ -71,15 +71,30 @@
                 <span class="text-secondary">{{ item.size }}</span>
               </div>
               <span class="price_text mt-1"
-                >單價 NT.{{ item.product.price }}</span
+                >單價 NT.{{ $filters.currency(item.product.price) }}</span
               >
-              <span class="price_text">小計 NT.{{ item.total }}</span>
+              <span class="price_text"
+                >小計 NT.{{ $filters.currency(item.total) }}</span
+              >
             </div>
 
             <div class="col-md-3 p-2">
-              <select class="form-select mb-2 mt-2">
-                <option value="" disabled selected>1</option>
-                <option :value="item.qty">{{ item.qty }}</option>
+              <select
+                class="form-select mb-2 mt-2"
+                v-model.number="item.qty"
+                @change="updateCart(item)"
+              >
+                <!-- <option value="" disabled selected>1</option> -->
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
               </select>
 
               <div class="col d-flex justify-content-between">
@@ -102,10 +117,18 @@
 
           <div class="px-4 py-2 bg-light">
             <div class="d-flex align-items-center p-2 mb-4">
-              <span><a class="couponLink me-3" href="">折價卷代碼</a></span>
+              <span>
+                <a
+                  class="couponLink me-3"
+                  href=""
+                  @click.prevent="openCouponModal"
+                  >折價卷代碼</a
+                >
+              </span>
               <button
                 type="button"
                 class="btn btn-outline-danger coupon_delete d-flex justify-content-center align-items-center"
+                @click="useCouponCode(originalCoupon)"
               >
                 <i class="bi bi-x-lg"></i>
               </button>
@@ -196,13 +219,14 @@
                 "
               >
                 <input
-                  class="col-md-12 p-1 mb-2 border rounded-1 border-secondary"
+                  class="col-md-12 p-1 mb-2 border rounded-1 border-secondary search_location"
                   type="text"
                   placeholder="尚未選擇門市"
-                  v-model="loaction"
+                  v-model="loaction.name"
                 />
                 <button
                   class="col-md-3 btn btn-outline-secondary btn-sm ms-auto"
+                  @click="openLocationModal"
                 >
                   選擇門市
                 </button>
@@ -219,18 +243,35 @@
                   >免運費</span
                 >
                 <span class="col-md-9" v-if="total < 1000"
-                  >商品金額只差 NT$ {{ 1000 - total }} 可享滿 NT$ 1000免運</span
+                  >商品金額只差 NT$ {{ $filters.currency(1000 - total) }} 可享滿
+                  NT$ 1,000免運</span
                 >
                 <span class="col-md-9" v-else>可享免運</span>
               </div>
+
               <div class="row mb-1">
                 <span class="col">商品總金額</span>
-                <span class="col text-end">{{ cart.total }}</span>
+                <span class="col text-end">{{
+                  $filters.currency(cart.total)
+                }}</span>
               </div>
 
               <div class="row mb-1">
-                <span class="col">電子折價卷</span>
-                <span class="col text-end">-0</span>
+                <div class="col d-flex justify-content-start">
+                  <span class="col-lg-5 col-md-3 me-1">電子折價卷</span>
+                  <span
+                    class="col-4 badge text-bg-success d-flex justify-content-center align-items-center"
+                    v-if="cart.final_total !== cart.total"
+                    >使用中</span
+                  >
+                </div>
+
+                <span
+                  class="col text-end"
+                  v-if="cart.final_total !== cart.total"
+                  >-{{ $filters.currency(cart.total - cart.final_total) }}</span
+                >
+                <span class="col text-end" v-else>-0</span>
               </div>
 
               <div class="row mb-1">
@@ -249,13 +290,21 @@
 
               <div class="text-end mb-4">
                 <span class="me-2"> 總金額:</span>
-                <span class="fs-2">NT.{{ finalPayTotal }}</span>
+
+                <span class="fs-2" v-if="cart.final_total !== cart.total"
+                  >NT.{{
+                    $filters.currency(cart.final_total + shippingFee)
+                  }}</span
+                >
+                <span class="fs-2" v-else
+                  >NT.{{ $filters.currency(finalPayTotal) }}</span
+                >
               </div>
             </div>
 
             <div>
               <button class="col-md-12 btn btn-secondary btn-sm px-2">
-                Continue
+                Continue <i class="bi bi-arrow-right"></i>
               </button>
             </div>
           </div>
@@ -263,91 +312,25 @@
       </div>
     </div>
   </div>
-
-  <!-- 參考範例 -->
-  <div class="">
-    <div class="sticky-top">
-      <table class="table align-middle">
-        <thead>
-          <tr>
-            <th></th>
-            <th>品名</th>
-            <th style="width: 110px">數量</th>
-            <th>單價</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          <template v-if="cart.carts">
-            <tr v-for="item in cart.carts" :key="item.id">
-              <td>
-                <button
-                  type="button"
-                  class="btn btn-outline-danger btn-sm"
-                  @click="removeCartItem(item.id)"
-                >
-                  刪除
-                </button>
-              </td>
-              <td>
-                {{ item.product.title }}
-                <div class="text-success">v-if="item.coupon"已套用優惠券</div>
-              </td>
-              <td>
-                <div class="input-group input-group-sm">
-                  <input
-                    type="number"
-                    class="form-control"
-                    v-model.number="item.qty"
-                  />
-                  <div class="input-group-text">{{ item.product.unit }}</div>
-                </div>
-              </td>
-              <td class="text-end">
-                <small class="text-success">
-                  v-if="cart.final_total !== cart.total"折扣價：</small
-                >
-                {{ $filters.currency(item.final_total) }}
-              </td>
-            </tr>
-          </template>
-        </tbody>
-
-        <tfoot>
-          <tr>
-            <td colspan="3" class="text-end">總計</td>
-            <td class="text-end">{{ $filters.currency(cart.total) }}</td>
-          </tr>
-          <tr v-if="cart.final_total !== cart.total">
-            <td colspan="3" class="text-end text-success">折扣價</td>
-            <td class="text-end text-success">
-              {{ $filters.currency(cart.final_total) }}
-            </td>
-          </tr>
-        </tfoot>
-      </table>
-      <div class="input-group mb-3 input-group-sm">
-        <input type="text" class="form-control" placeholder="請輸入優惠碼" />
-        <div class="input-group-append">
-          <button
-            class="btn btn-outline-secondary"
-            type="button"
-            @click="addCouponCode"
-          >
-            套用優惠碼
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- 參考範例 end -->
+  <CouponModal
+    ref="CouponModal"
+    :couponCode="couponCode"
+    @useCoupon="useCouponCode"
+  />
+  <UserLocationModal
+    ref="LocationModal"
+    :loaction="loaction"
+    @useloaction="useloaction"
+  />
 </template>
 
 <script>
 import NavBar from '@/components/user/UserNavBar.vue'
+import CouponModal from '@/components/user/UserCouponModal.vue'
+import UserLocationModal from '@/components/user/UserLocationModal.vue'
 
 export default {
-  components: { NavBar },
+  components: { NavBar, CouponModal, UserLocationModal },
   data() {
     return {
       cart: {},
@@ -356,7 +339,9 @@ export default {
       deliverMethod: '宅配', // 預設選擇運送方式
       loaction: '', // 取貨門市
       shippingFee: 80, // 預設運費
-      finalPayTotal: '' // 最後應付金額
+      finalPayTotal: '', // 最後應付金額
+      couponCode: '', // 建立空優惠卷代碼
+      originalCoupon: 'test100' // 建立一個原價的折價卷code，當取消使用折價卷用
     }
   },
   watch: {
@@ -375,7 +360,7 @@ export default {
       this.$http
         .get(url)
         .then((res) => {
-          // console.log(res)
+          console.log(res)
           if (res.data.success) {
             this.cart = res.data.data
             this.total = this.cart.total
@@ -384,7 +369,7 @@ export default {
               this.shippingFee = 80
             }
           }
-          // console.log(this.total)
+          // console.log(this.cart)
         })
         .catch((err) => {
           console.log(err.response)
@@ -398,6 +383,65 @@ export default {
           this.getCheckOut()
         }
       })
+    },
+    // 更新購物車 在商品資料結構裡 product_id 是商品 id;另外一個 id 是購物車該品項的 id
+    updateCart(item) {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
+      const cart = {
+        product_id: item.product_id,
+        qty: item.qty,
+        location: this.loaction,
+        paymentMethod: this.paymentMethod,
+        deliverMethod: this.deliverMethod
+      }
+      this.$http
+        .put(url, { data: cart })
+        .then((res) => {
+          // console.log(res)
+          if (res.data.success) {
+            this.getCheckOut()
+          }
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
+    },
+    // 打開折價卷Modal
+    openCouponModal() {
+      this.couponCode = ''
+      this.$refs.CouponModal.showModel()
+    },
+    // 使用折價卷
+    useCouponCode(data) {
+      this.couponCode = data
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/coupon`
+      const coupon = {
+        code: this.couponCode
+      }
+      this.$http
+        .post(url, { data: coupon })
+        .then((res) => {
+          // console.log(res)
+          if (res.data.success) {
+            this.getCheckOut()
+          }
+          this.$refs.CouponModal.hideModal()
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
+    },
+    // 打開選擇門市Modal
+    openLocationModal() {
+      this.loaction = ''
+      this.$refs.LocationModal.showModel()
+    },
+    // 將選擇的門市資訊傳回
+    useloaction(data) {
+      this.loaction = { ...data }
+      const item = this.cart.carts[0]
+      this.updateCart(item)
+      this.$refs.LocationModal.hideModal()
     }
   },
   created() {
@@ -410,7 +454,8 @@ export default {
 ul {
   list-style-type: none;
 }
-.step_text {
+.step_text,
+.couponModal_text {
   font-size: 0.9rem;
 }
 .price_text {
@@ -438,5 +483,19 @@ ul {
     position: absolute;
     top: -15px;
   }
+}
+.coupon_Modal {
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  right: 0;
+  top: -12px;
+}
+.couponInput,
+.search_location {
+  outline: none;
+}
+.selectShop {
+  margin-top: -5px;
 }
 </style>

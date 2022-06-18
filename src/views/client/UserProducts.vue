@@ -175,7 +175,7 @@ export default {
       this.$http
         .post(url, { data: cart })
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           this.status.loadingItem = ''
           this.qtyNumber = 1
           this.selectSize = ''
