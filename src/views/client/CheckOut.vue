@@ -10,7 +10,7 @@
       <div class="col-lg-12 mb-2">
         <ul class="row row-cols-md-4 justify-content-center">
           <li
-            class="col bg-light d-flex justify-content-star align-items-center rounded py-2"
+            class="col bg-warning d-flex justify-content-star align-items-center rounded py-2"
           >
             <div class="d-flex align-self-center fs-2 fw-semibold ps-2">01</div>
             <div class="d-flex flex-column px-3">
@@ -189,7 +189,11 @@
                   paymentMethod === '' || paymentMethod === '信用卡線上刷卡'
                 "
                 v-model="deliverMethod"
+                @change="resetUpdateCart"
               >
+                <option value="請選擇運送方式" disabled selected>
+                  請選擇運送方式
+                </option>
                 <option value="宅配">宅配</option>
                 <option value="7-11超商取貨">7-11超商取貨</option>
                 <option value="全家超商取貨">全家超商取貨</option>
@@ -199,7 +203,11 @@
                 class="form-select mb-4 mt-2 step_text"
                 v-if="paymentMethod === '貨到付款(宅配)'"
                 v-model="deliverMethod"
+                @change="resetUpdateCart"
               >
+                <option value="請選擇運送方式" disabled selected>
+                  請選擇運送方式
+                </option>
                 <option value="宅配">宅配</option>
               </select>
 
@@ -207,7 +215,11 @@
                 class="form-select mb-4 mt-2 step_text"
                 v-if="paymentMethod === '貨到付款(超商)'"
                 v-model="deliverMethod"
+                @change="resetUpdateCart"
               >
+                <option value="請選擇運送方式" disabled selected>
+                  請選擇運送方式
+                </option>
                 <option value="7-11超商取貨">7-11超商取貨</option>
                 <option value="全家超商取貨">全家超商取貨</option>
               </select>
@@ -222,7 +234,7 @@
                   class="col-md-12 p-1 mb-2 border rounded-1 border-secondary search_location"
                   type="text"
                   placeholder="尚未選擇門市"
-                  v-model="loaction.name"
+                  v-model="location.name"
                 />
                 <button
                   class="col-md-3 btn btn-outline-secondary btn-sm ms-auto"
@@ -303,7 +315,10 @@
             </div>
 
             <div>
-              <button class="col-md-12 btn btn-secondary btn-sm px-2">
+              <button
+                class="col-md-12 btn btn-secondary btn-sm px-2"
+                @click="checkStepTwo"
+              >
                 Continue <i class="bi bi-arrow-right"></i>
               </button>
             </div>
@@ -319,8 +334,8 @@
   />
   <UserLocationModal
     ref="LocationModal"
-    :loaction="loaction"
-    @useloaction="useloaction"
+    :loaction="location"
+    @useloaction="uselocation"
   />
 </template>
 
@@ -336,8 +351,8 @@ export default {
       cart: {},
       total: 0,
       paymentMethod: '', // 選擇付費方式
-      deliverMethod: '宅配', // 預設選擇運送方式
-      loaction: '', // 取貨門市
+      deliverMethod: '請選擇運送方式', // 預設選擇運送方式
+      location: '', // 取貨門市
       shippingFee: 80, // 預設運費
       finalPayTotal: '', // 最後應付金額
       couponCode: '', // 建立空優惠卷代碼
@@ -360,7 +375,7 @@ export default {
       this.$http
         .get(url)
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           if (res.data.success) {
             this.cart = res.data.data
             this.total = this.cart.total
@@ -390,7 +405,7 @@ export default {
       const cart = {
         product_id: item.product_id,
         qty: item.qty,
-        location: this.loaction,
+        location: this.location,
         paymentMethod: this.paymentMethod,
         deliverMethod: this.deliverMethod
       }
@@ -437,11 +452,20 @@ export default {
       this.$refs.LocationModal.showModel()
     },
     // 將選擇的門市資訊傳回
-    useloaction(data) {
-      this.loaction = { ...data }
+    uselocation(data) {
+      this.location = { ...data }
       const item = this.cart.carts[0]
       this.updateCart(item)
       this.$refs.LocationModal.hideModal()
+    },
+    // 挑整當更改運送方式時，再次觸發更新購物車API，後面的表單才能正常運作
+    resetUpdateCart() {
+      const item = this.cart.carts[0]
+      this.updateCart(item)
+    },
+    // 轉跳CheckOut第二步驟
+    checkStepTwo() {
+      this.$router.push('/checkout/step2')
     }
   },
   created() {

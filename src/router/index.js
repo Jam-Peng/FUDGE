@@ -25,6 +25,10 @@ const routes = [
     path: '/checkout',
     component: () => import('../views/client/CheckOut.vue')
   },
+  {
+    path: '/checkout/step2',
+    component: () => import('../views/client/CheckOutStepTwo.vue')
+  },
   // 搜尋關鍵字功能
   {
     path: '/search',

@@ -170,6 +170,7 @@ export default {
       qty = this.qtyNumber
       size = this.selectSize
       const cart = { product_id: id, qty, size }
+      // const cart = { product_id: id, qty, size }
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.status.loadingItem = id
       this.$http
