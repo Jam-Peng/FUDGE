@@ -487,6 +487,7 @@ ul {
 }
 .cart_img {
   max-width: 80px;
+  cursor: default;
 }
 .cartNullMessage {
   height: 150px;

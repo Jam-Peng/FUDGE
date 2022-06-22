@@ -34,7 +34,7 @@
       <!-- 左邊照片 -->
       <div class="col-lg-8 mb-3 px-3">
         <div class="" v-for="img in product.images" :key="img">
-          <img :src="img" class="img-fluid mb-4" alt="..." />
+          <img :src="img" class="img-fluid img-default mb-4" alt="..." />
         </div>
       </div>
       <!-- 右邊 -->
@@ -211,7 +211,9 @@ export default {
 .countSelector {
   border: 1px solid #ced4da;
 }
-
+.img-default {
+  cursor: default;
+}
 .icons-minus,
 .icons-plus,
 .skills__header {

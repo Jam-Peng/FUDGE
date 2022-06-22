@@ -29,6 +29,10 @@ const routes = [
     path: '/checkout/step2',
     component: () => import('../views/client/CheckOutStepTwo.vue')
   },
+  {
+    path: '/checkout/:orderId',
+    component: () => import('../views/client/CheckOutStepThree.vue')
+  },
   // 搜尋關鍵字功能
   {
     path: '/search',

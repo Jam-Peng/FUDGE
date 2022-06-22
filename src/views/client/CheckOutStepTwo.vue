@@ -64,7 +64,7 @@
                   </div>
                 </div>
               </div>
-              <!-- border-bottom -->
+
               <div
                 class="accordion-collapse collapse pb-2 row"
                 id="checkOutOrder"
@@ -372,7 +372,6 @@
                 ></ErrorMessage>
               </div>
             </div>
-            <!-- 訂購人資訊 end-->
 
             <!-- 收件人資訊 -->
             <div class="p-4 mb-3 bg-light" v-if="deliverMethod === '宅配'">
@@ -385,7 +384,7 @@
                     name="flexRadioDefault"
                     id="flexRadioDefault2"
                     value="同購買人"
-                    v-model="form.receiverInput"
+                    v-model="form.user.receiverInput"
                     checked
                   />
                   <label class="form-check-label" for="flexRadioDefault2">
@@ -399,7 +398,7 @@
                     name="flexRadioDefault"
                     id="flexRadioDefault1"
                     value="不同購買人"
-                    v-model="form.receiverInput"
+                    v-model="form.user.receiverInput"
                   />
                   <label class="form-check-label" for="flexRadioDefault1">
                     不同購買人
@@ -410,7 +409,7 @@
               <!-- 收件人表單 -->
               <div
                 class="receiverForm"
-                v-if="form.receiverInput === '不同購買人'"
+                v-if="form.user.receiverInput === '不同購買人'"
               >
                 <div class="col-md-12 my-3 orderItem_text">
                   <!-- <label for="name" class="form-label">收件人姓名</label> -->
@@ -421,7 +420,7 @@
                     class="form-control orderItem_text px-3"
                     placeholder="請輸入姓名"
                     rules="required"
-                    v-model.trim="form.receiverUser.receiverName"
+                    v-model.trim="form.user.receiverName"
                     :class="{ 'is-invalid': errors['收件人姓名'] }"
                   ></v-field>
                   <ErrorMessage
@@ -439,10 +438,12 @@
                       class="orderItem_text form-control form-select text-secondary px-3"
                       as="select"
                       rules="required"
-                      v-model="form.receiverUser.receiverNation"
+                      v-model="form.user.receiverNation"
                       :class="{ 'is-invalid': errors['收件人國家'] }"
                     >
-                      <!-- <option value="" disabled selected>請選擇國家</option> -->
+                      <!-- <option value="請選擇國家" disabled selected>
+                        請選擇國家
+                      </option> -->
                       <option value="台灣本島">台灣本島</option>
                       <option value="澎湖">澎湖</option>
                       <option value="金門">金門</option>
@@ -464,7 +465,7 @@
                       class="form-control orderItem_text px-3"
                       placeholder="請輸入手機號碼"
                       :rules="isPhone"
-                      v-model.trim="form.receiverUser.receiverTel"
+                      v-model.trim="form.user.receiverTel"
                       :class="{ 'is-invalid': errors['收件人電話'] }"
                     ></v-field>
                     <ErrorMessage
@@ -483,7 +484,7 @@
                       class="orderItem_text form-control form-select text-secondary px-3"
                       as="select"
                       rules="required"
-                      v-model="form.receiverUser.receiverCity"
+                      v-model="form.user.receiverCity"
                       :class="{ 'is-invalid': errors['收件人縣市'] }"
                     >
                       <!-- <option value="" disabled selected>請選擇縣市</option> -->
@@ -499,7 +500,7 @@
 
                   <div
                     class="col-md-6 mb-3 orderItem_text"
-                    v-if="form.receiverUser.receiverCity === '台北市'"
+                    v-if="form.user.receiverCity === '台北市'"
                   >
                     <!-- <label for="tpeZipCode" class="form-label">地區</label> -->
                     <v-field
@@ -508,7 +509,7 @@
                       class="orderItem_text form-control form-select text-secondary px-3 tpe-zipcode"
                       as="select"
                       rules="required"
-                      v-model="form.receiverUser.receiverArea"
+                      v-model="form.user.receiverArea"
                       :class="{ 'is-invalid': errors['收件人地區'] }"
                     >
                       <option value="請選擇地區" disabled selected>
@@ -536,7 +537,7 @@
 
                   <div
                     class="col-md-6 mb-3 orderItem_text"
-                    v-if="form.receiverUser.receiverCity === '基隆市'"
+                    v-if="form.user.receiverCity === '基隆市'"
                   >
                     <!-- <label for="kelZipCode" class="form-label">地區</label> -->
                     <v-field
@@ -545,7 +546,7 @@
                       class="orderItem_text form-control form-select text-secondary px-3 kel-zipcode"
                       as="select"
                       rules="required"
-                      v-model="form.receiverUser.receiverArea"
+                      v-model="form.user.receiverArea"
                       :class="{ 'is-invalid': errors['收件人地區'] }"
                     >
                       <option value="請選擇地區" disabled selected>
@@ -576,7 +577,7 @@
                     class="form-control orderItem_text px-3"
                     placeholder="請輸入地址"
                     rules="required"
-                    v-model.trim="form.receiverUser.receiverAddress"
+                    v-model.trim="form.user.receiverAddress"
                     :class="{ 'is-invalid': errors['收件人地址'] }"
                   >
                   </v-field>
@@ -595,7 +596,7 @@
                     class="form-control px-3 orderItem_text"
                     placeholder="請輸入 E-mail"
                     rules="email|required"
-                    v-model.trim="form.receiverUser.receiverEmail"
+                    v-model.trim="form.user.receiverEmail"
                     :class="{ 'is-invalid': errors['收件人 E-mail'] }"
                   >
                   </v-field>
@@ -606,7 +607,6 @@
                 </div>
               </div>
             </div>
-            <!-- 收件人資訊 end -->
 
             <!-- 超商取貨收件人資訊 -->
             <div
@@ -631,7 +631,7 @@
                     class="form-control orderItem_text px-3"
                     placeholder="請輸入姓名"
                     rules="required"
-                    v-model="form.receiverShop.receiverShopName"
+                    v-model="form.user.receiverShopName"
                     :class="{ 'is-invalid': errors['收件人姓名'] }"
                   ></v-field>
                   <ErrorMessage
@@ -649,7 +649,7 @@
                       class="orderItem_text form-control form-select text-secondary px-3"
                       as="select"
                       rules="required"
-                      v-model="form.receiverShop.receiverShopNation"
+                      v-model="form.user.receiverShopNation"
                       :class="{ 'is-invalid': errors['收件人國家'] }"
                     >
                       <!-- <option value="" disabled selected>請選擇國家</option> -->
@@ -674,7 +674,7 @@
                       class="form-control orderItem_text px-3"
                       placeholder="請輸入電話"
                       :rules="isPhone"
-                      v-model="form.receiverShop.receiverShopTel"
+                      v-model="form.user.receiverShopTel"
                       :class="{ 'is-invalid': errors['收件人電話'] }"
                     ></v-field>
                     <ErrorMessage
@@ -686,12 +686,21 @@
               </div>
 
               <div class="px-2 row">
-                <span class="col-md-12"
-                  >{{ location.name }} : {{ location.dress }}</span
-                >
+                <div class="col-md-12 d-flex align-item-center">
+                  <span class="me-3"
+                    ><i class="bi bi-geo-fill fs-5"></i> 門市資訊：
+                    {{ location.name }} - {{ location.dress }}
+                  </span>
+                  <button
+                    class="btn btn-warning btn-sm"
+                    :disabled="isFull"
+                    @click="sendLocation(isFull)"
+                  >
+                    確認門市
+                  </button>
+                </div>
               </div>
             </div>
-            <!-- 超商取貨收件人資訊 end -->
 
             <!-- 配送資訊 -->
             <div class="p-4 mb-5 bg-light">
@@ -708,7 +717,7 @@
                     class="orderItem_text form-control form-select text-secondary px-3"
                     as="select"
                     rules="required"
-                    v-model="form.deliverInfo.deliverTime"
+                    v-model="form.user.deliverTime"
                     :class="{ 'is-invalid': errors['配送時間'] }"
                   >
                     <option value="不指定">不指定</option>
@@ -729,7 +738,7 @@
                     class="orderItem_text form-control form-select text-secondary px-3"
                     as="select"
                     rules="required"
-                    v-model="form.deliverInfo.deliverTicket"
+                    v-model="form.user.deliverTicket"
                     :class="{ 'is-invalid': errors['電子發票'] }"
                   >
                     <option value="電子發票">電子發票</option>
@@ -746,7 +755,7 @@
                 </div>
 
                 <!-- 電子發票需填表格 -->
-                <div v-if="form.deliverInfo.deliverTicket === '電子發票'">
+                <div v-if="form.user.deliverTicket === '電子發票'">
                   <div class="row px-2 mb-3 deliverTicketLink">
                     <a class="col-md-12 ms-2 text-secondary">會員載具歸戶</a>
                   </div>
@@ -765,7 +774,7 @@
                         class="orderItem_text form-control form-select text-secondary px-3"
                         as="select"
                         rules="required"
-                        v-model="form.deliverInfo.deliverCity"
+                        v-model="form.user.deliverCity"
                         :class="{ 'is-invalid': errors['發票寄送縣市'] }"
                       >
                         <option value="台北市">台北市</option>
@@ -780,7 +789,7 @@
 
                     <div
                       class="col-md-6 mb-3 orderItem_text"
-                      v-if="form.deliverInfo.deliverCity === '台北市'"
+                      v-if="form.user.deliverCity === '台北市'"
                     >
                       <v-field
                         id="receiverTpeZipCode"
@@ -788,7 +797,7 @@
                         class="orderItem_text form-control form-select text-secondary px-3 tpe-zipcode"
                         as="select"
                         rules="required"
-                        v-model="form.deliverInfo.deliverArea"
+                        v-model="form.user.deliverArea"
                         :class="{ 'is-invalid': errors['發票寄送地區'] }"
                       >
                         <option value="請選擇地區" disabled selected>
@@ -816,7 +825,7 @@
 
                     <div
                       class="col-md-6 mb-3 orderItem_text"
-                      v-if="form.deliverInfo.deliverCity === '基隆市'"
+                      v-if="form.user.deliverCity === '基隆市'"
                     >
                       <v-field
                         id="receiverKelZipCode"
@@ -824,7 +833,7 @@
                         class="orderItem_text form-control form-select text-secondary px-3 kel-zipcode"
                         as="select"
                         rules="required"
-                        v-model="form.deliverInfo.deliverArea"
+                        v-model="form.user.deliverArea"
                         :class="{ 'is-invalid': errors['發票寄送地區'] }"
                       >
                         <option value="請選擇地區" disabled selected>
@@ -854,7 +863,7 @@
                       class="form-control orderItem_text px-3"
                       placeholder="請輸入地址"
                       rules="required"
-                      v-model="form.deliverInfo.deliverAddress"
+                      v-model="form.user.deliverAddress"
                       :class="{ 'is-invalid': errors['發票寄送地址'] }"
                     >
                     </v-field>
@@ -866,9 +875,7 @@
                 </div>
 
                 <!-- 電子發票(手機載具)需填表格 -->
-                <div
-                  v-if="form.deliverInfo.deliverTicket === '電子發票(手機載具)'"
-                >
+                <div v-if="form.user.deliverTicket === '電子發票(手機載具)'">
                   <div
                     class="col-md-12 mb-3 mt-4 orderItem_text position-relative"
                   >
@@ -880,9 +887,10 @@
                       id="receiverAddress"
                       name="手機載具條碼"
                       type="text"
+                      maxlength="8"
                       class="form-control orderItem_text px-3"
                       rules="required"
-                      v-model="form.deliverInfo.mobileCode"
+                      v-model="form.user.mobileCode"
                       :class="{ 'is-invalid': errors['手機載具條碼'] }"
                     >
                     </v-field>
@@ -894,7 +902,7 @@
                 </div>
 
                 <!-- 捐贈發票需填表格 -->
-                <div v-if="form.deliverInfo.deliverTicket === '捐贈發票'">
+                <div v-if="form.user.deliverTicket === '捐贈發票'">
                   <div
                     class="col-md-12 mb-3 mt-4 orderItem_text position-relative"
                   >
@@ -908,7 +916,7 @@
                       class="orderItem_text form-control form-select text-secondary px-3"
                       as="select"
                       rules="required"
-                      v-model="form.deliverInfo.invoiceDonate"
+                      v-model="form.user.invoiceDonate"
                       :class="{ 'is-invalid': errors['電子發票捐贈單位'] }"
                     >
                       <option value="財團法人創世社會福利基金會">
@@ -940,8 +948,8 @@
                 >
               </div>
             </div>
-            <!-- 配送資訊  end -->
 
+            <!-- 服務條款和隱私權政策 -->
             <div class="p-4 mb-4 border border-secondary">
               <div class="row px-2 orderItem_text">
                 <span class="col-md-12 text-secondary mb-1"
@@ -1000,6 +1008,7 @@ export default {
   components: { NavBar },
   data() {
     return {
+      isFull: false,
       cart: {},
       total: 0,
       paymentMethod: '', // 付費方式
@@ -1016,32 +1025,27 @@ export default {
           address: '',
           nation: '台灣本島',
           city: '台北市',
-          area: '請選擇地區'
-        },
-        receiverUser: {
-          receiverName: '',
+          area: '請選擇地區',
+          receiverInput: '同購買人', // 收件人是否同購買人
+          receiverName: '', // 收件人資訊
           receiverEmail: '',
           receiverTel: '',
           receiverAddress: '',
           receiverNation: '台灣本島',
           receiverCity: '台北市',
-          receiverArea: '請選擇地區'
-        },
-        receiverShop: {
-          receiverShopName: '',
+          receiverArea: '請選擇地區',
+          receiverShopName: '', // 超商取貨收件人
           receiverShopNation: '台灣本島',
-          receiverShopTel: ''
-        },
-        deliverInfo: {
-          deliverTime: '不指定',
+          receiverShopTel: '',
+          deliverTime: '不指定', // 配送資訊
           deliverTicket: '電子發票',
           deliverCity: '台北市',
           deliverArea: '請選擇地區',
           deliverAddress: '',
           mobileCode: '',
-          invoiceDonate: '財團法人創世社會福利基金會'
-        },
-        receiverInput: ''
+          invoiceDonate: '財團法人創世社會福利基金會',
+          clientLocation: {}
+        }
       }
     }
   },
@@ -1072,7 +1076,30 @@ export default {
             this.paymentMethod = this.cart.carts[0].paymentMethod
             this.location = this.cart.carts[0].location
           }
-          console.log(this.cart)
+          // console.log(this.cart)
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
+    },
+    // 轉跳CheckOut第一步驟
+    checkStepOne() {
+      this.deliverMethod = ''
+      this.paymentMethod = ''
+      this.location = {}
+      this.$router.push('/checkout')
+    },
+    // 完成訂單
+    createOrder() {
+      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`
+      const order = this.form
+      this.$http
+        .post(url, { data: order })
+        .then((res) => {
+          // console.log(res)
+          if (res.data.success) {
+            this.$router.push(`/checkout/${res.data.orderId}`)
+          }
         })
         .catch((err) => {
           console.log(err.response)
@@ -1091,42 +1118,14 @@ export default {
         orderOpen.classList.toggle('order_close')
       }
     },
-
-    // 轉跳CheckOut第一步驟
-    checkStepOne() {
-      this.deliverMethod = ''
-      this.paymentMethod = ''
-      this.location = {}
-      this.$router.push('/checkout')
-    },
-    // 完成訂單
-    createOrder() {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`
-      const order = this.form
-      this.$http
-        .post(url, { data: order })
-        .then((res) => {
-          console.log(res)
-          // this.form.user.name = ''
-          // this.form.user.email = ''
-          // this.form.user.tel = ''
-          // this.form.user.address = ''
-          // this.form.user.nation = '台灣本島'
-          // this.form.user.city = '台北市'
-          // this.form.user.area = '請選擇地區'
-        })
-        .catch((err) => {
-          console.log(err.response)
-        })
-    },
     // 設定手機電話的限制
     isPhone(value) {
       const phoneNumber = /^(09)[0-9]{8}$/
       return phoneNumber.test(value) ? true : '請輸入正確的手機號碼'
     },
-    onSubmit(values, { resetForm }) {
-      console.log(values) // 送給 API 的資料值
-      resetForm() // 把表單重置成預設值
+    sendLocation(isFull) {
+      this.isFull = !this.isFull
+      this.form.user.clientLocation = this.location
     }
   },
 
@@ -1161,6 +1160,7 @@ export default {
 }
 .cart_img {
   max-width: 80px;
+  cursor: default;
 }
 .mobile_title {
   font-size: 0.7rem;
