@@ -384,7 +384,7 @@ export default {
               this.shippingFee = 80
             }
           }
-          // console.log(this.cart)
+          console.log(this.cart)
         })
         .catch((err) => {
           console.log(err.response)

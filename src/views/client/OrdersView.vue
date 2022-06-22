@@ -6,38 +6,8 @@
   </div>
   <div class="container mt-4">
     <div class="row">
-      <!-- Check out步驟 -->
-      <div class="col-lg-12 mb-2">
-        <ul class="row row-cols-md-4 justify-content-center step_text">
-          <li
-            class="col bg-light d-flex justify-content-star align-items-center rounded py-2"
-          >
-            <div class="d-flex align-self-center fs-2 fw-semibold ps-2">01</div>
-            <div class="d-flex flex-column px-3">
-              <span>確認清單及付款方式</span>
-              <span>Check & Payment </span>
-            </div>
-          </li>
-          <li
-            class="col bg-light d-flex justify-content-star align-items-center rounded mx-4"
-          >
-            <div class="d-flex align-self-center fs-2 fw-semibold ps-2">02</div>
-            <div class="d-flex flex-column px-3">
-              <span>填寫訂購資料</span>
-              <span>Shipping info</span>
-            </div>
-          </li>
-          <li
-            class="col bg-warning d-flex justify-content-star align-items-center rounded"
-          >
-            <div class="d-flex align-self-center fs-2 fw-semibold ps-2">03</div>
-            <div class="d-flex flex-column px-3">
-              <span>完成購物</span>
-              <span>Order completed</span>
-            </div>
-          </li>
-        </ul>
-      </div>
+      <!-- 刪除Check out步驟 -->
+      <div class="col-lg-12 mb-2"></div>
 
       <div class="row justify-content-center">
         <!-- 訂單商品列表 -->
@@ -377,17 +347,6 @@
               <div class="row justify-content-center">
                 <div
                   class="col-md-4 d-flex justify-content-center"
-                  v-if="order.is_paid === false"
-                >
-                  <button
-                    class="btn btn-secondary btn-sm p-2 px-5"
-                    @click="OrderPayment"
-                  >
-                    確認付款
-                  </button>
-                </div>
-                <div
-                  class="col-md-4 d-flex justify-content-center"
                   v-if="order.is_paid === true"
                 >
                   <button
@@ -405,15 +364,13 @@
       </div>
     </div>
   </div>
-  <CompletePayModal ref="completePayModal" :orderId="completeOrderId" />
 </template>
 
 <script>
 import NavBar from '@/components/user/UserNavBar.vue'
-import CompletePayModal from '@/components/user/CompletePayModal.vue'
 
 export default {
-  components: { NavBar, CompletePayModal },
+  components: { NavBar },
   data() {
     return {
       orderId: '',
@@ -423,8 +380,7 @@ export default {
       originalTotal: 0,
       shippingFee: 80,
       locationName: '',
-      locationAddress: '',
-      completeOrderId: ''
+      locationAddress: ''
     }
   },
   methods: {
@@ -440,29 +396,13 @@ export default {
             this.locationAddress = this.order.user.clientLocation.dress
             // console.log(this.order)
             this.originalTotal = this.order.user.originalTotal // 商品原價總額
-            this.completeOrderId = this.order.id // 為了將id帶進Modal中顯示
           }
         })
         .catch((err) => {
           console.log(err.response)
         })
     },
-    // 完成訂單付款
-    OrderPayment() {
-      const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/pay/${this.orderId}`
-      this.$http
-        .post(url)
-        .then((res) => {
-          // console.log(res)
-          if (res.data.success) {
-            this.$refs.completePayModal.showModel()
-            this.getOrder()
-          }
-        })
-        .catch((err) => {
-          console.log(err.response)
-        })
-    },
+
     goShopping() {
       this.$router.push('/')
     }

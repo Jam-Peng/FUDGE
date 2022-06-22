@@ -99,8 +99,17 @@
                     <span class="price_text mt-1"
                       >單價 NT.{{ $filters.currency(item.product.price) }}</span
                     >
-                    <span class="price_text"
+                    <span
+                      class="price_text"
+                      v-if="item.final_total === item.total"
                       >小計 NT.{{ $filters.currency(item.total) }}</span
+                    >
+                    <span
+                      class="price_text"
+                      v-if="item.final_total !== item.total"
+                      >折扣小計 NT.{{
+                        $filters.currency(item.final_total)
+                      }}</span
                     >
                   </div>
                 </div>
@@ -190,6 +199,7 @@
                   rules="required"
                   v-model.trim="form.user.name"
                   :class="{ 'is-invalid': errors['訂購人姓名'] }"
+                  @click="sendLocation"
                 ></v-field>
                 <ErrorMessage
                   name="訂購人姓名"
@@ -685,7 +695,7 @@
                 </div>
               </div>
 
-              <div class="px-2 row">
+              <div class="px-2 row orderItem_text">
                 <div class="col-md-12 d-flex align-item-center">
                   <span class="me-3"
                     ><i class="bi bi-geo-fill fs-5"></i> 門市資訊：
@@ -694,7 +704,7 @@
                   <button
                     class="btn btn-warning btn-sm"
                     :disabled="isFull"
-                    @click="sendLocation(isFull)"
+                    @click="sendLocation"
                   >
                     確認門市
                   </button>
@@ -1044,7 +1054,8 @@ export default {
           deliverAddress: '',
           mobileCode: '',
           invoiceDonate: '財團法人創世社會福利基金會',
-          clientLocation: {}
+          clientLocation: {}, // 門市資訊
+          originalTotal: '' // 商品原價總額(因為step3訂單資料無法從API取得)
         }
       }
     }
@@ -1123,9 +1134,11 @@ export default {
       const phoneNumber = /^(09)[0-9]{8}$/
       return phoneNumber.test(value) ? true : '請輸入正確的手機號碼'
     },
-    sendLocation(isFull) {
+    // 門市確認按鈕
+    sendLocation() {
       this.isFull = !this.isFull
       this.form.user.clientLocation = this.location
+      this.form.user.originalTotal = this.total // 取得商品原價總額
     }
   },
 
