@@ -184,7 +184,7 @@
               </div>
 
               <select
-                class="form-select mb-4 mt-2 step_text"
+                class="form-select mb-1 mt-2 step_text"
                 v-if="
                   paymentMethod === '' || paymentMethod === '信用卡線上刷卡'
                 "
@@ -200,7 +200,7 @@
               </select>
 
               <select
-                class="form-select mb-4 mt-2 step_text"
+                class="form-select mb-1 mt-2 step_text"
                 v-if="paymentMethod === '貨到付款(宅配)'"
                 v-model="deliverMethod"
                 @change="resetUpdateCart"
@@ -212,7 +212,7 @@
               </select>
 
               <select
-                class="form-select mb-4 mt-2 step_text"
+                class="form-select mb-1 mt-2 step_text"
                 v-if="paymentMethod === '貨到付款(超商)'"
                 v-model="deliverMethod"
                 @change="resetUpdateCart"
@@ -224,8 +224,15 @@
                 <option value="全家超商取貨">全家超商取貨</option>
               </select>
 
+              <!-- 運送方式提醒訊息 -->
+              <div class="row deliverWarn ps-1 text-danger" ref="deliverWarn">
+                <span v-if="deliverMethod === '請選擇運送方式'"
+                  >※請先確定您的運送方式</span
+                >
+              </div>
+
               <div
-                class="row px-3"
+                class="row px-3 mt-4"
                 v-if="
                   paymentMethod === '貨到付款(超商)' || deliverMethod !== '宅配'
                 "
@@ -236,12 +243,22 @@
                   placeholder="尚未選擇門市"
                   v-model="location.name"
                 />
-                <button
-                  class="col-md-3 btn btn-outline-secondary btn-sm ms-auto"
-                  @click="openLocationModal"
-                >
-                  選擇門市
-                </button>
+
+                <div class="col-md-12 d-flex justify-content-between px-0">
+                  <div
+                    class="col-md-6 locationWarn ps-1 text-danger"
+                    ref="locationWarn"
+                  >
+                    <span v-if="location === ''">※請確認您的門市位置</span>
+                  </div>
+
+                  <button
+                    class="col-md-3 btn btn-outline-secondary btn-sm ms-auto"
+                    @click="openLocationModal"
+                  >
+                    選擇門市
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -337,15 +354,25 @@
     :loaction="location"
     @useloaction="uselocation"
   />
+  <NoCartModal ref="noCartModal" />
+  <NoPayMethodModal ref="NoPayModal" />
 </template>
 
 <script>
 import NavBar from '@/components/user/UserNavBar.vue'
 import CouponModal from '@/components/user/UserCouponModal.vue'
 import UserLocationModal from '@/components/user/UserLocationModal.vue'
+import NoCartModal from '@/components/user/NoCartModal.vue'
+import NoPayMethodModal from '@/components/user/NoPayMethodModal.vue'
 
 export default {
-  components: { NavBar, CouponModal, UserLocationModal },
+  components: {
+    NavBar,
+    CouponModal,
+    UserLocationModal,
+    NoCartModal,
+    NoPayMethodModal
+  },
   data() {
     return {
       cart: {},
@@ -384,7 +411,7 @@ export default {
               this.shippingFee = 80
             }
           }
-          console.log(this.cart)
+          // console.log(this.cart)
         })
         .catch((err) => {
           console.log(err.response)
@@ -465,7 +492,17 @@ export default {
     },
     // 轉跳CheckOut第二步驟
     checkStepTwo() {
-      this.$router.push('/checkout/step2')
+      if (this.cart.carts.length === 0) {
+        this.$refs.noCartModal.showModel()
+      } else if (this.paymentMethod === '') {
+        this.$refs.NoPayModal.showModel()
+      } else if (this.deliverMethod === '請選擇運送方式') {
+        this.$refs.deliverWarn.classList.add('openDeliverWarn')
+      } else if (this.deliverMethod !== '宅配' && this.location === '') {
+        this.$refs.locationWarn.classList.add('openLocationWarn')
+      } else {
+        this.$router.push('/checkout/step2')
+      }
     }
   },
   created() {
@@ -522,5 +559,14 @@ ul {
 }
 .selectShop {
   margin-top: -5px;
+}
+.deliverWarn,
+.locationWarn {
+  font-size: 0.7rem;
+  display: none;
+}
+.openDeliverWarn,
+.openLocationWarn {
+  display: block;
 }
 </style>

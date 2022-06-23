@@ -199,7 +199,7 @@
                   rules="required"
                   v-model.trim="form.user.name"
                   :class="{ 'is-invalid': errors['訂購人姓名'] }"
-                  @click="sendLocation"
+                  @click="sendData"
                 ></v-field>
                 <ErrorMessage
                   name="訂購人姓名"
@@ -1009,13 +1009,19 @@
       </div>
     </div>
   </div>
+  <NolocationModal
+    ref="nolocationModal"
+    :location="location"
+    @confirmLocation="sendLocation"
+  />
 </template>
 
 <script>
 import NavBar from '@/components/user/UserNavBar.vue'
+import NolocationModal from '@/components/user/NoLocationModal.vue'
 
 export default {
-  components: { NavBar },
+  components: { NavBar, NolocationModal },
   data() {
     return {
       isFull: false,
@@ -1104,17 +1110,22 @@ export default {
     createOrder() {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/order`
       const order = this.form
-      this.$http
-        .post(url, { data: order })
-        .then((res) => {
-          // console.log(res)
-          if (res.data.success) {
-            this.$router.push(`/checkout/${res.data.orderId}`)
-          }
-        })
-        .catch((err) => {
-          console.log(err.response)
-        })
+      // 先判斷確認門市按鈕是否被執行
+      if (this.isFull !== true) {
+        this.$refs.nolocationModal.showModel()
+      } else {
+        this.$http
+          .post(url, { data: order })
+          .then((res) => {
+            // console.log(res)
+            if (res.data.success) {
+              this.$router.push(`/checkout/${res.data.orderId}`)
+            }
+          })
+          .catch((err) => {
+            console.log(err.response)
+          })
+      }
     },
     // 購物車訂單資料收合功能
     toggleOrder() {
@@ -1134,11 +1145,24 @@ export default {
       const phoneNumber = /^(09)[0-9]{8}$/
       return phoneNumber.test(value) ? true : '請輸入正確的手機號碼'
     },
-    // 門市確認按鈕
+    // 經由訂購人觸發資料傳遞到from
+    sendData() {
+      if (this.isFull === true) {
+        this.isFull = true
+      } else if (this.deliverMethod !== '宅配') {
+        this.isFull = false
+      } else {
+        this.isFull = !this.isFull
+        this.form.user.clientLocation = this.location
+        this.form.user.originalTotal = this.total // 取得商品原價總額
+      }
+    },
+    // 經由門市確認按鈕觸發資料傳遞到from
     sendLocation() {
       this.isFull = !this.isFull
       this.form.user.clientLocation = this.location
       this.form.user.originalTotal = this.total // 取得商品原價總額
+      this.$refs.nolocationModal.hideModal()
     }
   },
 

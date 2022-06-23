@@ -10,16 +10,9 @@
     <div class="modal-dialog modal-sm p-2" role="document">
       <div class="modal-content border-0 p-4">
         <div class="modal_header row position-relative">
-          <!-- <div
-            class="modal-title col-sm-12 d-flex justify-content-center"
-            id="exampleModalLabel"
-            >
-            <span class="fs-5">已完成付款</span>
-          </div> -->
-
           <button
             type="button"
-            class="btn btn-outline-danger d-flex justify-content-center align-items-center noCart_Modal"
+            class="btn btn-outline-danger d-flex justify-content-center align-items-center noPay_Modal"
             @click="hideModal"
           >
             <i class="bi bi-x-lg"></i>
@@ -31,7 +24,7 @@
             <div
               class="col-sm-12 d-flex justify-content-center align-items-center mb-2"
             >
-              <span class="">購物車目前沒有商品</span>
+              <span class="">請確認您的付款方式</span>
             </div>
           </div>
         </div>
@@ -40,9 +33,9 @@
           <button
             type="button"
             class="col-sm-6 btn btn-secondary btn-sm"
-            @click="goProductList"
+            @click="hideModal"
           >
-            來去逛逛
+            確定
           </button>
         </div>
       </div>
@@ -59,18 +52,13 @@ export default {
       modal: {}
     }
   },
-  methods: {
-    goProductList() {
-      this.$router.push('/productList')
-      this.modal.hide()
-    }
-  },
+  methods: {},
   mixins: [modalMixin]
 }
 </script>
 
 <style lang="scss">
-.noCart_Modal {
+.noPay_Modal {
   height: 25px;
   width: 25px;
   position: absolute;

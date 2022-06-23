@@ -7,42 +7,46 @@
     aria-hidden="true"
     ref="modal"
   >
-    <div class="modal-dialog modal-sm p-2" role="document">
+    <div class="modal-dialog modal-md p-2" role="document">
       <div class="modal-content border-0 p-4">
         <div class="modal_header row position-relative">
-          <!-- <div
-            class="modal-title col-sm-12 d-flex justify-content-center"
-            id="exampleModalLabel"
-            >
-            <span class="fs-5">已完成付款</span>
-          </div> -->
-
           <button
             type="button"
-            class="btn btn-outline-danger d-flex justify-content-center align-items-center noCart_Modal"
+            class="btn btn-outline-danger d-flex justify-content-center align-items-center nolocation_Modal"
             @click="hideModal"
           >
             <i class="bi bi-x-lg"></i>
           </button>
         </div>
 
-        <div class="modal-body">
-          <div class="row noCart_text">
+        <div class="modal-body pb-0 mb-2">
+          <div class="row noLocation_text">
             <div
-              class="col-sm-12 d-flex justify-content-center align-items-center mb-2"
+              class="col-sm-12 d-flex justify-content-center align-items-center"
             >
-              <span class="">購物車目前沒有商品</span>
+              <span class="fs-5">請確認您的門市</span>
             </div>
+          </div>
+        </div>
+
+        <div class="px-2 mb-4 orderItem_text">
+          <div
+            class="col-md-12 d-flex align-item-center justify-content-center"
+          >
+            <span class="me-3"
+              ><i class="bi bi-geo-fill fs-5"></i> 門市資訊：
+              {{ location.name }} - {{ location.dress }}
+            </span>
           </div>
         </div>
 
         <div class="modal_footer d-flex justify-content-center">
           <button
             type="button"
-            class="col-sm-6 btn btn-secondary btn-sm"
-            @click="goProductList"
+            class="col-sm-3 btn btn-secondary btn-sm"
+            @click="$emit('confirmLocation')"
           >
-            來去逛逛
+            確定
           </button>
         </div>
       </div>
@@ -59,25 +63,21 @@ export default {
       modal: {}
     }
   },
-  methods: {
-    goProductList() {
-      this.$router.push('/productList')
-      this.modal.hide()
-    }
-  },
+  props: ['location'],
+
   mixins: [modalMixin]
 }
 </script>
 
 <style lang="scss">
-.noCart_Modal {
+.nolocation_Modal {
   height: 25px;
   width: 25px;
   position: absolute;
   right: 0;
   top: -12px;
 }
-.noCart_text {
+.noLocation_text {
   font-size: 0.9rem;
 }
 </style>

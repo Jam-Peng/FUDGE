@@ -72,7 +72,6 @@ export default {
     }
   },
   props: ['orderId'],
-  emits: [''],
   watch: {
     orderId() {
       this.orderCode = this.orderId
