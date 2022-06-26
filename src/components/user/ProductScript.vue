@@ -37,8 +37,8 @@
           </div>
         </div>
       </div>
-      <!--================ 洗滌方式 =================-->
 
+      <!--================ 洗滌方式 =================-->
       <div class="border-bottom border-muted" @click="toggleWash">
         <div
           class="d-flex align-items-center collapsed"
@@ -56,7 +56,7 @@
         </div>
 
         <div
-          class="accordion-collapse collapse pb-2"
+          class="accordion-collapse collapse pb-1"
           id="descriptWash"
           data-bs-parent="#accordionFlushExample"
         >
@@ -75,21 +75,43 @@
           </div>
         </div>
       </div>
+
+      <!--================ 尺寸指南 =================-->
+      <div class="border-bottom border-muted sizeGuide_box" @click="openModal">
+        <div class="d-flex align-items-center">
+          <span class="sizeGuide_title my-2">尺寸指南</span>
+
+          <font-awesome-icon
+            class="icons sizeIcons-arrow ms-auto"
+            :icon="['fas', 'angle-down']"
+          />
+        </div>
+      </div>
     </div>
   </section>
-  <!--  -->
+
+  <sizeGuideModal
+    ref="sizeGuide"
+    :assignProduct="assignProduct"
+    :sizeguideImg="sizeguideImg"
+  />
 </template>
 
 <script>
+import sizeGuideModal from '@/components/user/SizeGuideModal.vue'
+
 export default {
+  components: { sizeGuideModal },
   data() {
     return {
+      assignProduct: {},
       descript: '', // 商品資訊第一個欄位
       descripts: [], // 刪除第一個的其他商品資訊
-      washContents: []
+      washContents: [],
+      sizeguideImg: ''
     }
   },
-  props: ['product'],
+  props: ['product', 'sizeGuideImg'],
   watch: {
     product() {
       // 將字串轉為陣列使用在template排版上
@@ -100,6 +122,11 @@ export default {
       // console.log(this.descripts)
       // 洗滌方式
       this.washContents = this.product.content.split(',')
+      // 將資料傳存在另一個變數中傳進sizeGuideModal
+      this.assignProduct = this.product
+    },
+    sizeGuideImg() {
+      this.sizeguideImg = this.sizeGuideImg // 取得的最後一張照片
     }
   },
   methods: {
@@ -134,6 +161,10 @@ export default {
       } else {
         washOopen.classList.toggle('wash_close')
       }
+    },
+    // 開啟尺寸指南 Modal
+    openModal() {
+      this.$refs.sizeGuide.showModel()
     }
   }
 }
@@ -145,8 +176,15 @@ export default {
   font-size: 0.9rem;
   cursor: pointer;
 }
+.sizeIcons-arrow {
+  font-size: 0.9rem;
+}
+.sizeGuide_box {
+  cursor: pointer;
+}
 .descript_title,
-.wash_title {
+.wash_title,
+.sizeGuide_title {
   font-size: 0.9rem;
 }
 .descript_open {

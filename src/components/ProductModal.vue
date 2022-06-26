@@ -125,6 +125,39 @@
                   v-model.trim="tempProduct.content"
                 ></textarea>
               </div>
+              <div class="mb-3 col-md-12">
+                <label class="col-md-12 form-label">尺寸指南</label>
+                <label for="small-Guide" class="form-label sizeGuide_text mb-0"
+                  >S尺寸</label
+                >
+                <input
+                  type="text"
+                  class="form-control mb-2"
+                  id="small-Guide"
+                  placeholder="請輸入Ｓ尺寸資料"
+                  v-model.trim="tempProduct.smallGuide"
+                />
+                <label for="middle-Guide" class="form-label sizeGuide_text mb-0"
+                  >M尺寸</label
+                >
+                <input
+                  type="text"
+                  class="form-control mb-2"
+                  id="middle-Guide"
+                  placeholder="請輸入M尺寸資料"
+                  v-model.trim="tempProduct.middleGuide"
+                />
+                <label for="large-Guide" class="form-label sizeGuide_text mb-0"
+                  >L尺寸</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="large-Guide"
+                  placeholder="請輸入L尺寸資料"
+                  v-model.trim="tempProduct.largeGuide"
+                />
+              </div>
               <div class="mb-3">
                 <div class="form-check">
                   <input
@@ -226,6 +259,10 @@ export default {
         // 新增size資料
         this.tempProduct.size = []
         this.tempProduct.preSize = []
+        // 新增尺寸指南
+        this.tempProduct.smallGuide = []
+        this.tempProduct.middleGuide = []
+        this.tempProduct.largeGuide = []
       }
     }
   },
@@ -272,3 +309,9 @@ export default {
   mixins: [modalMixin]
 }
 </script>
+
+<style lang="scss">
+.sizeGuide_text {
+  font-size: 0.9rem;
+}
+</style>

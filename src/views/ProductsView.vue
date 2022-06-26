@@ -114,6 +114,7 @@ export default {
             // console.log(res.data)
             this.products = res.data.products
             this.pagination = res.data.pagination
+            // console.log(this.products)
           }
         })
         .catch((err) => {

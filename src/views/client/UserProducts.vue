@@ -65,9 +65,9 @@
               <!-- 尺寸與數量 -->
               <div>
                 <div class="row px-2">
-                  <div class="col-6 px-0">
+                  <div class="col-md-6 px-0">
                     <select
-                      class="form-select form-select-sm text-center"
+                      class="form-select form-select-sm text-center border-secondary size_select"
                       v-model="selectSize"
                     >
                       <option selected disabled value="">SIZE</option>
@@ -77,7 +77,7 @@
                     </select>
                   </div>
                   <div
-                    class="col-6 countSelector rounded-1 d-flex align-items-center w-50"
+                    class="col-md-6 countSelector rounded-1 d-flex align-items-center w-50 border-secondary"
                   >
                     <div
                       class="col d-flex align-items-center justify-content-between"
@@ -95,7 +95,14 @@
                       />
                     </div>
                   </div>
-                  <div class="px-0 my-4">
+                  <div class="px-0 my-4" v-if="selectSize === ''">
+                    <div
+                      class="col-12 size_box border rounded border-secondary text-dark text-center"
+                    >
+                      請選擇尺寸
+                    </div>
+                  </div>
+                  <div class="px-0 my-4" v-else>
                     <button
                       type="button"
                       class="btn btn-outline-danger btn-sm col-12"
@@ -109,8 +116,12 @@
               </div>
               <!-- 商品資訊 -->
               <div>
-                <ProductScript :product="product" />
+                <ProductScript
+                  :product="product"
+                  :sizeGuideImg="sizeGuideImg"
+                />
               </div>
+
               <!-- 商品資訊 end -->
             </div>
           </div>
@@ -141,7 +152,11 @@ export default {
       },
       qtyNumber: 1, // 預設數量為 1
       sizes: [], // 取得所有尺寸
-      selectSize: '' // 選擇加到購物車的尺寸
+      selectSize: '', // 選擇加到購物車的尺寸
+      smallGuide: [],
+      middleGuide: [],
+      largeGuide: [],
+      sizeGuideImg: '' // 取得最後一張尺寸照片
     }
   },
   methods: {
@@ -157,7 +172,9 @@ export default {
             // 分別取出第一張照片和其他照片
             // this.image = res.data.product.images[0]
             // res.data.product.images.shift()
+            this.sizeGuideImg = res.data.product.images.pop() // 取最後一張尺寸圖
             this.sizes.push(...this.product.size.split(' '))
+            // console.log(this.product)
           }
         })
         .catch((err) => {
@@ -208,6 +225,9 @@ export default {
 </script>
 
 <style lang="scss">
+.size_select {
+  cursor: pointer;
+}
 .countSelector {
   border: 1px solid #ced4da;
 }
@@ -226,5 +246,9 @@ export default {
   :hover {
     color: #ffc107;
   }
+}
+.size_box {
+  font-size: 0.88rem;
+  padding: 0.25rem 0.5rem;
 }
 </style>

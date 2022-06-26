@@ -227,7 +227,7 @@
               <!-- 運送方式提醒訊息 -->
               <div class="row deliverWarn ps-1 text-danger" ref="deliverWarn">
                 <span v-if="deliverMethod === '請選擇運送方式'"
-                  >※請先確定您的運送方式</span
+                  >※請先確認您的運送方式</span
                 >
               </div>
 
