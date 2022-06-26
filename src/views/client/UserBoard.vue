@@ -6,7 +6,7 @@
   </div>
   <ToastMessages class="top-10 end-0 me-3" />
   <div class="container-fluid mt-4 position-relative px-4">
-    <div class="row ms-auto">
+    <div class="row">
       <div class="col-lg-2 col-md-3 col-sm-12 mb-3">
         <!-- 側邊sideBar -->
         <SideBar

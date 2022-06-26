@@ -1,21 +1,60 @@
-/* eslint-disable prefer-const */
 <template>
-  <nav class="navbar navbar-expand-lg bg-light px-3">
-    <div class="container">
-      <a class="navbar-brand" href="#">FUDGE</a>
+  <nav class="navbar navbar-expand-lg bg-light p-4">
+    <div class="container-fluid">
+      <a
+        class="navbar-brand me-0 logo_title order-2 order-sm-2 order-md-2 order-lg-0"
+        href="#"
+        >FUDGE</a
+      >
       <button
-        class="navbar-toggler"
+        class="navbar-toggler order-1 order-sm-1 order-md-1 me-3"
         type="button"
         data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <!-- RWD-平板和手機顯示 -->
+      <div
+        class="d-md-block d-sm-block d-lg-none order-3 order-sm-3 order-md-3"
+      >
+        <ul class="navbar-nav d-flex flex-row justify-content-start">
+          <li class="nav-item ps-3">
+            <a class="nav-link p-0"
+              ><font-awesome-icon
+                class="icons icons_user"
+                :icon="['fas', 'user']"
+              />
+            </a>
+          </li>
+          <li class="nav-item ps-3 d-md-block d-none">
+            <a class="nav-link p-0"
+              ><font-awesome-icon
+                class="icons icons_star"
+                :icon="['far', 'star']"
+              />
+            </a>
+          </li>
+          <li class="nav-item ps-3">
+            <a class="nav-link p-0"
+              ><font-awesome-icon
+                class="icons icons_cart"
+                :icon="['fas', 'cart-shopping']"
+                @click="toCheckOut"
+              />
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div
+        class="collapse navbar-collapse order-4 order-md-4 order-lg-1 ms-lg-5 justify-content-between"
+        id="navbarNav"
+      >
+        <ul class="navbar-nav">
           <li class="nav-item">
             <router-link to="/about" class="nav-link">關於我們 </router-link>
           </li>
@@ -31,84 +70,87 @@
             <a class="nav-link">優惠卷 </a>
           </li>
         </ul>
-      </div>
-    </div>
+        <div class="me-2">
+          <div class="d-flex align-items-center">
+            <div
+              class="d-flex flex-column align-items-center position-relative d-md-block d-none"
+              role="search"
+            >
+              <label for="search">
+                <input
+                  class="search me-0 ps-2"
+                  type="search"
+                  placeholder="Search"
+                  aria-label="Search"
+                  id="search"
+                  @keyup.enter="searchKeyword($event)"
+                  :value="keyword"
+                />
 
-    <div class="container">
-      <div class="row ms-lg-auto">
-        <div
-          class="col d-flex flex-column align-items-center justify-content-center position-relative"
-          role="search"
-        >
-          <label for="search">
-            <!-- <input
-              class="search me-0"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              :value="search"
-              @keyup.enter="$emit('update:search', $event.target.value)"
-              @change="valueSearch"
-              ref="searchValue"
-              id="search"
-            /> -->
-            <!-- <input
-              class="search me-0"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              @keyup.enter="searchKeyword(keyword)"
-              id="search"
-              v-model="keyword"
-            /> -->
-            <input
-              class="search me-0"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-              id="search"
-              @keyup.enter="searchKeyword($event)"
-              :value="keyword"
-            />
-            <!-- :value="$route.query.keyword" -->
-            <font-awesome-icon
-              class="icons icons-search position-absolute"
-              :icon="['fas', 'magnifying-glass']"
-            />
-          </label>
-        </div>
-        <div class="col">
-          <ul class="navbar-nav d-flex flex-row justify-content-end">
-            <li class="nav-item">
-              <a class="nav-link"
-                ><font-awesome-icon
-                  class="icons icons_user"
-                  :icon="['fas', 'user']"
+                <font-awesome-icon
+                  class="icons icons-search position-absolute"
+                  :icon="['fas', 'magnifying-glass']"
                 />
-              </a>
-            </li>
-            <li class="nav-item mx-1">
-              <a class="nav-link"
-                ><font-awesome-icon
-                  class="icons icons_star"
-                  :icon="['far', 'star']"
-                />
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"
-                ><font-awesome-icon
-                  class="icons icons_cart"
-                  :icon="['fas', 'cart-shopping']"
-                  @click="toCheckOut"
-                />
-              </a>
-            </li>
-          </ul>
+              </label>
+            </div>
+            <div class="d-none d-lg-block">
+              <ul class="navbar-nav d-flex flex-row justify-content-start">
+                <li class="nav-item ps-3">
+                  <a class="nav-link p-0"
+                    ><font-awesome-icon
+                      class="icons icons_user"
+                      :icon="['fas', 'user']"
+                    />
+                  </a>
+                </li>
+                <li class="nav-item ps-3">
+                  <a class="nav-link p-0"
+                    ><font-awesome-icon
+                      class="icons icons_star"
+                      :icon="['far', 'star']"
+                    />
+                  </a>
+                </li>
+                <li class="nav-item ps-3">
+                  <a class="nav-link p-0"
+                    ><font-awesome-icon
+                      class="icons icons_cart"
+                      :icon="['fas', 'cart-shopping']"
+                      @click="toCheckOut"
+                    />
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </nav>
+
+  <!-- RWD 手機顯示 -->
+  <div
+    class="col d-sm-flex flex-column align-items-center position-relative d-md-none d-sm-block px-4 pt-3"
+    role="search"
+  >
+    <label for="search">
+      <input
+        class="search me-0 ps-4"
+        type="search"
+        placeholder="Search"
+        aria-label="Search"
+        size="30"
+        id="search"
+        @keyup.enter="searchKeyword($event)"
+        :value="keyword"
+      />
+
+      <font-awesome-icon
+        class="icons icons_sm_search position-absolute"
+        :icon="['fas', 'magnifying-glass']"
+      />
+    </label>
+  </div>
 </template>
 
 <script>
@@ -122,21 +164,6 @@ export default {
   },
 
   methods: {
-    // searchKeyword(keyword) {
-    //   this.$router.replace(`/search?Keyword=${keyword}`)
-    //   // this.keyword = ''
-    // }
-    // searchKeyword(e) {
-    //   this.$router.replace({
-    //     query: {
-    //       ...this.$route.query,
-    //       keyword: e.target.value
-    //     },
-    //     path: '/search'
-    //   })
-    //   // e.target.value = ''
-    //   console.log(this.$route)
-    // }
     searchKeyword(e) {
       this.keyword = e.target.value
       this.$router.replace({
@@ -158,14 +185,27 @@ export default {
 // ul li {
 //   cursor: pointer;
 // }
+.logo_title {
+  font-size: 1.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1rem;
+}
+
 .icons_user,
 .icons_star,
 .icons_cart {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 .icons-search {
-  top: 30%;
-  right: 9%;
+  top: 25%;
+  right: 3%;
+  cursor: pointer;
+  color: #6f7479;
+  background: rgb(255, 255, 255);
+}
+.icons_sm_search {
+  top: 50%;
+  left: 8%;
   cursor: pointer;
   color: #6f7479;
   background: rgb(255, 255, 255);

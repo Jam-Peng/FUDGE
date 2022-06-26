@@ -512,19 +512,6 @@ export default {
         sizeDash.classList.remove('size_dashNone')
         sizeDash.classList.add('size_dashBlock')
       }
-      // ===================================
-      // if (sizePlus.className === 'bi bi-plus size_plus') {
-      //   sizePlus.classList.add('size_plusBlock')
-      //   sizeDash.classList.toggle('size_dashNone')
-      // } else if (sizePlus.className === 'bi bi-plus size_plus size_plusBlock') {
-      //   sizePlus.classList.remove('size_plusBlock')
-      //   sizeDash.classList.remove('size_dashNone')
-      //   sizeDash.classList.add('size_dashBlock')
-
-      //   fittingPlus.classList.remove('fitting_plusNone')
-      //   fittingDash.classList.remove('fitting_dashBlock')
-      //   fittingPlus.classList.add('fitting_plusBlock')
-      // }
     },
     // 試穿報告
     toggleFitting() {

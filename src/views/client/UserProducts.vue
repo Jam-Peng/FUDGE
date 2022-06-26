@@ -6,7 +6,7 @@
   </div>
   <ToastMessages class="top-10 end-0 me-3" />
   <div class="container mt-4 position-relative px-4">
-    <div class="row ms-auto">
+    <div class="row">
       <!-- breadcrumb麵包屑 -->
       <div class="container px-3">
         <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
