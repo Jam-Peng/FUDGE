@@ -33,9 +33,10 @@ const routes = [
     path: '/checkout/:orderId',
     component: () => import('../views/client/CheckOutStepThree.vue')
   },
+  // 客戶訂單查詢
   {
     path: '/checkOrder/:orderId',
-    component: () => import('../views/client/OrdersView.vue')
+    component: () => import('../views/client/CheckOrdersView.vue')
   },
   // 搜尋關鍵字功能
   {

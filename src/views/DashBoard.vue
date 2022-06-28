@@ -2,6 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col col-lg-3 col-md-2">
+        <!-- bg-light -->
         <NavBar />
       </div>
       <div class="col col-lg-9 col-md-10">

@@ -173,7 +173,7 @@ export default {
           this.$refs.DeleteProductModal.hideModal()
           this.getProudcts()
           // 全域屬性發送吐司訊息
-          this.$httpMessageState(res, '刪除商品成功')
+          this.$httpMessageState(res, '刪除商品')
         })
         .catch((err) => {
           console.log(err.response)

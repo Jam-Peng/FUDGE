@@ -1061,6 +1061,8 @@ export default {
           mobileCode: '',
           invoiceDonate: '財團法人創世社會福利基金會',
           clientLocation: {}, // 門市資訊
+          userPayMethod: '', // 付費方式
+          userdeliverMethod: '', // 運送方式
           originalTotal: '' // 商品原價總額(因為step3訂單資料無法從API取得)
         }
       }
@@ -1155,6 +1157,8 @@ export default {
         this.isFull = !this.isFull
         this.form.user.clientLocation = this.location
         this.form.user.originalTotal = this.total // 取得商品原價總額
+        this.form.user.userPayMethod = this.paymentMethod
+        this.form.user.userdeliverMethod = this.deliverMethod
       }
     },
     // 經由門市確認按鈕觸發資料傳遞到from
@@ -1162,6 +1166,8 @@ export default {
       this.isFull = !this.isFull
       this.form.user.clientLocation = this.location
       this.form.user.originalTotal = this.total // 取得商品原價總額
+      this.form.user.userPayMethod = this.paymentMethod
+      this.form.user.userdeliverMethod = this.deliverMethod
       this.$refs.nolocationModal.hideModal()
     }
   },

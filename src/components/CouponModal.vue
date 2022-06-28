@@ -12,7 +12,7 @@
       <div class="modal-content">
         <div class="modal-header bg-dark text-white">
           <h5 class="modal-title" id="exampleModalLabel">
-            <span>新增優惠卷</span>
+            <span>優惠卷資料</span>
           </h5>
           <button
             type="button"
