@@ -79,7 +79,7 @@ export default {
   },
   methods: {
     intoIndex() {
-      this.$router.push('/')
+      this.$router.push('/zh-tw')
       this.modal.hide()
     },
     goCheckOrder() {

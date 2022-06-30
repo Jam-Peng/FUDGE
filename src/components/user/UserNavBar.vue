@@ -1,11 +1,17 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-light p-4">
     <div class="container-fluid">
-      <a
+      <!-- <a
         class="navbar-brand me-0 logo_title order-2 order-sm-2 order-md-2 order-lg-0"
-        href="#"
+        href="#/zh-tw"
         >FUDGE</a
-      >
+      > -->
+      <router-link
+        to="/zh-tw"
+        class="navbar-brand me-0 logo_title order-2 order-sm-2 order-md-2 order-lg-0"
+        >FUDGE
+      </router-link>
+
       <button
         class="navbar-toggler order-1 order-sm-1 order-md-1 me-3"
         type="button"
@@ -100,24 +106,29 @@
                   class="nav-item ps-4 position-relative"
                   @="{mouseenter: loginDisplay,mouseleave: loginNone}"
                 >
-                  <a class="nav-link p-0"
+                  <a class="nav-link p-0" @click.prevent="userLogin"
                     ><font-awesome-icon
                       class="icons icons_user"
                       :icon="['fas', 'user']"
                     />
                   </a>
-                  <!-- 登入 mouse事件  -->
+                  <!-- 登入 mouse事件    -->
                   <div class="d-flex flex-column cart_login">
-                    <span
-                      class="text-end cart_bagTitle pb-2"
+                    <div
+                      class="text-end pb-2 pt-1"
                       v-show="loginIsable"
-                      >登入</span
+                      v-if="
+                        userTestSignin.testAccount !== '' &&
+                        userTestSignin.testPassword !== ''
+                      "
                     >
-                    <span
-                      class="text-end cart_bagTitle pb-2"
-                      v-show="loginIsable"
-                      >我的帳戶</span
-                    >
+                      <span class="cart_bagTitle">我的帳戶 </span>
+                    </div>
+
+                    <div class="text-end pb-2 pt-1" v-show="loginIsable" v-else>
+                      <span class="cart_bagTitle">登入</span>
+                    </div>
+
                     <div
                       class="border border-secondary p-2 bg-white text-secondary"
                       v-show="loginIsable"
@@ -129,7 +140,10 @@
                         </div>
                       </div>
                       <hr class="my-2" />
-                      <div class="pb-1 p-1 d-flex flex-column userLogout">
+                      <div
+                        class="pb-1 p-1 d-flex flex-column userLogout"
+                        @click="userLogout"
+                      >
                         <span>LOGOUT</span>
                         <span>登出</span>
                       </div>
@@ -150,14 +164,13 @@
                   <!-- 收藏清單 mouse事件 -->
                   <div class="d-flex flex-column cart_favorite">
                     <span
-                      class="text-end cart_bagTitle pb-2"
+                      class="text-end cart_bagTitle pb-2 pt-1"
                       v-show="favoriteIsable"
                       >收藏清單</span
                     >
                   </div>
                 </li>
                 <!-- 購物車 -->
-                <!-- @="{mouseover: cartDisplay,mouseout: cartNone}" -->
                 <li
                   class="nav-item ps-4 position-relative"
                   @="{mouseenter: cartDisplay,mouseleave: cartNone}"
@@ -172,13 +185,27 @@
                   <!-- 購物車 mouse事件 -->
                   <div class="d-flex flex-column cart_bag">
                     <span
-                      class="text-end cart_bagTitle pb-2"
+                      class="text-end cart_bagTitle pb-2 pt-1"
                       v-show="cartIsable"
                       >購物車</span
                     >
+                    <!-- 購物車無商品時 -->
+                    <div
+                      class="border border-secondary p-2 bg-white text-center"
+                      v-show="cartIsable"
+                      v-if="productsArr.length === 0"
+                    >
+                      <span class="cart_bagContain">目前尚無商品</span>
+                      <hr class="mb-0 mt-2" />
+                      <div class="pt-3 pb-2 text-center cart_bagCheckOut">
+                        CHECK OUT
+                      </div>
+                    </div>
+                    <!-- 購物車有商品時 -->
                     <div
                       class="border border-secondary p-2 bg-white"
                       v-show="cartIsable"
+                      v-else
                     >
                       <div
                         class="d-flex"
@@ -248,6 +275,8 @@
 <script>
 // 為了讓Bootstrap的 Navbar 可以正常收合
 import 'bootstrap/dist/js/bootstrap.bundle'
+import emitter from '@/methods/emitter'
+
 export default {
   data() {
     return {
@@ -255,7 +284,22 @@ export default {
       cartBag: {},
       cartIsable: false,
       favoriteIsable: false,
-      loginIsable: false
+      loginIsable: false,
+      // userTestSignin: {
+      //   userAccount: '',
+      //   userPassword: ''
+      // },
+      userTestSignin: {
+        testAccount: '',
+        testPassword: ''
+      },
+
+      productsArr: []
+    }
+  },
+  provide() {
+    return {
+      emitter
     }
   },
   methods: {
@@ -267,7 +311,7 @@ export default {
         path: '/search'
       })
       e.target.value = ''
-      console.log(this.$route)
+      // console.log(this.$route)
     },
     toCheckOut() {
       this.$router.push('/checkout')
@@ -280,12 +324,22 @@ export default {
         .then((res) => {
           if (res.data.success) {
             this.cartBag = res.data.data
+            this.productsArr = this.cartBag.carts // 設定購物車還沒有商品時的判斷
           }
           // console.log(this.cartBag)
         })
         .catch((err) => {
           console.log(err.response)
         })
+    },
+    // 進入登入頁面
+    userLogin() {
+      this.$router.push('/userlogin')
+    },
+    // 登出帳號
+    userLogout() {
+      this.userTestSignin.testAccount = ''
+      this.userTestSignin.testPassword = ''
     },
     // mouseenter 顯示購物車列表
     cartDisplay() {
@@ -312,6 +366,11 @@ export default {
     loginNone() {
       this.loginIsable = false
     }
+  },
+  mounted() {
+    emitter.on('sendSignIn', (data) => {
+      this.userTestSignin = { ...data }
+    })
   },
   created() {
     this.getCartOrder()

@@ -464,7 +464,7 @@ export default {
         })
     },
     goShopping() {
-      this.$router.push('/')
+      this.$router.push('/zh-tw')
     }
   },
   created() {

@@ -6,12 +6,26 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
+    children: [
+      {
+        path: 'zh-tw',
+        component: () => import('../views/client/BrandHome.vue')
+      },
+      {
+        path: 'userlogin',
+        component: () => import('../views/client/UserLogin.vue')
+      }
+    ]
   },
   {
     path: '/about',
     name: 'about',
     component: () => import('../views/client/AboutView.vue')
+  },
+  {
+    path: '/userlogin',
+    component: () => import('../views/client/UserLogin.vue')
   },
   {
     path: '/productList',

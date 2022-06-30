@@ -1,15 +1,5 @@
 <template>
-  <div class="container-fluid">
-    <div class="row">
-      <NavBar />
-    </div>
-  </div>
-
-  <div>
-    <router-view />
-  </div>
-
-  <!-- <div class="container-fluid mt-3">
+  <div class="container-fluid mt-3">
     <div class="row">
       <div class="col text-center">
         <p class="fs-3">登入後台管理系統</p>
@@ -22,17 +12,15 @@
         </button>
       </div>
     </div>
-  </div> -->
+  </div>
 </template>
 
 <script>
-import NavBar from '@/components/user/UserNavBar.vue'
 export default {
-  components: { NavBar }
-  // methods: {
-  //   loginPage() {
-  //     this.$router.push('/login')
-  //   }
-  // }
+  methods: {
+    loginPage() {
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
