@@ -134,7 +134,10 @@
                       v-show="loginIsable"
                     >
                       <div class="d-flex p-1 searchOrder">
-                        <div class="col-lg-12 d-flex flex-column">
+                        <div
+                          class="col-lg-12 d-flex flex-column"
+                          @click="checkOrders"
+                        >
                           <span>MY ORDER</span>
                           <span>訂單查詢</span>
                         </div>
@@ -313,6 +316,7 @@ export default {
       e.target.value = ''
       // console.log(this.$route)
     },
+    // 購物車購買流程
     toCheckOut() {
       this.$router.push('/checkout')
     },
@@ -340,6 +344,10 @@ export default {
     userLogout() {
       this.userTestSignin.testAccount = ''
       this.userTestSignin.testPassword = ''
+    },
+    // 查詢訂單列表
+    checkOrders() {
+      this.$router.push('/checkOrder')
     },
     // mouseenter 顯示購物車列表
     cartDisplay() {

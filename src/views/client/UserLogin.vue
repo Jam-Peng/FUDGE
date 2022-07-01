@@ -27,11 +27,13 @@
             />
           </li>
         </ul>
-        <div class="px-1 mb-4 text-secondary">
-          <span class="loginMissPass"> 忘記密碼 </span>
+        <div class="px-1 mb-3 text-secondary d-flex flex-column">
+          <span class="loginMissPass mb-4"> 忘記密碼 </span>
+          <span class="testloginText"> 測試帳號：test_account@mail.com </span>
+          <span class="testloginText"> 測試密碼：test1234 </span>
         </div>
         <button
-          class="col-md-12 btn btn-secondary btn-sm px-2 mt-3"
+          class="col-md-12 btn btn-secondary btn-sm px-2 mt-1"
           @click="userLogin"
         >
           SIGN IN
@@ -72,7 +74,7 @@
           </li>
         </ul>
 
-        <button class="col-md-12 btn btn-secondary btn-sm px-2 mt-2">
+        <button class="col-md-12 btn btn-secondary btn-sm px-2 mt-5">
           SIGN UP
         </button>
       </div>
@@ -151,5 +153,9 @@ ul li {
 .returnStore {
   font-size: 0.9rem;
   cursor: pointer;
+}
+.testloginText {
+  font-size: 0.8rem;
+  opacity: 0.7;
 }
 </style>

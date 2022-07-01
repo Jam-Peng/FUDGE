@@ -42,7 +42,11 @@
                 @keyup.enter="$emit('useCoupon', userCouponCode)"
               />
             </div>
+
             <div class="row">
+              <span class="col-sm-12 text-secondary mb-2 test_couponCode"
+                >代碼測試：test50</span
+              >
               <span class="col-sm-12 text-danger mb-2"
                 >單筆訂單限抵一張折價券。</span
               >
@@ -88,3 +92,9 @@ export default {
   mixins: [modalMixin]
 }
 </script>
+
+<style lang="scss">
+.test_couponCode {
+  font-size: 0.8rem;
+}
+</style>

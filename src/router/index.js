@@ -24,10 +24,6 @@ const routes = [
     component: () => import('../views/client/AboutView.vue')
   },
   {
-    path: '/userlogin',
-    component: () => import('../views/client/UserLogin.vue')
-  },
-  {
     path: '/productList',
     component: () => import('../views/client/UserBoard.vue')
   },
@@ -47,10 +43,15 @@ const routes = [
     path: '/checkout/:orderId',
     component: () => import('../views/client/CheckOutStepThree.vue')
   },
-  // 客戶訂單查詢
+  // 客戶訂單列表查詢
   {
-    path: '/checkOrder/:orderId',
+    path: '/checkOrder',
     component: () => import('../views/client/CheckOrdersView.vue')
+  },
+  // 客戶單一訂單檢視
+  {
+    path: '/checkOrder/:checkOrderId',
+    component: () => import('../views/client/CheckOneOrder.vue')
   },
   // 搜尋關鍵字功能
   {
@@ -58,7 +59,8 @@ const routes = [
     name: 'search',
     component: () => import('../views/client/SearchView.vue')
   },
-  // 後台
+
+  // 後台管理系統
   {
     path: '/login',
     component: () => import('../views/LoginView.vue')

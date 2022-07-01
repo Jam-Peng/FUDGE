@@ -83,7 +83,7 @@ export default {
       this.modal.hide()
     },
     goCheckOrder() {
-      this.$router.push(`/checkOrder/${this.orderCode}`)
+      this.$router.push('/checkOrder')
       this.modal.hide()
     }
   },
