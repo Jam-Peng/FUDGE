@@ -41,6 +41,7 @@
               ><font-awesome-icon
                 class="icons icons_star"
                 :icon="['far', 'star']"
+                @click="toFavorite"
               />
             </a>
           </li>
@@ -162,6 +163,7 @@
                     ><font-awesome-icon
                       class="icons icons_star"
                       :icon="['far', 'star']"
+                      @click="toFavorite"
                     />
                   </a>
                   <!-- 收藏清單 mouse事件 -->
@@ -348,6 +350,10 @@ export default {
     // 查詢訂單列表
     checkOrders() {
       this.$router.push('/checkOrder')
+    },
+    // 我的收藏
+    toFavorite() {
+      this.$router.push('/favorite')
     },
     // mouseenter 顯示購物車列表
     cartDisplay() {

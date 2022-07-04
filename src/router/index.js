@@ -53,6 +53,11 @@ const routes = [
     path: '/checkOrder/:checkOrderId',
     component: () => import('../views/client/CheckOneOrder.vue')
   },
+  // 我的最愛
+  {
+    path: '/favorite',
+    component: () => import('../views/client/UserFavorite.vue')
+  },
   // 搜尋關鍵字功能
   {
     path: '/search',

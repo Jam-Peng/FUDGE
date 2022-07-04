@@ -43,11 +43,18 @@
           <div class="row">
             <div class="col">
               <article>
-                <div class="mb-4 d-flex">
+                <div class="mb-4 d-flex align-items-baseline">
                   <p class="card-title mb-1">{{ product.title }}</p>
-                  <span class="icon-star ms-auto"
-                    ><font-awesome-icon class="icons" :icon="['far', 'star']"
-                  /></span>
+                  <span
+                    class="icon-star ms-auto"
+                    @click="addFavorite(product.id)"
+                  >
+                    <i
+                      class="bi bi-star-fill text-warning"
+                      v-if="favoriteItems.includes(product.id)"
+                    ></i>
+                    <i class="bi bi-star" v-else></i>
+                  </span>
                 </div>
                 <div class="d-flex align-items-baseline">
                   <p
@@ -136,6 +143,7 @@ import NavBar from '@/components/user/UserNavBar.vue'
 import ProductScript from '@/components/user/ProductScript.vue'
 import emitter from '@/methods/emitter'
 import ToastMessages from '@/components/ToastMessages.vue'
+import favoriteLocalStorage from '@/mixins/userFavoriteMethod'
 
 export default {
   components: { NavBar, ProductScript, ToastMessages },
@@ -156,7 +164,8 @@ export default {
       smallGuide: [],
       middleGuide: [],
       largeGuide: [],
-      sizeGuideImg: '' // 取得最後一張尺寸照片
+      sizeGuideImg: '', // 取得最後一張尺寸照片
+      favoriteItems: this.getLocalStorage() || [] // 我的最愛和LocalStorage
     }
   },
   methods: {
@@ -182,7 +191,7 @@ export default {
         })
     },
 
-    // 加入購物車serve
+    // 加入購物車server
     addToCart(id, qty, size) {
       qty = this.qtyNumber
       size = this.selectSize
@@ -213,10 +222,29 @@ export default {
         this.qtyNumber -= 1
       }
     },
+    // 麵包屑的類別query
     CategoryProduct(category) {
       this.$router.push(`/productList?category=${category}`)
     }
+
+    // 透過Icon將"商品的ID"加入或刪除相同ID到“我的最愛”陣列中，並同時執行更新localstorage
+    // addFavorite(productId) {
+    //   if (this.favoriteItems.includes(productId)) {
+    //     const num = this.favoriteItems.indexOf(productId)
+    //     this.favoriteItems.splice(num, 1)
+    //   } else {
+    //     this.favoriteItems.push(productId)
+    //   }
+    // 將資料設定到localStorage
+    // localStorage.setItem('favorites', JSON.stringify(this.favoriteItems))
+    // console.log(this.favoriteItems)
+    // },
+    // 取得回傳從localStorage裡取出來的ID
+    // getLocalStorage() {
+    //   return JSON.parse(localStorage.getItem('favorites'))
+    // }
   },
+  mixins: [favoriteLocalStorage],
   created() {
     this.id = this.$route.params.productId
     this.getProduct()
