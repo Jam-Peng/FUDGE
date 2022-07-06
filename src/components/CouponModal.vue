@@ -117,7 +117,7 @@ export default {
     coupon() {
       this.tempCoupon = { ...this.coupon }
       // 轉換時間戳為 Js時間形式 格式改為 YYYY-MM-DD
-      const dateTime = new Date(this.tempCoupon.due_date * 1000)
+      const dateTime = new Date((this.tempCoupon.due_date + 8 * 3600) * 1000)
         .toISOString()
         .split('T')
       ;[this.due_date] = dateTime

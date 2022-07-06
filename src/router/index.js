@@ -85,6 +85,14 @@ const routes = [
       {
         path: 'coupons',
         component: () => import('../views/CouponsView.vue')
+      },
+      {
+        path: 'lookbooks',
+        component: () => import('../views/LookbooksView.vue')
+      },
+      {
+        path: 'lookbooks/:lookbokId',
+        component: () => import('../views/OneLookbookView.vue')
       }
     ]
   }

@@ -1,4 +1,5 @@
 <template>
+  <OverLoading :active="isLoading"></OverLoading>
   <div class="shadow-sm p-3 mt-2 bg-body rounded">
     <div class="d-flex justify-content-between px-3">
       <p class="fs-3">訂單管理表</p>
@@ -108,11 +109,18 @@ export default {
     // 取得訂單列表
     getOrder(page = 1) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders?page=${page}`
+      this.isLoading = true
       this.$http
         .get(url)
         .then((res) => {
-          this.orders = res.data.orders
-          this.pagination = res.data.pagination
+          setTimeout(() => {
+            this.isLoading = false
+          }, 500)
+          if (res.data.success) {
+            this.orders = res.data.orders
+            this.pagination = res.data.pagination
+          }
+
           // console.log(res.data)
         })
         .catch((err) => {

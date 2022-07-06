@@ -14,7 +14,7 @@ import { localize, setLocale } from '@vee-validate/i18n'
 import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 import App from './App.vue'
 import router from './router'
-import { currency, date } from '@/methods/filters'
+import { currency, date, isodate, endate } from '@/methods/filters'
 import $httpMessageState from '@/methods/pushMessagesState'
 // font awesome
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -61,7 +61,7 @@ configure({
 setLocale('zh_TW')
 
 const app = createApp(App)
-app.config.globalProperties.$filters = { currency, date }
+app.config.globalProperties.$filters = { currency, date, isodate, endate }
 app.config.globalProperties.$httpMessageState = $httpMessageState
 app.use(VueAxios, axios)
 app.use(router)

@@ -3,7 +3,7 @@
   <div class="shadow-sm p-3 mt-2 bg-body rounded">
     <div>
       <div class="d-flex justify-content-between px-3">
-        <p class="fs-3">商品管理表</p>
+        <p class="fs-3">商品列表</p>
         <span
           ><button
             class="btn btn-primary mt-1"

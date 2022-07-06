@@ -11,7 +11,7 @@
       <div class="modal-content border-0">
         <div class="modal-header bg-dark text-white">
           <h5 class="modal-title" id="exampleModalLabel">
-            <span>產品資料</span>
+            <span>商品資料</span>
           </h5>
           <button
             type="button"
@@ -109,6 +109,7 @@
                 <label for="description" class="form-label">產品描述</label>
                 <textarea
                   type="text"
+                  rows="3"
                   class="form-control"
                   id="description"
                   placeholder="請輸入產品描述"
@@ -119,6 +120,7 @@
                 <label for="content" class="form-label">說明內容</label>
                 <textarea
                   type="text"
+                  rows="5"
                   class="form-control"
                   id="content"
                   placeholder="請輸入產品說明內容"
