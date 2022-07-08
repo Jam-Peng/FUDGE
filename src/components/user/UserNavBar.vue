@@ -71,11 +71,11 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link">最新消息 </a>
+            <router-link to="/lookbook" class="nav-link">LookBook </router-link>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link">優惠卷 </a>
-          </li>
+          </li> -->
         </ul>
         <div class="me-2">
           <div class="d-flex align-items-center">
@@ -406,6 +406,7 @@ export default {
 .icons_star,
 .icons_cart {
   font-size: 1.1rem;
+  cursor: pointer;
 }
 .icons-search {
   top: 25%;

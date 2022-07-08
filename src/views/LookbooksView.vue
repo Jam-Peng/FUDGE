@@ -94,7 +94,8 @@ export default {
         .get(url)
         .then((res) => {
           // console.log(res)
-          this.articles = res.data.articles.reverse()
+          // this.articles = res.data.articles.reverse()
+          this.articles = res.data.articles
           this.pagination = res.data.pagination
 
           // console.log(this.articles)

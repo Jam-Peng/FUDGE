@@ -178,6 +178,18 @@
               </div>
 
               <div class="mb-3">
+                <label for="content" class="form-label">文章第十段內容</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="content"
+                  placeholder="請輸入第十段文章內容"
+                  rows="5"
+                  v-model.trim="tempArticle.contentTen"
+                ></textarea>
+              </div>
+
+              <div class="mb-3">
                 <div class="form-check">
                   <input
                     class="form-check-input"

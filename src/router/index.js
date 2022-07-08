@@ -64,6 +64,14 @@ const routes = [
     name: 'search',
     component: () => import('../views/client/SearchView.vue')
   },
+  {
+    path: '/lookbook',
+    component: () => import('../views/client/UserLookbooks.vue')
+  },
+  {
+    path: '/lookbook/:lookbookId',
+    component: () => import('../views/client/UserOneLookbook.vue')
+  },
 
   // 後台管理系統
   {

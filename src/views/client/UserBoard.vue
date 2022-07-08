@@ -40,8 +40,8 @@
         <div class="container">
           <div class="row row-cols-2 row-cols-md-2 row-cols-lg-4">
             <div class="col" v-for="item in filterProducts" :key="item.id">
-              <div class="position-relative">
-                <div>
+              <div>
+                <div class="position-relative">
                   <div
                     class="position-absolute text-white fw-semibold d-flex align-items-center justify-content-center"
                     style="

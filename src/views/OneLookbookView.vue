@@ -144,6 +144,16 @@
           <span>{{ item }}</span>
         </div>
       </div>
+
+      <div class="mb-4">
+        <div
+          class="text-center article_content pb-1"
+          v-for="item in contentTen"
+          :key="item"
+        >
+          <span>{{ item }}</span>
+        </div>
+      </div>
     </div>
 
     <div class="col-4 mt-2">
@@ -188,6 +198,7 @@ export default {
       contentSeven: [],
       contentEight: [],
       contentNine: [],
+      contentTen: [],
       tempArticle: {}
     }
   },
@@ -208,6 +219,7 @@ export default {
           this.contentSeven = res.data.article.contentSeven.split(',')
           this.contentEight = res.data.article.contentEight.split(',')
           this.contentNine = res.data.article.contentNine.split(',')
+          this.contentTen = res.data.article.contentTen.split(',')
 
           // console.log(this.article)
         })
