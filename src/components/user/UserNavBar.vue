@@ -1,11 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg bg-light p-4">
     <div class="container-fluid">
-      <!-- <a
-        class="navbar-brand me-0 logo_title order-2 order-sm-2 order-md-2 order-lg-0"
-        href="#/zh-tw"
-        >FUDGE</a
-      > -->
       <router-link
         to="/zh-tw"
         class="navbar-brand me-0 logo_title order-2 order-sm-2 order-md-2 order-lg-0"
@@ -396,6 +391,7 @@ export default {
 // ul li {
 //   cursor: pointer;
 // }
+
 .logo_title {
   font-size: 1.7rem;
   font-weight: 500;

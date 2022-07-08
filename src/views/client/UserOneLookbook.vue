@@ -1,5 +1,8 @@
 <template>
-  <div class="container-fluid position-sticky top-0 start-0">
+  <div
+    class="container-fluid position-sticky top-0 start-0"
+    style="z-index: 1000"
+  >
     <div class="row">
       <NavBar />
     </div>
@@ -8,7 +11,7 @@
   <div class="container">
     <div class="row justify-content-evenly px-3 mt-4">
       <div class="col-md-4 mt-2 position-relative">
-        <div class="sticky_position">
+        <div class="sticky_Newsposition">
           <div class="px-3 pt-2">
             <span>News / 最新文章</span>
           </div>
@@ -311,7 +314,7 @@ export default {
 ul li {
   list-style-type: none;
 }
-.sticky_position {
+.sticky_Newsposition {
   position: sticky;
   top: 8rem;
 }

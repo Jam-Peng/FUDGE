@@ -1,5 +1,8 @@
 <template>
-  <div class="container-fluid">
+  <div
+    class="container-fluid position-sticky top-0 start-0"
+    style="z-index: 1000"
+  >
     <div class="row">
       <NavBar />
     </div>

@@ -1,5 +1,8 @@
 <template>
-  <div class="container-fluid">
+  <div
+    class="container-fluid position-sticky top-0 start-0"
+    style="z-index: 1000"
+  >
     <div class="row">
       <NavBar />
     </div>
@@ -7,17 +10,19 @@
   <ToastMessages class="top-10 end-0 me-3" />
   <div class="container-fluid mt-4 position-relative px-4">
     <div class="row">
-      <div class="col-lg-2 col-md-3 col-sm-12 mb-3">
+      <div class="col-lg-2 col-md-3 col-sm-12 mb-3 position-relative">
         <!-- 側邊sideBar -->
-        <SideBar
-          @emit-All="filterProductAll"
-          @emit-Clothes="filterCategory"
-          @emit-Pants="filterCategory"
-          @emit-Hats="filterCategory"
-          @emit-Pack="filterCategory"
-          @emit-Shoes="filterCategory"
-          :breadcrumb="breadcrumb"
-        />
+        <div class="sticky_SideBar">
+          <SideBar
+            @emit-All="filterProductAll"
+            @emit-Clothes="filterCategory"
+            @emit-Pants="filterCategory"
+            @emit-Hats="filterCategory"
+            @emit-Pack="filterCategory"
+            @emit-Shoes="filterCategory"
+            :breadcrumb="breadcrumb"
+          />
+        </div>
       </div>
 
       <div class="col-lg-10 col-md-9 col-sm-12 mb-4">
@@ -211,6 +216,10 @@ export default {
 </script>
 
 <style lang="scss">
+.sticky_SideBar {
+  position: sticky;
+  top: 8rem;
+}
 img {
   cursor: pointer;
 }
