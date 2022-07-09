@@ -68,9 +68,6 @@
           <li class="nav-item">
             <router-link to="/lookbook" class="nav-link">LookBook </router-link>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link">優惠卷 </a>
-          </li> -->
         </ul>
         <div class="me-2">
           <div class="d-flex align-items-center">
@@ -161,6 +158,12 @@
                       @click="toFavorite"
                     />
                   </a>
+                  <!-- badge -->
+                  <span
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger box_badge"
+                  >
+                    {{ favoriteId.length }}
+                  </span>
                   <!-- 收藏清單 mouse事件 -->
                   <div class="d-flex flex-column cart_favorite">
                     <span
@@ -182,6 +185,12 @@
                       @click.prevent="toCheckOut"
                     />
                   </a>
+                  <!-- badge -->
+                  <span
+                    class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger box_badge"
+                  >
+                    {{ productsArr.length }}
+                  </span>
                   <!-- 購物車 mouse事件 -->
                   <div class="d-flex flex-column cart_bag">
                     <span
@@ -276,6 +285,7 @@
 // 為了讓Bootstrap的 Navbar 可以正常收合
 import 'bootstrap/dist/js/bootstrap.bundle'
 import emitter from '@/methods/emitter'
+import favoriteLocalStorage from '@/mixins/userFavoriteMethod'
 
 export default {
   data() {
@@ -293,8 +303,8 @@ export default {
         testAccount: '',
         testPassword: ''
       },
-
-      productsArr: []
+      productsArr: [],
+      favoriteId: [] // 取得儲存LocalStorage裡的ID
     }
   },
   provide() {
@@ -333,6 +343,11 @@ export default {
           console.log(err.response)
         })
     },
+    // 取得我的最愛Id
+    getFavorite() {
+      this.favoriteId = this.getLocalStorage()
+    },
+
     // 進入登入頁面
     userLogin() {
       this.$router.push('/userlogin')
@@ -376,22 +391,30 @@ export default {
       this.loginIsable = false
     }
   },
+  mixins: [favoriteLocalStorage],
   mounted() {
     emitter.on('sendSignIn', (data) => {
       this.userTestSignin = { ...data }
     })
+    // 重新觸發加到購物車改變navBar的badge數量
+    emitter.on('update_cart', this.getCartOrder)
+    // 重新觸發刪除購物車改變navBar的badge數量
+    emitter.on('delete-cart', this.getCartOrder)
+    // 重新觸發更新navBar的“我的最愛”badge數量
+    emitter.on('update_favorite', this.getFavorite)
   },
+  // 不知道為何要加 unmounted 生命週期
+  // unmounted() {
+  //   emitter.off('update_cart', this.getCartOrder)
+  // },
   created() {
     this.getCartOrder()
+    this.getFavorite()
   }
 }
 </script>
 
 <style lang="scss">
-// ul li {
-//   cursor: pointer;
-// }
-
 .logo_title {
   font-size: 1.7rem;
   font-weight: 500;
@@ -467,5 +490,8 @@ export default {
   &:hover {
     color: #212529;
   }
+}
+.box_badge {
+  font-size: 0.6rem;
 }
 </style>

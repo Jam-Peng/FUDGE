@@ -194,12 +194,11 @@ export default {
         })
     },
 
-    // 加入購物車server
+    // 加入購物車server 及emitter傳遞觸發事件到UserNavBar
     addToCart(id, qty, size) {
       qty = this.qtyNumber
       size = this.selectSize
       const cart = { product_id: id, qty, size }
-      // const cart = { product_id: id, qty, size }
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
       this.status.loadingItem = id
       this.$http
@@ -210,11 +209,14 @@ export default {
           this.qtyNumber = 1
           this.selectSize = ''
           this.$httpMessageState(res, '加入購物車')
+          // 重新觸發navBar元件的badge數量
+          emitter.emit('update_cart')
         })
         .catch((err) => {
           console.log(err.response)
         })
     },
+
     // 增加商品數量
     addQty() {
       this.qtyNumber += 1

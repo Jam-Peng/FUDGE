@@ -19,7 +19,7 @@
             <li class="px-3" v-for="item in otherArticles" :key="item.id">
               <hr />
               <div
-                class="row align-items-center news_lookbook"
+                class="row align-items-center justify-content-evenly news_lookbook"
                 @click="getOneLookbook(true, item.id)"
               >
                 <div class="col-md-4">
@@ -31,8 +31,8 @@
                   />
                 </div>
 
-                <div class="col-md-8">
-                  <div class="d-flex flex-column">
+                <div class="col-md-7">
+                  <div class="d-flex flex-column px-2">
                     <p class="onelookbook_date mb-1 ps-3 text-secondary">
                       {{ $filters.endate(item.create_at) }}
                     </p>

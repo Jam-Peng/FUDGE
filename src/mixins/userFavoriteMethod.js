@@ -1,3 +1,5 @@
+import emitter from '@/methods/emitter'
+
 export default {
   methods: {
     // 透過Icon將"商品的ID"加入或刪除相同ID到“我的最愛”陣列中，並同時執行更新localstorage
@@ -11,6 +13,8 @@ export default {
       }
       // 將資料設定到localStorage
       localStorage.setItem('favorites', JSON.stringify(this.favoriteItems))
+      // 傳遞emitter觸發navBar元件“我的最愛”badge數量
+      emitter.emit('update_favorite')
     },
     // 取得回傳從localStorage裡取出來的ID
     // UserProducts.vue元件 和 UserFavorite.vue元件 使用

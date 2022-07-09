@@ -7,6 +7,7 @@
       <NavBar />
     </div>
   </div>
+  <ToastMessages class="top-10 end-0 me-3" />
   <div class="container mt-4">
     <div class="row">
       <!-- Check out步驟 -->
@@ -367,6 +368,8 @@ import CouponModal from '@/components/user/UserCouponModal.vue'
 import UserLocationModal from '@/components/user/UserLocationModal.vue'
 import NoCartModal from '@/components/user/NoCartModal.vue'
 import NoPayMethodModal from '@/components/user/NoPayMethodModal.vue'
+import emitter from '@/methods/emitter'
+import ToastMessages from '@/components/ToastMessages.vue'
 
 export default {
   components: {
@@ -374,7 +377,8 @@ export default {
     CouponModal,
     UserLocationModal,
     NoCartModal,
-    NoPayMethodModal
+    NoPayMethodModal,
+    ToastMessages
   },
   data() {
     return {
@@ -387,6 +391,11 @@ export default {
       finalPayTotal: '', // 最後應付金額
       couponCode: '', // 建立空優惠卷代碼
       originalCoupon: 'test100' // 建立一個原價的折價卷code，當取消使用折價卷用
+    }
+  },
+  provide() {
+    return {
+      emitter
     }
   },
   watch: {
@@ -423,12 +432,19 @@ export default {
     // 刪除特定一筆購物車資料
     deleteCartItem(id) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${id}`
-      this.$http.delete(url).then((res) => {
-        if (res.data.success) {
+      this.$http
+        .delete(url)
+        .then((res) => {
+          // 重新觸發刪除navBar元件的badge數量
+          emitter.emit('delete-cart')
           this.getCheckOut()
-        }
-      })
+          this.$httpMessageState(res, '刪除商品')
+        })
+        .catch((err) => {
+          console.log(err.response)
+        })
     },
+
     // 更新購物車 在商品資料結構裡 product_id 是商品 id;另外一個 id 是購物車該品項的 id
     updateCart(item) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart/${item.id}`
