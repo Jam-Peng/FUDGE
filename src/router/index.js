@@ -56,12 +56,6 @@ const routes = [
         path: 'favorite',
         component: () => import('../views/front/UserFavorite.vue')
       },
-      // 搜尋關鍵字功能
-      {
-        path: 'search',
-        name: 'search',
-        component: () => import('../views/front/SearchView.vue')
-      },
       {
         path: 'lookbook',
         component: () => import('../views/front/UserLookbooks.vue')

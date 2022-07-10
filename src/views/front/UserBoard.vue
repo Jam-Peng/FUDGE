@@ -21,7 +21,15 @@
       <div class="col-lg-10 col-md-9 col-sm-12 mb-4">
         <div class="container">
           <nav style="--bs-breadcrumb-divider: '/'" aria-label="breadcrumb">
-            <ol class="breadcrumb">
+            <!-- 搜尋結果的顯示 -->
+            <ol class="breadcrumb" v-if="keyWord !== ''">
+              <li class="breadcrumb-item text-secondary">
+                WE FOUND {{ keywordProudct.length }} RESULTS FOR "
+                {{ keyWord }} "
+              </li>
+            </ol>
+
+            <ol class="breadcrumb" v-else>
               <li class="breadcrumb-item">
                 <router-link to="/" class="link-dark">首頁</router-link>
               </li>
@@ -133,7 +141,8 @@ export default {
       category: '',
       status: {
         loadingItem: '' // 狀態對應品項的 id
-      }
+      },
+      keyWord: '' // 搜尋的關鍵字
     }
   },
   watch: {
@@ -143,6 +152,13 @@ export default {
       if (this.category !== undefined) {
         this.breadcrumb = this.category
       }
+    },
+    // 監聽搜尋的值，執行篩選
+    keywordProudct() {
+      this.filterProducts = this.keywordProudct
+    },
+    $route() {
+      this.keyWord = this.$route.query.keyword || ''
     }
   },
   computed: {
@@ -150,6 +166,12 @@ export default {
     categoryProduct() {
       return this.products.filter((item) => {
         return item.category.match(this.category)
+      })
+    },
+    // 執行關鍵字的商品篩選
+    keywordProudct() {
+      return this.products.filter((item) => {
+        return item.title.match(this.keyWord)
       })
     }
   },
@@ -193,6 +215,10 @@ export default {
     // }
   },
   mixins: [userFilterProduct], // 將側邊商品的篩選功能
+  mounted() {
+    // 取得 UserNavBar中的 search關鍵字
+    this.keyWord = this.$route.query.keyword || ''
+  },
   created() {
     this.getProduct()
     // 從單一指定商品的類別中將類別的參數經路由搜尋參數過來

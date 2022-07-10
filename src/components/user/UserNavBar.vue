@@ -308,12 +308,13 @@ export default {
   },
   inject: ['emitter'],
   methods: {
+    // 搜尋功能
     searchKeyword(e) {
       this.keyword = e.target.value
       this.$router.replace({
         name: this.$route.name,
         query: { keyword: e.target.value },
-        path: '/search'
+        path: '/productList'
       })
       this.keyword = ''
       // console.log(this.$route)
