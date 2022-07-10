@@ -1,13 +1,6 @@
 <template>
-  <div
-    class="container-fluid position-sticky top-0 start-0"
-    style="z-index: 1000"
-  >
-    <div class="row">
-      <NavBar />
-    </div>
-  </div>
   <ToastMessages class="top-10 end-0 me-3" />
+
   <div class="container-fluid mt-4 position-relative px-4">
     <div class="row">
       <div class="col-lg-2 col-md-3 col-sm-12 mb-3 position-relative">
@@ -124,30 +117,23 @@
 </template>
 
 <script>
-import NavBar from '@/components/user/UserNavBar.vue'
-import emitter from '@/methods/emitter'
 import ToastMessages from '@/components/ToastMessages.vue'
 // 將側邊商品的篩選功能匯入並加到 mixins裡
 import userFilterProduct from '@/mixins/userFilterProduct'
 import SideBar from '@/components/user/SideBar.vue'
 
 export default {
-  components: { NavBar, ToastMessages, SideBar },
+  components: { ToastMessages, SideBar },
+  inject: ['emitter'],
   data() {
     return {
       products: [],
-      // productSearch: '',
       filterProducts: [],
       breadcrumb: '全部商品',
       category: '',
       status: {
         loadingItem: '' // 狀態對應品項的 id
       }
-    }
-  },
-  provide() {
-    return {
-      emitter
     }
   },
   watch: {

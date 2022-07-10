@@ -1,12 +1,4 @@
 <template>
-  <div
-    class="container-fluid position-sticky top-0 start-0"
-    style="z-index: 1000"
-  >
-    <div class="row">
-      <NavBar />
-    </div>
-  </div>
   <ToastMessages class="top-10 end-0 me-3" />
   <div class="container mt-4">
     <div class="row">
@@ -363,23 +355,21 @@
 </template>
 
 <script>
-import NavBar from '@/components/user/UserNavBar.vue'
 import CouponModal from '@/components/user/UserCouponModal.vue'
 import UserLocationModal from '@/components/user/UserLocationModal.vue'
 import NoCartModal from '@/components/user/NoCartModal.vue'
 import NoPayMethodModal from '@/components/user/NoPayMethodModal.vue'
-import emitter from '@/methods/emitter'
 import ToastMessages from '@/components/ToastMessages.vue'
 
 export default {
   components: {
-    NavBar,
     CouponModal,
     UserLocationModal,
     NoCartModal,
     NoPayMethodModal,
     ToastMessages
   },
+  inject: ['emitter'],
   data() {
     return {
       cart: {},
@@ -391,11 +381,6 @@ export default {
       finalPayTotal: '', // 最後應付金額
       couponCode: '', // 建立空優惠卷代碼
       originalCoupon: 'test100' // 建立一個原價的折價卷code，當取消使用折價卷用
-    }
-  },
-  provide() {
-    return {
-      emitter
     }
   },
   watch: {
@@ -436,7 +421,7 @@ export default {
         .delete(url)
         .then((res) => {
           // 重新觸發刪除navBar元件的badge數量
-          emitter.emit('delete-cart')
+          this.emitter.emit('delete-cart')
           this.getCheckOut()
           this.$httpMessageState(res, '刪除商品')
         })

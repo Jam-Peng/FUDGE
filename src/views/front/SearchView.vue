@@ -1,14 +1,4 @@
 <template>
-  <div
-    class="container-fluid position-sticky top-0 start-0"
-    style="z-index: 1000"
-  >
-    <div class="row">
-      <NavBar />
-      <!-- v-model:search="productSearch" -->
-    </div>
-  </div>
-
   <div class="container-fluid mt-4 position-relative px-4">
     <div class="row ms-auto">
       <div class="col-lg-2 col-md-3 col-sm-12 mb-3">
@@ -88,15 +78,13 @@
 </template>
 
 <script>
-import NavBar from '@/components/user/UserNavBar.vue'
-import emitter from '@/methods/emitter'
-
 // 將側邊商品的篩選功能匯入並加到 mixins裡
 import userFilterProduct from '@/mixins/userFilterProduct'
 import SideBar from '@/components/user/SideBar.vue'
 
 export default {
-  components: { NavBar, SideBar },
+  components: { SideBar },
+  inject: ['emitter'],
   data() {
     return {
       products: [],
@@ -107,11 +95,7 @@ export default {
       keyWord: ''
     }
   },
-  provide() {
-    return {
-      emitter
-    }
-  },
+
   watch: {
     // 監聽搜尋的值，執行篩選
     keywordProudct() {

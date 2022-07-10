@@ -90,8 +90,6 @@
 </template>
 
 <script>
-import emitter from '@/methods/emitter'
-
 export default {
   data() {
     return {
@@ -105,11 +103,7 @@ export default {
       }
     }
   },
-  provide() {
-    return {
-      emitter
-    }
-  },
+  inject: ['emitter'],
   methods: {
     // 登入
     userLogin() {
@@ -117,7 +111,7 @@ export default {
         this.singIn.userAccount === this.testSignIn.testAccount &&
         this.singIn.userPassword === this.testSignIn.testPassword
       ) {
-        emitter.emit('sendSignIn', this.testSignIn)
+        this.emitter.emit('sendSignIn', this.testSignIn)
         this.$router.push('/zh-tw')
         this.singIn.userAccount = ''
         this.singIn.userPassword = ''

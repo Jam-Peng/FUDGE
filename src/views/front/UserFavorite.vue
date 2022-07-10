@@ -1,13 +1,5 @@
 <template>
   <OverLoading :active="isLoading"></OverLoading>
-  <div
-    class="container-fluid position-sticky top-0 start-0"
-    style="z-index: 1000"
-  >
-    <div class="row">
-      <NavBar />
-    </div>
-  </div>
   <ToastMessages class="top-10 end-0 me-3" />
 
   <div class="p-4 d-flex justify-content-center">
@@ -75,17 +67,13 @@
 </template>
 
 <script>
-import NavBar from '@/components/user/UserNavBar.vue'
 import favoriteLocalStorage from '@/mixins/userFavoriteMethod'
 import CartModal from '@/components/user/FavoriteToCartModal.vue'
 import ToastMessages from '@/components/ToastMessages.vue'
-import emitter from '@/methods/emitter'
 
 export default {
-  components: { NavBar, CartModal, ToastMessages },
-  provide() {
-    return { emitter }
-  },
+  components: { CartModal, ToastMessages },
+  inject: ['emitter'],
   data() {
     return {
       favoriteId: [], // 取得儲存LocalStorage裡的ID

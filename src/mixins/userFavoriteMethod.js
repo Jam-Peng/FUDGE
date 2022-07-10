@@ -26,6 +26,7 @@ export default {
     deleteLocalStorage(itemsId) {
       const favoritesId = JSON.stringify(itemsId)
       localStorage.setItem('favorites', favoritesId)
+      emitter.emit('delete_favorite')
     }
   }
 }

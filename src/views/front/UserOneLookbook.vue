@@ -1,13 +1,4 @@
 <template>
-  <div
-    class="container-fluid position-sticky top-0 start-0"
-    style="z-index: 1000"
-  >
-    <div class="row">
-      <NavBar />
-    </div>
-  </div>
-
   <div class="container">
     <div class="row justify-content-evenly px-3 mt-4">
       <div class="col-md-4 mt-2 position-relative">
@@ -208,10 +199,7 @@
 </template>
 
 <script>
-import NavBar from '@/components/user/UserNavBar.vue'
-
 export default {
-  components: { NavBar },
   data() {
     return {
       id: '',

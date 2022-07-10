@@ -1,12 +1,4 @@
 <template>
-  <div
-    class="container-fluid position-sticky top-0 start-0"
-    style="z-index: 1000"
-  >
-    <div class="row">
-      <NavBar />
-    </div>
-  </div>
   <ToastMessages class="top-10 end-0 me-3" />
   <div class="container mt-4 position-relative px-4">
     <div class="row">
@@ -34,6 +26,7 @@
           </ol>
         </nav>
       </div>
+
       <!-- 左邊照片 -->
       <div class="col-lg-8 mb-3 px-3">
         <div class="" v-for="img in product.images" :key="img">
@@ -131,7 +124,6 @@
                   :sizeGuideImg="sizeGuideImg"
                 />
               </div>
-
               <!-- 商品資訊 end -->
             </div>
           </div>
@@ -142,17 +134,13 @@
 </template>
 
 <script>
-import NavBar from '@/components/user/UserNavBar.vue'
 import ProductScript from '@/components/user/ProductScript.vue'
-import emitter from '@/methods/emitter'
 import ToastMessages from '@/components/ToastMessages.vue'
 import favoriteLocalStorage from '@/mixins/userFavoriteMethod'
 
 export default {
-  components: { NavBar, ProductScript, ToastMessages },
-  provide() {
-    return { emitter }
-  },
+  components: { ProductScript, ToastMessages },
+  inject: ['emitter'],
   data() {
     return {
       id: '',
@@ -210,7 +198,7 @@ export default {
           this.selectSize = ''
           this.$httpMessageState(res, '加入購物車')
           // 重新觸發navBar元件的badge數量
-          emitter.emit('update_cart')
+          this.emitter.emit('update_cart')
         })
         .catch((err) => {
           console.log(err.response)

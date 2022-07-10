@@ -8,18 +8,21 @@
     </div>
   </div>
 
-  <div class="container-fluid mt-3">
-    <div class="row">
-      <div class="col text-center">
-        <p class="fs-3">關於我頁面</p>
-      </div>
-    </div>
+  <div>
+    <router-view />
   </div>
 </template>
 
 <script>
 import NavBar from '@/components/user/UserNavBar.vue'
+import emitter from '@/methods/emitter'
+
 export default {
-  components: { NavBar }
+  components: { NavBar },
+  provide() {
+    return {
+      emitter
+    }
+  }
 }
 </script>

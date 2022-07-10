@@ -1,12 +1,4 @@
 <template>
-  <div
-    class="container-fluid position-sticky top-0 start-0"
-    style="z-index: 1000"
-  >
-    <div class="row">
-      <NavBar />
-    </div>
-  </div>
   <div class="container mt-4">
     <div class="row">
       <!-- Check out步驟 -->
@@ -1020,11 +1012,11 @@
 </template>
 
 <script>
-import NavBar from '@/components/user/UserNavBar.vue'
 import NolocationModal from '@/components/user/NoLocationModal.vue'
 
 export default {
-  components: { NavBar, NolocationModal },
+  components: { NolocationModal },
+  inject: ['emitter'],
   data() {
     return {
       isFull: false,
@@ -1125,6 +1117,7 @@ export default {
             // console.log(res)
             if (res.data.success) {
               this.$router.push(`/checkout/${res.data.orderId}`)
+              this.emitter.emit('delete-cart')
             }
           })
           .catch((err) => {

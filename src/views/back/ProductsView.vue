@@ -81,8 +81,8 @@
 </template>
 
 <script>
-import ProductModal from '../components/ProductModal.vue'
-import DeleteModal from '../components/DeleteModal.vue'
+import ProductModal from '../../components/ProductModal.vue'
+import DeleteModal from '../../components/DeleteModal.vue'
 import PagiNation from '@/components/PagiNation.vue'
 
 export default {

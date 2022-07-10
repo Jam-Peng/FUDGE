@@ -1,12 +1,4 @@
 <template>
-  <div
-    class="container-fluid position-sticky top-0 start-0"
-    style="z-index: 1000"
-  >
-    <div class="row">
-      <NavBar />
-    </div>
-  </div>
   <div class="container-fluid">
     <div class="row p-4 pb-1 justify-content-center">
       <div class="col-lg-10 col-md-12 bg-light mb-2">
@@ -75,11 +67,10 @@
 </template>
 
 <script>
-import NavBar from '@/components/user/UserNavBar.vue'
 import PagiNation from '@/components/user/UserPagiNation.vue'
 
 export default {
-  components: { NavBar, PagiNation },
+  components: { PagiNation },
   data() {
     return {
       orders: [],

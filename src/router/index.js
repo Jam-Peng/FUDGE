@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import HomeView from '../views/front/HomeView.vue'
 
 const routes = [
   // 前台
@@ -10,97 +10,97 @@ const routes = [
     children: [
       {
         path: 'zh-tw',
-        component: () => import('../views/client/BrandHome.vue')
+        component: () => import('../views/front/BrandHome.vue')
       },
       {
         path: 'userlogin',
-        component: () => import('../views/client/UserLogin.vue')
+        component: () => import('../views/front/UserLogin.vue')
+      },
+      {
+        path: 'about',
+        name: 'about',
+        component: () => import('../views/front/AboutView.vue')
+      },
+      {
+        path: 'productList',
+        component: () => import('../views/front/UserBoard.vue')
+      },
+      {
+        path: 'productList/:productId',
+        component: () => import('../views/front/UserProducts.vue')
+      },
+      {
+        path: 'checkout',
+        component: () => import('../views/front/CheckOut.vue')
+      },
+      {
+        path: 'checkout/step2',
+        component: () => import('../views/front/CheckOutStepTwo.vue')
+      },
+      {
+        path: 'checkout/:orderId',
+        component: () => import('../views/front/CheckOutStepThree.vue')
+      },
+      // 客戶訂單列表查詢
+      {
+        path: 'checkOrder',
+        component: () => import('../views/front/CheckOrdersView.vue')
+      },
+      // 客戶單一訂單檢視
+      {
+        path: 'checkOrder/:checkOrderId',
+        component: () => import('../views/front/CheckOneOrder.vue')
+      },
+      // 我的最愛
+      {
+        path: 'favorite',
+        component: () => import('../views/front/UserFavorite.vue')
+      },
+      // 搜尋關鍵字功能
+      {
+        path: 'search',
+        name: 'search',
+        component: () => import('../views/front/SearchView.vue')
+      },
+      {
+        path: 'lookbook',
+        component: () => import('../views/front/UserLookbooks.vue')
+      },
+      {
+        path: 'lookbook/:lookbookId',
+        component: () => import('../views/front/UserOneLookbook.vue')
       }
     ]
-  },
-  {
-    path: '/about',
-    name: 'about',
-    component: () => import('../views/client/AboutView.vue')
-  },
-  {
-    path: '/productList',
-    component: () => import('../views/client/UserBoard.vue')
-  },
-  {
-    path: '/productList/:productId',
-    component: () => import('../views/client/UserProducts.vue')
-  },
-  {
-    path: '/checkout',
-    component: () => import('../views/client/CheckOut.vue')
-  },
-  {
-    path: '/checkout/step2',
-    component: () => import('../views/client/CheckOutStepTwo.vue')
-  },
-  {
-    path: '/checkout/:orderId',
-    component: () => import('../views/client/CheckOutStepThree.vue')
-  },
-  // 客戶訂單列表查詢
-  {
-    path: '/checkOrder',
-    component: () => import('../views/client/CheckOrdersView.vue')
-  },
-  // 客戶單一訂單檢視
-  {
-    path: '/checkOrder/:checkOrderId',
-    component: () => import('../views/client/CheckOneOrder.vue')
-  },
-  // 我的最愛
-  {
-    path: '/favorite',
-    component: () => import('../views/client/UserFavorite.vue')
-  },
-  // 搜尋關鍵字功能
-  {
-    path: '/search',
-    name: 'search',
-    component: () => import('../views/client/SearchView.vue')
-  },
-  {
-    path: '/lookbook',
-    component: () => import('../views/client/UserLookbooks.vue')
-  },
-  {
-    path: '/lookbook/:lookbookId',
-    component: () => import('../views/client/UserOneLookbook.vue')
   },
 
   // 後台管理系統
   {
     path: '/login',
-    component: () => import('../views/LoginView.vue')
+    component: () => import('../views/back/LoginView.vue')
   },
   {
     path: '/dashboard',
-    component: () => import('../views/DashBoard.vue'),
+    component: () => import('../views/back/DashBoard.vue'),
     children: [
       {
         path: 'products',
-        component: () => import('../views/ProductsView.vue')
+        component: () => import('../views/back/ProductsView.vue')
       },
       {
         path: 'orders',
-        component: () => import('../views/OrdersView.vue')
+        component: () => import('../views/back/OrdersView.vue')
       },
       {
         path: 'coupons',
-        component: () => import('../views/CouponsView.vue')
+        component: () => import('../views/back/CouponsView.vue')
       },
       {
         path: 'lookbooks',
-        component: () => import('../views/LookbooksView.vue')
+        component: () => import('../views/back/LookbooksView.vue')
       },
       {
         path: 'lookbooks/:lookbokId',
-        component: () => import('../views/OneLookbookView.vue')
+        component: () => import('../views/back/OneLookbookView.vue')
       }
     ]
   }
