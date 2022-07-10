@@ -100,10 +100,6 @@ export default {
     // 監聽搜尋的值，執行篩選
     keywordProudct() {
       this.filterProducts = this.keywordProudct
-    },
-
-    $route() {
-      this.keyWord = this.$route.query.keyword || ''
     }
   },
   computed: {
@@ -138,14 +134,11 @@ export default {
     }
   },
   mixins: [userFilterProduct], // 將側邊商品的篩選功能
-  mounted() {
-    this.keyWord = this.$route.query.keyword || ''
-    // console.log(this.$route)
-  },
+
   created() {
     this.getProduct()
     // 取得 UserNavBar中的 search關鍵字
-    // this.keyWord = this.$route.query.keyword || ''
+    this.keyWord = this.$route.query.keyword || ''
 
     // console.log(this.$route)
   }
