@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="row px-2 mb-1">
-                  <div class="col-md-6 px-0">
+                  <div class="col-5 col-md-6 px-0">
                     <select
                       class="form-select form-select-sm text-center border-secondary size_select"
                       v-model="favorite.likeSelectSize"
@@ -73,7 +73,7 @@
 
         <div class="modal_footer d-flex justify-content-around">
           <div
-            class="col-sm-4 px-2 favoriteCount rounded-1 d-flex align-items-center border-secondary"
+            class="col-5 col-md-4 px-2 favoriteCount rounded-1 d-flex align-items-center border-secondary"
           >
             <div class="col d-flex align-items-center justify-content-between">
               <font-awesome-icon
@@ -92,14 +92,14 @@
 
           <button
             type="button"
-            class="col-sm-4 btn btn-secondary btn-sm"
+            class="col-5 col-md-4 btn btn-secondary btn-sm"
             v-if="favorite.likeSelectSize === ''"
           >
             請選擇尺寸
           </button>
           <button
             type="button"
-            class="col-sm-4 btn btn-secondary btn-sm"
+            class="col-5 col-md-4 btn btn-secondary btn-sm"
             v-else
             @click="sendFavorite"
           >

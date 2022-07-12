@@ -21,7 +21,7 @@
           </div>
           <div class="card-body py-2 mb-4">
             <div class="d-flex flex-column">
-              <p class="card-title mb-1 ps-3">
+              <p class="card-title mb-1 ps-0">
                 {{ $filters.endate(item.create_at) }}
               </p>
 

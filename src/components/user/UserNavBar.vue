@@ -18,12 +18,16 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-      <!-- RWD-平板和手機顯示 -->
-      <div
-        class="d-md-block d-sm-block d-lg-none order-3 order-sm-3 order-md-3"
-      >
+      <!-- 平板顯示 -->
+      <div class="d-none d-md-block d-lg-none order-3 order-sm-3 order-md-3">
         <ul class="navbar-nav d-flex flex-row justify-content-start">
-          <li class="nav-item ps-3">
+          <!-- 會員中心offcanvas -->
+          <li
+            class="nav-item ps-0"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasWithBothOptions"
+            aria-controls="offcanvasWithBothOptions"
+          >
             <a class="nav-link p-0"
               ><font-awesome-icon
                 class="icons icons_user"
@@ -31,27 +35,79 @@
               />
             </a>
           </li>
-          <li class="nav-item ps-3 d-md-block d-none">
+          <li class="nav-item ps-4 position-relative">
             <a class="nav-link p-0"
               ><font-awesome-icon
                 class="icons icons_star"
                 :icon="['far', 'star']"
-                @click="toFavorite"
+                @click.prevent="toFavorite"
               />
             </a>
+            <!-- badge -->
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger box_badge"
+            >
+              {{ favoriteId.length }}
+            </span>
           </li>
-          <li class="nav-item ps-3">
+          <li class="nav-item ps-4 position-relative">
             <a class="nav-link p-0"
               ><font-awesome-icon
                 class="icons icons_cart"
                 :icon="['fas', 'cart-shopping']"
-                @click="toCheckOut"
+                @click.prevent="toCheckOut"
               />
             </a>
+            <!-- badge -->
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger box_badge"
+            >
+              {{ productsArr.length }}
+            </span>
           </li>
         </ul>
       </div>
+      <!-- 登入offcanvas 平板顯示 -->
+      <div
+        class="offcanvas offcanvas-start text-secondary d-none d-md-block d-lg-none"
+        data-bs-scroll="true"
+        tabindex="-1"
+        id="offcanvasWithBothOptions"
+        aria-labelledby="offcanvasWithBothOptionsLabel"
+      >
+        <div class="offcanvas-header pb-3 pt-4">
+          <span class="offcanvas-title" id="offcanvasWithBothOptionsLabel">
+            會員中心
+          </span>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="offcanvas-body pt-0">
+          <div
+            class="mb-3"
+            @click="userLogin"
+            v-if="userTestSignin.testAccount === ''"
+          >
+            <span>會員登入</span>
+          </div>
+          <div class="mb-3" @click="checkOrders">
+            <span>訂單查詢</span>
+          </div>
+          <div
+            class="mb-3"
+            @click="userLogout"
+            v-if="userTestSignin.testAccount !== ''"
+          >
+            <span>登出</span>
+          </div>
+        </div>
+      </div>
 
+      <!-- 桌機Navbar -->
       <div
         class="collapse navbar-collapse order-4 order-md-4 order-lg-1 ms-lg-5 justify-content-between"
         id="navbarNav"
@@ -72,12 +128,12 @@
         <div class="me-2">
           <div class="d-flex align-items-center">
             <div
-              class="d-flex flex-column align-items-center position-relative d-md-block d-none"
+              class="d-flex flex-column align-items-center position-relative"
               role="search"
             >
               <label for="search">
                 <input
-                  class="search me-0 ps-2"
+                  class="search me-0 ps-1 pe-4"
                   type="search"
                   placeholder="Search"
                   aria-label="Search"
@@ -89,6 +145,7 @@
                 <font-awesome-icon
                   class="icons icons-search position-absolute"
                   :icon="['fas', 'magnifying-glass']"
+                  @click="searchKeyword($event)"
                 />
               </label>
             </div>
@@ -155,7 +212,7 @@
                     ><font-awesome-icon
                       class="icons icons_star"
                       :icon="['far', 'star']"
-                      @click="toFavorite"
+                      @click.prevent="toFavorite"
                     />
                   </a>
                   <!-- badge -->
@@ -255,30 +312,6 @@
       </div>
     </div>
   </nav>
-
-  <!-- RWD 手機顯示 -->
-  <div
-    class="col d-sm-flex flex-column align-items-center position-relative d-md-none d-sm-block px-4 pt-3"
-    role="search"
-  >
-    <label for="search">
-      <input
-        class="search me-0 ps-4"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-        size="30"
-        id="search"
-        @keyup.enter="searchKeyword($event)"
-        :value="keyword"
-      />
-
-      <font-awesome-icon
-        class="icons icons_sm_search position-absolute"
-        :icon="['fas', 'magnifying-glass']"
-      />
-    </label>
-  </div>
 </template>
 
 <script>
@@ -426,24 +459,22 @@ export default {
   cursor: pointer;
 }
 .icons-search {
-  top: 25%;
+  top: 20%;
   right: 3%;
   cursor: pointer;
   color: #6f7479;
-  background: rgb(255, 255, 255);
+  background: rgba(251, 251, 251, 0);
 }
-.icons_sm_search {
-  top: 50%;
-  left: 8%;
-  cursor: pointer;
-  color: #6f7479;
-  background: rgb(255, 255, 255);
-}
+
 .icon-trash-can {
   font-size: 1rem;
 }
 .search {
   outline: none;
+  border: 0;
+  background-color: rgba(251, 251, 251, 0);
+  border-bottom: 1px solid #6f7479;
+  font-size: 0.9rem;
 }
 .cart_bag {
   position: absolute;
@@ -457,7 +488,8 @@ export default {
     font-size: 0.7rem;
   }
   .cart_bagImg {
-    max-width: 60px;
+    // max-width: 60px;
+    max-width: 3.5rem;
     cursor: inherit;
   }
   .cart_bagCheckOut {

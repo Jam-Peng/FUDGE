@@ -1,34 +1,51 @@
 <template>
   <div class="container mt-4">
-    <div class="row">
+    <div class="">
       <!-- Check out步驟 -->
-      <div class="col-lg-12 mb-2">
-        <ul class="row row-cols-md-4 justify-content-center step_text">
+      <!-- 桌機、平板 -->
+      <div class="row mb-2 d-none d-md-block d-lg-block">
+        <ul class="d-flex justify-content-evenly ps-0">
           <li
-            class="col bg-light d-flex justify-content-star align-items-center rounded py-2"
+            class="col-lg-3 bg-light d-flex justify-content-star align-items-center rounded py-2"
           >
             <div class="d-flex align-self-center fs-2 fw-semibold ps-2">01</div>
             <div class="d-flex flex-column px-3">
-              <span>確認清單及付款方式</span>
-              <span>Check & Payment </span>
+              <span class="step_text">確認清單及付款方式</span>
+              <span class="step_text">Check & Payment </span>
             </div>
           </li>
+
           <li
-            class="col bg-light d-flex justify-content-star align-items-center rounded mx-4"
+            class="col-lg-3 bg-light d-flex justify-content-star align-items-center rounded py-2"
           >
             <div class="d-flex align-self-center fs-2 fw-semibold ps-2">02</div>
             <div class="d-flex flex-column px-3">
-              <span>填寫訂購資料</span>
-              <span>Shipping info</span>
+              <span class="step_text">填寫訂購資料</span>
+              <span class="step_text">Shipping info </span>
             </div>
           </li>
+
           <li
-            class="col bg-warning d-flex justify-content-star align-items-center rounded"
+            class="col-lg-3 bg-warning d-flex justify-content-star align-items-center rounded"
+          >
+            <div class="d-flex align-self-center fs-2 fw-semibold ps-2">03</div>
+            <div class="d-flex flex-column step_text px-3">
+              <span>完成購物</span>
+              <span>Order completed</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- 手機顯示 -->
+      <div class="row mb-2 d-block d-sm-none">
+        <ul class="d-flex justify-content-center px-0">
+          <li
+            class="col-9 bg-warning d-flex justify-content-star align-items-center rounded py-2"
           >
             <div class="d-flex align-self-center fs-2 fw-semibold ps-2">03</div>
             <div class="d-flex flex-column px-3">
-              <span>完成購物</span>
-              <span>Order completed</span>
+              <span class="step_text">完成購物</span>
+              <span class="step_text">Order completed </span>
             </div>
           </li>
         </ul>
@@ -36,7 +53,7 @@
 
       <div class="row justify-content-center">
         <!-- 訂單商品列表 -->
-        <div class="col-md-7 mb-3 bg-light">
+        <div class="col-10 col-lg-8 col-md-12 mb-3 bg-light">
           <div class="row d-flex align-items-center collapsed px-3">
             <div class="col-md-6 fs-3 fw-semibold py-3">Orders Info</div>
             <div class="col-md-6 text-end">
@@ -62,21 +79,53 @@
                 class="col-md-10 d-flex flex-column orderItem_text p-2 ps-0 pe-3"
               >
                 <div class="row mb-3 mt-1">
-                  <div class="col-md-6">
+                  <!-- 桌機、平板 -->
+                  <div class="col-md-6 d-none d-md-block d-lg-block">
                     <span class="me-2">{{ item.product.title }}</span>
                     <span class="text-secondary">{{ item.size }}</span>
                   </div>
-
-                  <span class="col-md-6 text-end">數量：{{ item.qty }} </span>
+                  <!-- 手機顯示 -->
+                  <div class="col-md-6 ms-2 d-block d-sm-none">
+                    <span class="me-2">{{ item.product.title }}</span>
+                    <span class="text-secondary">{{ item.size }}</span>
+                  </div>
+                  <!-- 桌機、平板 -->
+                  <span class="col-md-6 text-end d-none d-md-block d-lg-block"
+                    >數量：{{ item.qty }}
+                  </span>
+                  <!-- 手機顯示 -->
+                  <span class="col-md-6 ms-2 d-block d-sm-none"
+                    >數量：{{ item.qty }}
+                  </span>
                 </div>
-                <span class="price_text mt-1"
+
+                <!-- 桌機、平板 -->
+                <span class="price_text mt-1 d-none d-md-block d-lg-block"
                   >單價 NT.{{ $filters.currency(item.product.price) }}</span
                 >
-
-                <span class="price_text" v-if="item.final_total === item.total"
+                <span
+                  class="price_text d-none d-md-block d-lg-block"
+                  v-if="item.final_total === item.total"
                   >小計 NT.{{ $filters.currency(item.total) }}</span
                 >
-                <span class="price_text" v-if="item.final_total !== item.total"
+                <span
+                  class="price_text d-none d-md-block d-lg-block"
+                  v-if="item.final_total !== item.total"
+                  >折扣小計 NT.{{ $filters.currency(item.final_total) }}</span
+                >
+
+                <!-- 手機顯示 -->
+                <span class="price_text text-end d-block d-sm-none"
+                  >單價 NT.{{ $filters.currency(item.product.price) }}</span
+                >
+                <span
+                  class="price_text text-end d-block d-sm-none"
+                  v-if="item.final_total === item.total"
+                  >小計 NT.{{ $filters.currency(item.total) }}</span
+                >
+                <span
+                  class="price_text text-end d-block d-sm-none"
+                  v-if="item.final_total !== item.total"
                   >折扣小計 NT.{{ $filters.currency(item.final_total) }}</span
                 >
               </div>
@@ -144,7 +193,7 @@
         </div>
 
         <!-- 下方表單 -->
-        <div class="col-md-7 mb-5">
+        <div class="col-10 col-lg-8 col-md-12 mb-5">
           <div class="row">
             <!-- 訂購人資訊-->
             <div class="p-4 mb-3 bg-light">
@@ -160,7 +209,7 @@
                   <span>國家：{{ order.user.nation }}</span>
                 </div>
 
-                <div class="col-md-6 mb-2 ps-0 orderItem_text">
+                <div class="col-md-6 mb-2 orderItem_text">
                   <span>手機號碼：{{ order.user.tel }}</span>
                 </div>
               </div>
@@ -170,7 +219,7 @@
                   <span>居住縣市：{{ order.user.city }}</span>
                 </div>
 
-                <div class="col-md-6 mb-2 ps-0 orderItem_text">
+                <div class="col-md-6 mb-2 orderItem_text">
                   <span>居住地區：{{ order.user.area }}</span>
                 </div>
               </div>
@@ -204,7 +253,7 @@
                     <span>國家：{{ order.user.receiverNation }}</span>
                   </div>
 
-                  <div class="col-md-6 mb-2 ps-0 orderItem_text">
+                  <div class="col-md-6 mb-2 orderItem_text">
                     <span>手機號碼：{{ order.user.receiverTel }}</span>
                   </div>
                 </div>
@@ -214,7 +263,7 @@
                     <span>居住縣市：{{ order.user.receiverCity }}</span>
                   </div>
 
-                  <div class="col-md-6 mb-2 ps-0 orderItem_text">
+                  <div class="col-md-6 mb-2 orderItem_text">
                     <span>居住地區：{{ order.user.receiverArea }}</span>
                   </div>
                 </div>
@@ -269,7 +318,7 @@
                     <span>國家：{{ order.user.receiverShopNation }}</span>
                   </div>
 
-                  <div class="col-md-6 mb-2 ps-0 orderItem_text">
+                  <div class="col-md-6 mb-2 orderItem_text">
                     <span>手機號碼：{{ order.user.receiverShopTel }}</span>
                   </div>
                 </div>
@@ -311,7 +360,7 @@
                       <span>縣市：{{ order.user.deliverCity }}</span>
                     </div>
 
-                    <div class="col-md-6 mb-2 ps-0 orderItem_text">
+                    <div class="col-md-6 mb-2 orderItem_text">
                       <span>地區：{{ order.user.deliverArea }}</span>
                     </div>
                   </div>

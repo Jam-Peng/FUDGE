@@ -11,7 +11,7 @@
       <div class="modal-content border-0 p-4">
         <div class="modal_header row position-relative pt-3 pb-2">
           <div
-            class="modal-title col-sm-12 d-flex flex-column justify-content-center align-items-center"
+            class="modal-title col-12 col-lg-12 d-flex flex-column justify-content-center align-items-center"
             id="exampleModalLabel"
           >
             <span class="fs-2">Store</span>
@@ -28,20 +28,20 @@
         </div>
 
         <div class="modal-body">
-          <div class="row couponModal_text mb-2">
+          <div class="row couponModal_text mb-2 d-flex justify-content-between">
             <div
-              class="col-sm-4 d-flex justify-content-start mb-4"
+              class="col-6 col-md-4 d-flex justify-content-center mb-4 ps-0"
               v-for="item in locations"
               :key="item"
             >
               <label
                 for="locationTitle"
-                class="col-sm-2 form-label mb-0 text-center"
+                class="col-4 col-lg-2 col-md-3 form-label mb-0 text-center"
                 ><i class="bi bi-geo-fill fs-5"></i>
               </label>
               <input
                 type="button"
-                class="col-sm-9 px-2 couponInput btn btn-outline-secondary btn-sm"
+                class="col-8 col-lg-9 col-md-8 px-2 couponInput btn btn-outline-secondary btn-sm"
                 id="locationTitle"
                 :value="item.name"
                 @click="userloaction = item"

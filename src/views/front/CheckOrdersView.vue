@@ -1,5 +1,6 @@
 <template>
-  <div class="container-fluid">
+  <!-- 桌機 -->
+  <div class="container-fluid d-none d-lg-block">
     <div class="row p-4 pb-1 justify-content-center">
       <div class="col-lg-10 col-md-12 bg-light mb-2">
         <table class="table mt-2 align-middle checkOrder_text">
@@ -10,7 +11,7 @@
               <td>購買款項</td>
               <td class="text-center">總金額</td>
               <td width="120" class="text-center">是否付款</td>
-              <td class="text-center">編輯</td>
+              <td class="text-center">查詢訂單</td>
             </tr>
           </thead>
           <tbody>
@@ -48,7 +49,105 @@
                     class="btn btn-outline-secondary btn-sm"
                     @click="checkOneOrder(order.id)"
                   >
-                    查看訂單
+                    CHECK
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- 平板 -->
+  <div class="container-fluid d-none d-md-block d-lg-none">
+    <div class="row p-4 pb-1 justify-content-center">
+      <div class="col-lg-10 col-md-12 bg-light mb-2">
+        <table class="table mt-2 align-middle checkOrder_text">
+          <thead>
+            <tr>
+              <td class="text-center">購買時間</td>
+              <td>訂單編號</td>
+              <td>購買款項</td>
+              <td width="120" class="text-center">是否付款</td>
+              <td class="text-center">查詢訂單</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="order in orders" :key="order.id">
+              <td class="text-center">{{ $filters.date(order.create_at) }}</td>
+              <td><span></span>{{ order.id }}</td>
+              <td>
+                <ul
+                  class="list-unstyled"
+                  v-for="item in order.products"
+                  :key="item.id"
+                >
+                  <li>{{ item.product.title }}</li>
+                  <li class="me-4">數量：{{ item.qty }}</li>
+                </ul>
+              </td>
+
+              <td>
+                <div class="text-center">
+                  <label class="form-check-label">
+                    <span v-if="order.is_paid">已付款</span>
+                    <span class="text-danger" v-else>未付款</span>
+                  </label>
+                </div>
+              </td>
+              <td class="text-center">
+                <div class="btn-group">
+                  <button
+                    class="btn btn-outline-secondary btn-sm"
+                    @click="checkOneOrder(order.id)"
+                  >
+                    CHECK
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <!-- 手機顯示 -->
+  <div class="container-fluid d-block d-sm-none">
+    <div class="row p-3 pb-1 justify-content-center">
+      <div class="col-lg-10 col-md-12 bg-light mb-2">
+        <table class="table mt-2 align-middle smCheckOrder_text">
+          <thead>
+            <tr>
+              <td class="text-center">購買時間</td>
+              <td class="text-center">訂單編號</td>
+
+              <td width="100" class="text-center">是否付款</td>
+              <td class="text-center">查詢訂單</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="order in orders" :key="order.id">
+              <td class="text-center">{{ $filters.date(order.create_at) }}</td>
+              <td class="text-center">
+                <span></span>{{ order.id.slice(1, 9) }}
+              </td>
+
+              <td>
+                <div class="text-center">
+                  <label class="form-check-label">
+                    <span v-if="order.is_paid">已付款</span>
+                    <span class="text-danger" v-else>未付款</span>
+                  </label>
+                </div>
+              </td>
+              <td class="text-center">
+                <div class="btn-group">
+                  <button
+                    class="btn btn-outline-secondary btn-sm"
+                    @click="checkOneOrder(order.id)"
+                  >
+                    CHECK
                   </button>
                 </div>
               </td>
@@ -59,6 +158,7 @@
     </div>
   </div>
   <PagiNation
+    class="px-0"
     :pages="pagination"
     @emit-Page="getCheckOrder"
     @emit-Pre="getCheckOrder"
@@ -107,5 +207,9 @@ export default {
 <style lang="scss">
 .checkOrder_text {
   font-size: 0.9rem;
+}
+.smCheckOrder_text {
+  font-size: 0.7rem;
+  height: 100vh;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row justify-content-evenly px-3 mt-4">
-      <div class="col-md-4 mt-2 position-relative">
+      <div class="col-lg-4 mt-2 position-relative order-lg-1 d-none d-lg-block">
         <div class="sticky_Newsposition">
           <div class="px-3 pt-2">
             <span>News / 最新文章</span>
@@ -24,7 +24,7 @@
 
                 <div class="col-md-7">
                   <div class="d-flex flex-column px-2">
-                    <p class="onelookbook_date mb-1 ps-3 text-secondary">
+                    <p class="onelookbook_date mb-1 text-secondary">
                       {{ $filters.endate(item.create_at) }}
                     </p>
 
@@ -38,8 +38,78 @@
           </ul>
         </div>
       </div>
+      <!-- 平板 -->
+      <div class="mb-4 order-md-2 d-none d-md-block d-lg-none">
+        <div class="row justify-content-between">
+          <div class="col-md-12 px-3 py-2">
+            <span>News / 最新文章</span>
+          </div>
+          <div class="col-md-4" v-for="item in otherArticles" :key="item.id">
+            <div
+              class="d-flex flex-column justify-content-center"
+              @click="getOneLookbook(true, item.id)"
+            >
+              <div class="">
+                <img
+                  class="card-img-top"
+                  :src="item.firstImage"
+                  alt="..."
+                  style="width: 201.5px"
+                />
+              </div>
 
-      <div class="col-md-6 col-sm-12 mt-2">
+              <div class="">
+                <div class="d-flex flex-column px-1">
+                  <span class="onelookbook_date text-secondary pt-1">
+                    {{ $filters.endate(item.create_at) }}
+                  </span>
+
+                  <span class="onelookbook_title mb-2">
+                    {{ item.title }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 手機 -->
+      <div class="mb-4 order-2 d-sm-block d-md-none">
+        <div class="row">
+          <div class="col-12 px-3 py-2">
+            <span>News / 最新文章</span>
+          </div>
+          <div class="col-12 pb-3" v-for="item in otherArticles" :key="item.id">
+            <div
+              class="row justify-content-between align-items-center"
+              @click="getOneLookbook(true, item.id)"
+            >
+              <div class="col-4">
+                <img
+                  class="card-img-top"
+                  :src="item.firstImage"
+                  alt="..."
+                  style="width: 121px"
+                />
+              </div>
+
+              <div class="col-8">
+                <div class="d-flex flex-column px-3">
+                  <span class="onelookbook_date text-secondary pt-1">
+                    {{ $filters.endate(item.create_at) }}
+                  </span>
+
+                  <span class="onelookbook_title mb-2">
+                    {{ item.title }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 文章內容 -->
+      <div class="col-lg-6 order-1 order-lg-2 order-md-1 mt-2">
         <div class="card-body">
           <div class="d-flex flex-column text-center">
             <p class="card-title article_date text-secondary mb-0">

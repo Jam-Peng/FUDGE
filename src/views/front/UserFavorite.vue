@@ -3,7 +3,8 @@
   <ToastMessages class="top-10 end-0 me-3" />
 
   <div class="p-4 d-flex justify-content-center">
-    <div class="col-lg-7 mb-3 px-2">
+    <!-- 桌機、平板 -->
+    <div class="col-lg-7 col-md-10 mb-3 px-2 d-none d-md-block d-lg-block">
       <div class="row px-5 py-3 bg-light align-items-center">
         <span class="col-md-3 fs-3 fw-semibold px-0 pb-1">Favorite List</span>
         <span class="col-md-9 text-secondary">我的收藏</span>
@@ -62,7 +63,69 @@
         </button>
       </div>
     </div>
+
+    <!-- 手機顯示 -->
+    <div class="col-12 mb-3 px-2 d-block d-sm-none" style="height: 100vh">
+      <div class="row px-2 py-3 bg-light align-items-center">
+        <span class="col fs-3 fw-semibold pb-1">Favorite List</span>
+        <span class="col text-secondary">我的收藏</span>
+      </div>
+      <div
+        class="row d-flex justify-content-center p-5 bg-light"
+        v-if="favoriteItems.length === 0"
+      >
+        目前尚無收藏
+      </div>
+
+      <div
+        class="row pt-2 justify-content-center bg-light favorite_text"
+        v-for="item in favoriteItems"
+        :key="item.id"
+      >
+        <div class="col-3 pe-0">
+          <img
+            class="img-fluid favorite_img p-2 mb-2"
+            :src="item.images[0]"
+            alt=""
+            @click="intoProduct(item.id)"
+          />
+        </div>
+
+        <div class="col-9 d-flex flex-column p-2 ps-2">
+          <div class="mb-1 mt-1">
+            <span class="me-2">{{ item.title }}</span>
+          </div>
+          <span class="">單價 NT.{{ $filters.currency(item.price) }}</span>
+        </div>
+
+        <div class="col-12 p-2 pt-0">
+          <div class="col d-flex justify-content-end">
+            <button
+              class="btn btn-outline-secondary btn-sm me-3"
+              @click="openCartModal(item)"
+            >
+              Add to Cart
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-danger btn-sm me-2"
+              @click="deleteFavorite(item.id)"
+            >
+              <i class="bi bi-trash3"></i>
+            </button>
+          </div>
+        </div>
+        <hr class="col-md-11 mx-auto mt-1" />
+      </div>
+
+      <div class="d-flex justify-content-center mt-4">
+        <button class="btn btn-secondary btn-sm" @click="goShopping">
+          Continu Shopping
+        </button>
+      </div>
+    </div>
   </div>
+
   <CartModal ref="cartModal" :product="product" @add-toCart="addToCart" />
 </template>
 

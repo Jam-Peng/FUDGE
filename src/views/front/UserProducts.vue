@@ -68,7 +68,7 @@
               <!-- 尺寸與數量 -->
               <div>
                 <div class="row px-2">
-                  <div class="col-md-6 px-0">
+                  <div class="col col-md-6 px-0">
                     <select
                       class="form-select form-select-sm text-center border-secondary size_select"
                       v-model="selectSize"
@@ -80,7 +80,7 @@
                     </select>
                   </div>
                   <div
-                    class="col-md-6 countSelector rounded-1 d-flex align-items-center w-50 border-secondary"
+                    class="col col-md-6 countSelector rounded-1 d-flex align-items-center w-50 border-secondary"
                   >
                     <div
                       class="col d-flex align-items-center justify-content-between"

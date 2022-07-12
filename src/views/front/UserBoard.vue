@@ -230,7 +230,7 @@ export default {
 <style lang="scss">
 .sticky_SideBar {
   position: sticky;
-  top: 8rem;
+  top: 7.6rem;
 }
 img {
   cursor: pointer;

@@ -30,7 +30,9 @@
         <div class="modal-body mb-4">
           <div class="row couponModal_text">
             <div class="col-sm-12 d-flex justify-content-start mb-4">
-              <label for="title" class="col-sm-1 form-label mb-0 text-center"
+              <label
+                for="title"
+                class="col-2 col-md-1 form-label mb-0 text-center"
                 ><i class="bi bi-tags-fill fs-5"></i
               ></label>
               <input

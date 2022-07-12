@@ -1,34 +1,51 @@
 <template>
   <div class="container mt-4">
-    <div class="row">
+    <div class="">
       <!-- Check out步驟 -->
-      <div class="col-lg-12 mb-2">
-        <ul class="row row-cols-md-4 justify-content-center step_text">
+      <!-- 桌機、平板 -->
+      <div class="row mb-2 d-none d-md-block d-lg-block">
+        <ul class="d-flex justify-content-evenly ps-0">
           <li
-            class="col bg-light d-flex justify-content-star align-items-center rounded py-2"
+            class="col-lg-3 bg-light d-flex justify-content-star align-items-center rounded py-2"
           >
             <div class="d-flex align-self-center fs-2 fw-semibold ps-2">01</div>
             <div class="d-flex flex-column px-3">
-              <span>確認清單及付款方式</span>
-              <span>Check & Payment </span>
+              <span class="step_text">確認清單及付款方式</span>
+              <span class="step_text">Check & Payment </span>
             </div>
           </li>
+
           <li
-            class="col bg-warning d-flex justify-content-star align-items-center rounded mx-4"
+            class="col-lg-3 bg-warning d-flex justify-content-star align-items-center rounded py-2"
           >
             <div class="d-flex align-self-center fs-2 fw-semibold ps-2">02</div>
             <div class="d-flex flex-column px-3">
-              <span>填寫訂購資料</span>
-              <span>Shipping info</span>
+              <span class="step_text">填寫訂購資料</span>
+              <span class="step_text">Shipping info </span>
             </div>
           </li>
+
           <li
-            class="col bg-light d-flex justify-content-star align-items-center rounded"
+            class="col-lg-3 bg-light d-flex justify-content-star align-items-center rounded"
           >
             <div class="d-flex align-self-center fs-2 fw-semibold ps-2">03</div>
-            <div class="d-flex flex-column px-3">
+            <div class="d-flex flex-column step_text px-3">
               <span>完成購物</span>
               <span>Order completed</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- 手機顯示 -->
+      <div class="row mb-2 d-block d-sm-none">
+        <ul class="d-flex justify-content-center px-0">
+          <li
+            class="col-9 bg-warning d-flex justify-content-star align-items-center rounded py-2"
+          >
+            <div class="d-flex align-self-center fs-2 fw-semibold ps-2">02</div>
+            <div class="d-flex flex-column px-3">
+              <span class="step_text">填寫訂購資料</span>
+              <span class="step_text">Shipping info </span>
             </div>
           </li>
         </ul>
@@ -36,7 +53,7 @@
 
       <div class="row justify-content-center">
         <!-- 購物車訂單列表 -->
-        <div class="col-md-7 mb-3 bg-light">
+        <div class="col-10 col-lg-8 col-md-12 mb-3 bg-light">
           <div class="checkOutOrder_container" id="accordionFlushExample">
             <div class="" @click="toggleOrder">
               <div class="">
@@ -50,7 +67,7 @@
                   <div class="col-md-6 fs-3 fw-semibold py-3">
                     Shopping Info
                   </div>
-                  <div class="col-md-6 text-end">
+                  <div class="col-md-6 text-end mb-1">
                     <span class="me-2 step_text">查看訂單資料</span>
                     <font-awesome-icon
                       class="icons icons-arrow order_open"
@@ -82,25 +99,54 @@
                     class="col-md-10 d-flex flex-column orderItem_text p-2 ps-0 pe-3"
                   >
                     <div class="row mb-3 mt-1">
-                      <div class="col-md-6">
+                      <!-- 桌機、平板 -->
+                      <div class="col-md-6 d-none d-md-block d-lg-block">
                         <span class="me-2">{{ item.product.title }}</span>
                         <span class="text-secondary">{{ item.size }}</span>
                       </div>
+                      <!-- 手機顯示 -->
+                      <div class="col-md-6 ms-2 d-block d-sm-none">
+                        <span class="me-3">{{ item.product.title }}</span>
+                        <span class="text-secondary">{{ item.size }}</span>
+                      </div>
 
-                      <span class="col-md-6 text-end"
+                      <!-- 桌機、平板 -->
+                      <span
+                        class="col-md-6 text-end d-none d-md-block d-lg-block"
+                        >數量：{{ item.qty }}
+                      </span>
+                      <!-- 手機顯示 -->
+                      <span class="col-md-6 ms-2 d-block d-sm-none"
                         >數量：{{ item.qty }}
                       </span>
                     </div>
-                    <span class="price_text mt-1"
+                    <!-- 桌機、平板 -->
+                    <span class="price_text mt-1 d-none d-md-block d-lg-block"
                       >單價 NT.{{ $filters.currency(item.product.price) }}</span
                     >
                     <span
-                      class="price_text"
+                      class="price_text d-none d-md-block d-lg-block"
                       v-if="item.final_total === item.total"
                       >小計 NT.{{ $filters.currency(item.total) }}</span
                     >
                     <span
-                      class="price_text"
+                      class="price_text d-none d-md-block d-lg-block"
+                      v-if="item.final_total !== item.total"
+                      >折扣小計 NT.{{
+                        $filters.currency(item.final_total)
+                      }}</span
+                    >
+                    <!-- 手機顯示 -->
+                    <span class="price_text text-end d-block d-sm-none"
+                      >單價 NT.{{ $filters.currency(item.product.price) }}</span
+                    >
+                    <span
+                      class="price_text text-end d-block d-sm-none"
+                      v-if="item.final_total === item.total"
+                      >小計 NT.{{ $filters.currency(item.total) }}</span
+                    >
+                    <span
+                      class="price_text text-end d-block d-sm-none"
                       v-if="item.final_total !== item.total"
                       >折扣小計 NT.{{
                         $filters.currency(item.final_total)
@@ -108,6 +154,7 @@
                     >
                   </div>
                 </div>
+
                 <hr class="col-11 mx-auto mt-3" />
                 <!-- 總金額 -->
                 <div class="p-4 py-2">
@@ -169,14 +216,13 @@
                     </div>
                   </div>
                 </div>
-                <!-- 總金額 end -->
               </div>
             </div>
           </div>
         </div>
 
         <!-- 下方表單-->
-        <div class="col-md-7 mb-4">
+        <div class="col-10 col-lg-8 col-md-12 mb-4">
           <v-form class="row" v-slot="{ errors }" @submit="createOrder">
             <!-- 訂購人資訊-->
             <div class="p-4 mb-3 bg-light">
@@ -981,7 +1027,8 @@
             </div>
 
             <!-- 最下方按鈕 -->
-            <div class="mb-3">
+            <!-- 桌機、平板 -->
+            <div class="mb-3 d-none d-md-block d-lg-block">
               <div class="row justify-content-center">
                 <div
                   class="col-md-4 d-flex justify-content-center"
@@ -993,6 +1040,24 @@
                 </div>
                 <div class="col-md-4 d-flex justify-content-center">
                   <button class="btn btn-secondary btn-sm p-2 px-5">
+                    完成訂購
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- 手機顯示 -->
+            <div class="mb-3 d-block d-sm-none">
+              <div class="row justify-content-center">
+                <div
+                  class="col-6 d-flex justify-content-center"
+                  @click="checkStepOne"
+                >
+                  <button class="btn btn-outline-secondary btn-sm p-1 px-3">
+                    <i class="bi bi-arrow-left"></i> 修改付款
+                  </button>
+                </div>
+                <div class="col-6 d-flex justify-content-center">
+                  <button class="btn btn-secondary btn-sm p-2 px-4">
                     完成訂購
                   </button>
                 </div>
