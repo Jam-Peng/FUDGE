@@ -2,6 +2,13 @@
   <!-- RWD 桌機、平板 -->
   <div class="container d-none d-md-block d-lg-block">
     <div class="row justify-content-center mt-5">
+      <div class="col-md-11 col-lg-9 login_img mb-4">
+        <img
+          src="../../assets/img/login_bg.jpeg"
+          alt=""
+          class="d-block w-100"
+        />
+      </div>
       <!-- 會員登入 -->
       <div class="col-lg-4 col-md-6 border-end border-secondary p-5 mb-4">
         <div class="text-center mb-4 pb-2">
@@ -92,6 +99,13 @@
   <!-- RWD 手機 -->
   <div class="container d-md-none d-sm-block">
     <div class="row justify-content-center mt-5">
+      <div class="col-10 smlogin_img mb-4">
+        <img
+          src="../../assets/img/login_bg.jpeg"
+          alt=""
+          class="d-block w-100"
+        />
+      </div>
       <!-- 會員登入 -->
       <div class="col-12 p-5 pt-0">
         <div class="mb-4 pb-2">
@@ -178,10 +192,14 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
+import Footer from '@/components/user/UserFooter.vue'
+
 export default {
+  components: { Footer },
   data() {
     return {
       testSignIn: {
@@ -221,6 +239,14 @@ export default {
 <style lang="scss">
 body {
   height: 100vh;
+}
+.login_img {
+  height: 300px;
+  overflow: hidden;
+}
+.smlogin_img {
+  height: 140px;
+  overflow: hidden;
 }
 ul li {
   list-style: none;

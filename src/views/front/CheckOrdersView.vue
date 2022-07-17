@@ -157,6 +157,7 @@
       </div>
     </div>
   </div>
+
   <PagiNation
     class="px-0"
     :pages="pagination"
@@ -164,13 +165,15 @@
     @emit-Pre="getCheckOrder"
     @emit-Next="getCheckOrder"
   />
+  <Footer />
 </template>
 
 <script>
 import PagiNation from '@/components/user/UserPagiNation.vue'
+import Footer from '@/components/user/UserFooter.vue'
 
 export default {
-  components: { PagiNation },
+  components: { PagiNation, Footer },
   data() {
     return {
       orders: [],
@@ -205,6 +208,9 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+  height: 100vh;
+}
 .checkOrder_text {
   font-size: 0.9rem;
 }

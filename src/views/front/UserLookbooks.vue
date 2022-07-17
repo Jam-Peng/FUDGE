@@ -286,13 +286,15 @@
       <div class="row smLookbook_bg"></div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import PagiNation from '@/components/user/UserPagiNation.vue'
+import Footer from '@/components/user/UserFooter.vue'
 
 export default {
-  components: { PagiNation },
+  components: { PagiNation, Footer },
   data() {
     return {
       articles: [],
@@ -370,9 +372,10 @@ ul {
 }
 .lookbook_bg {
   height: 500px;
-  background-image: url('../../assets/img/lookbook_bg.png');
+  background-image: url('../../assets/img/lookbook_bg.jpg');
   background-size: cover;
   background-attachment: fixed;
+  background-position: center;
   margin: 3rem 0 4rem;
 }
 // 平板
@@ -390,10 +393,11 @@ ul {
 }
 .mdLookbook_bg {
   height: 300px;
-  background-image: url('../../assets/img/lookbook_bg.png');
-  background-size: contain;
-  background-repeat: space;
+  background-image: url('../../assets/img/lookbook_bg.jpg');
+  background-size: cover;
+  // background-repeat: space;
   background-attachment: fixed;
+
   margin: 1rem 0 3rem;
 }
 // 手機
@@ -405,10 +409,11 @@ ul {
 }
 .smLookbook_bg {
   height: 150px;
-  background-image: url('../../assets/img/lookbook_bg.png');
+  background-image: url('../../assets/img/lookbook_bg.jpg');
   background-size: contain;
   background-repeat: space;
   background-attachment: fixed;
-  margin: 0 0 3rem;
+  background-position: center;
+  // margin: 0 0 1rem;
 }
 </style>

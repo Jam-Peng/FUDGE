@@ -400,13 +400,15 @@
     </div>
   </div>
   <CompletePayModal ref="completePayModal" :orderId="completeOrderId" />
+  <Footer />
 </template>
 
 <script>
 import CompletePayModal from '@/components/user/CompletePayModal.vue'
+import Footer from '@/components/user/UserFooter.vue'
 
 export default {
-  components: { CompletePayModal },
+  components: { CompletePayModal, Footer },
   data() {
     return {
       orderId: '',

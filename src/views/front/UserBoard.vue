@@ -31,7 +31,7 @@
 
             <ol class="breadcrumb" v-else>
               <li class="breadcrumb-item">
-                <router-link to="/" class="link-dark">首頁</router-link>
+                <router-link to="/zh-tw" class="link-dark">首頁</router-link>
               </li>
 
               <li class="breadcrumb-item active">產品列表</li>
@@ -122,6 +122,7 @@
       <!-- 購物車底 -->
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
@@ -129,9 +130,10 @@ import ToastMessages from '@/components/ToastMessages.vue'
 // 將側邊商品的篩選功能匯入並加到 mixins裡
 import userFilterProduct from '@/mixins/userFilterProduct'
 import SideBar from '@/components/user/SideBar.vue'
+import Footer from '@/components/user/UserFooter.vue'
 
 export default {
-  components: { ToastMessages, SideBar },
+  components: { ToastMessages, SideBar, Footer },
   inject: ['emitter'],
   data() {
     return {

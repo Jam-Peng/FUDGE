@@ -4,7 +4,7 @@
     <!-- Check out步驟 -->
     <!-- 桌機、平板 -->
     <div class="row mb-2 d-none d-md-block d-lg-block">
-      <ul class="d-flex justify-content-evenly ps-0">
+      <ul class="d-flex justify-content-evenly px-0">
         <li
           class="col-lg-3 bg-warning d-flex justify-content-star align-items-center rounded py-2"
         >
@@ -351,8 +351,8 @@
                 >免運費</span
               >
               <span class="col-md-9" v-if="total < 1000"
-                >商品金額只差 NT$ {{ $filters.currency(1000 - total) }} 可享滿
-                NT$ 1,000免運</span
+                >商品金額差 NT$ {{ $filters.currency(1000 - total) }} 可享滿 NT$
+                1,000免運</span
               >
               <span class="col-md-9" v-else>可享免運</span>
             </div>
@@ -420,6 +420,7 @@
       </div>
     </div>
   </div>
+  <Footer />
   <CouponModal
     ref="CouponModal"
     :couponCode="couponCode"
@@ -440,6 +441,7 @@ import UserLocationModal from '@/components/user/UserLocationModal.vue'
 import NoCartModal from '@/components/user/NoCartModal.vue'
 import NoPayMethodModal from '@/components/user/NoPayMethodModal.vue'
 import ToastMessages from '@/components/ToastMessages.vue'
+import Footer from '@/components/user/UserFooter.vue'
 
 export default {
   components: {
@@ -447,7 +449,8 @@ export default {
     UserLocationModal,
     NoCartModal,
     NoPayMethodModal,
-    ToastMessages
+    ToastMessages,
+    Footer
   },
   inject: ['emitter'],
   data() {

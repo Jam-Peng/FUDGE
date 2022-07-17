@@ -266,10 +266,16 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
+import Footer from '@/components/user/UserFooter.vue'
+
 export default {
+  components: {
+    Footer
+  },
   data() {
     return {
       id: '',

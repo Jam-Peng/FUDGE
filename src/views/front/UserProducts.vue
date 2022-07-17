@@ -131,15 +131,17 @@
       </div>
     </div>
   </div>
+  <Footer />
 </template>
 
 <script>
 import ProductScript from '@/components/user/ProductScript.vue'
 import ToastMessages from '@/components/ToastMessages.vue'
 import favoriteLocalStorage from '@/mixins/userFavoriteMethod'
+import Footer from '@/components/user/UserFooter.vue'
 
 export default {
-  components: { ProductScript, ToastMessages },
+  components: { ProductScript, ToastMessages, Footer },
   inject: ['emitter'],
   data() {
     return {

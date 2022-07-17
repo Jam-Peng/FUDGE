@@ -4,10 +4,13 @@
 
   <div class="p-4 d-flex justify-content-center">
     <!-- 桌機、平板 -->
-    <div class="col-lg-7 col-md-10 mb-3 px-2 d-none d-md-block d-lg-block">
+    <div
+      class="col-lg-7 col-md-10 mb-3 px-2 d-none d-md-block d-lg-block"
+      style="height: 100vh"
+    >
       <div class="row px-5 py-3 bg-light align-items-center">
-        <span class="col-md-3 fs-3 fw-semibold px-0 pb-1">Favorite List</span>
-        <span class="col-md-9 text-secondary">我的收藏</span>
+        <span class="col-md-3 fs-3 fw-semibold px-0 pb-1">Favorite </span>
+        <span class="col text-secondary">我的收藏</span>
       </div>
       <div
         class="row d-flex justify-content-center p-5 bg-light"
@@ -67,7 +70,7 @@
     <!-- 手機顯示 -->
     <div class="col-12 mb-3 px-2 d-block d-sm-none" style="height: 100vh">
       <div class="row px-2 py-3 bg-light align-items-center">
-        <span class="col fs-3 fw-semibold pb-1">Favorite List</span>
+        <span class="col-4 fs-3 fw-semibold pb-1">Favorite </span>
         <span class="col text-secondary">我的收藏</span>
       </div>
       <div
@@ -125,7 +128,7 @@
       </div>
     </div>
   </div>
-
+  <Footer />
   <CartModal ref="cartModal" :product="product" @add-toCart="addToCart" />
 </template>
 
@@ -133,9 +136,10 @@
 import favoriteLocalStorage from '@/mixins/userFavoriteMethod'
 import CartModal from '@/components/user/FavoriteToCartModal.vue'
 import ToastMessages from '@/components/ToastMessages.vue'
+import Footer from '@/components/user/UserFooter.vue'
 
 export default {
-  components: { CartModal, ToastMessages },
+  components: { CartModal, ToastMessages, Footer },
   inject: ['emitter'],
   data() {
     return {

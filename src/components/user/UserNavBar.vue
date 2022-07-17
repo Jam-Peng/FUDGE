@@ -36,7 +36,7 @@
             </a>
           </li>
           <li class="nav-item ps-4 position-relative">
-            <a class="nav-link p-0"
+            <a class="nav-link p-0" href="/zh-tw"
               ><font-awesome-icon
                 class="icons icons_star"
                 :icon="['far', 'star']"
@@ -51,7 +51,7 @@
             </span>
           </li>
           <li class="nav-item ps-4 position-relative">
-            <a class="nav-link p-0"
+            <a class="nav-link p-0" href="/zh-tw"
               ><font-awesome-icon
                 class="icons icons_cart"
                 :icon="['fas', 'cart-shopping']"

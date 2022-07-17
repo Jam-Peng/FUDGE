@@ -29,9 +29,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { faStar } from '@fortawesome/free-regular-svg-icons'
 import {
-  faFacebookSquare,
-  faInstagramSquare,
-  faYoutubeSquare,
+  faFacebookF,
+  faInstagram,
+  faYoutube,
   faLine
 } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -40,9 +40,9 @@ library.add(
   faUser,
   faCartShopping,
   faMagnifyingGlass,
-  faFacebookSquare,
-  faInstagramSquare,
-  faYoutubeSquare,
+  faFacebookF,
+  faInstagram,
+  faYoutube,
   faLine,
   faTrashCan,
   faPlus,

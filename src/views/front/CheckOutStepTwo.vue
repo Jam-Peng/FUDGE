@@ -4,7 +4,7 @@
       <!-- Check out步驟 -->
       <!-- 桌機、平板 -->
       <div class="row mb-2 d-none d-md-block d-lg-block">
-        <ul class="d-flex justify-content-evenly ps-0">
+        <ul class="d-flex justify-content-evenly px-0">
           <li
             class="col-lg-3 bg-light d-flex justify-content-star align-items-center rounded py-2"
           >
@@ -1069,6 +1069,7 @@
       </div>
     </div>
   </div>
+  <Footer />
   <NolocationModal
     ref="nolocationModal"
     :location="location"
@@ -1078,9 +1079,10 @@
 
 <script>
 import NolocationModal from '@/components/user/NoLocationModal.vue'
+import Footer from '@/components/user/UserFooter.vue'
 
 export default {
-  components: { NolocationModal },
+  components: { NolocationModal, Footer },
   inject: ['emitter'],
   data() {
     return {
