@@ -113,16 +113,52 @@
         id="navbarNav"
       >
         <ul class="navbar-nav">
-          <li class="nav-item">
-            <router-link to="/about" class="nav-link">關於我們 </router-link>
+          <li class="nav-item me-2">
+            <div @="{mouseenter: aboutDisplay,mouseleave: aboutNone}">
+              <router-link to="/about" class="nav-link" v-show="aboutIsable">
+                <span class="border-bottom border-secondary">關於我們</span>
+              </router-link>
+              <router-link
+                to="/about"
+                class="nav-link"
+                v-if="aboutIsable === false"
+                >About Us
+              </router-link>
+            </div>
+          </li>
+          <li class="nav-item me-2">
+            <div @="{mouseenter: productsDisplay,mouseleave: productsNone}">
+              <router-link
+                to="/productList"
+                class="nav-link"
+                v-show="productsIsable"
+              >
+                <span class="border-bottom border-secondary">產品列表</span>
+              </router-link>
+              <router-link
+                to="/productList"
+                class="nav-link"
+                v-if="productsIsable === false"
+                >Products
+              </router-link>
+            </div>
           </li>
           <li class="nav-item">
-            <router-link to="/productList" class="nav-link"
-              >產品列表
-            </router-link>
-          </li>
-          <li class="nav-item">
-            <router-link to="/lookbook" class="nav-link">LookBook </router-link>
+            <div @="{mouseenter: lookbookDisplay,mouseleave: lookbookNone}">
+              <router-link
+                to="/lookbook"
+                class="nav-link"
+                v-show="lookbookIsable"
+              >
+                <span class="border-bottom border-secondary">小雜誌+</span>
+              </router-link>
+              <router-link
+                to="/lookbook"
+                class="nav-link"
+                v-if="lookbookIsable === false"
+                >LookBooks
+              </router-link>
+            </div>
           </li>
         </ul>
         <div class="me-2">
@@ -327,6 +363,9 @@ export default {
       cartIsable: false,
       favoriteIsable: false,
       loginIsable: false,
+      aboutIsable: false,
+      productsIsable: false,
+      lookbookIsable: false,
       // userTestSignin: {
       //   userAccount: '',
       //   userPassword: ''
@@ -418,6 +457,27 @@ export default {
     // 隱藏登入資訊
     loginNone() {
       this.loginIsable = false
+    },
+    // 關於我中英文字更換
+    aboutDisplay() {
+      this.aboutIsable = true
+    },
+    aboutNone() {
+      this.aboutIsable = false
+    },
+    // 產品列表中英文字更換
+    productsDisplay() {
+      this.productsIsable = true
+    },
+    productsNone() {
+      this.productsIsable = false
+    },
+    // 小雜誌中英文字更換
+    lookbookDisplay() {
+      this.lookbookIsable = true
+    },
+    lookbookNone() {
+      this.lookbookIsable = false
     }
   },
   mixins: [favoriteLocalStorage],

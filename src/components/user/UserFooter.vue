@@ -57,7 +57,7 @@
           </router-link>
         </div>
       </div>
-      <div class="col-12 col-md-6 d-flex flex-column">
+      <div class="col-12 col-md-6 d-flex flex-column ps-4">
         <span class="pb-2">SERVICE</span>
         <span>MON.-FRI. 09:00-12:00 / 13:00-18:00</span>
         <span> service@fudge.com.tw</span>
