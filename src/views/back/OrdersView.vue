@@ -92,8 +92,11 @@
 import OrderModal from '@/components/OrderModal.vue'
 import DeleteOrderModal from '@/components/DeleteOrderModal.vue'
 import PagiNation from '@/components/PagiNation.vue'
+import { mapActions } from 'pinia'
+import statusStore from '@/stores/statusStores'
 
 export default {
+  components: { OrderModal, DeleteOrderModal, PagiNation },
   data() {
     return {
       orders: [],
@@ -104,8 +107,9 @@ export default {
       shippingFee: 80 // 運費
     }
   },
-  components: { OrderModal, DeleteOrderModal, PagiNation },
+
   methods: {
+    ...mapActions(statusStore, ['pushMessage']),
     // 取得訂單列表
     getOrder(page = 1) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/orders?page=${page}`
@@ -120,7 +124,6 @@ export default {
             this.orders = res.data.orders
             this.pagination = res.data.pagination
           }
-
           // console.log(res.data)
         })
         .catch((err) => {
@@ -145,7 +148,9 @@ export default {
         .put(url, { data: paid })
         .then((res) => {
           this.getOrder()
-          this.$httpMessageState(res, '更新付款狀態')
+          this.pushMessage(res.data.success, '更新付款狀態', res.data.message)
+          // 全域屬性發送吐司訊息
+          // this.$httpMessageState(res, '更新付款狀態')
         })
         .catch((err) => {
           console.log(err.response)
@@ -165,7 +170,9 @@ export default {
           // console.log(res)
           this.$refs.deleteModal.hideModal()
           this.getOrder()
-          this.$httpMessageState(res, '刪除訂單')
+          this.pushMessage(res.data.success, '刪除訂單', res.data.message)
+          // 全域屬性發送吐司訊息
+          // this.$httpMessageState(res, '刪除訂單')
         })
         .catch((err) => {
           console.log(err.response)

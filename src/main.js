@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 // 匯入 vue3-loading-overlay 元件
@@ -15,7 +16,8 @@ import zhTW from '@vee-validate/i18n/dist/locale/zh_TW.json'
 import App from './App.vue'
 import router from './router'
 import { currency, date, isodate, endate } from '@/methods/filters'
-import $httpMessageState from '@/methods/pushMessagesState'
+// 匯入全域發送吐司訊息
+// import $httpMessageState from '@/methods/pushMessagesState'
 // font awesome
 import { library } from '@fortawesome/fontawesome-svg-core'
 import {
@@ -61,8 +63,11 @@ configure({
 setLocale('zh_TW')
 
 const app = createApp(App)
+const pinia = createPinia()
 app.config.globalProperties.$filters = { currency, date, isodate, endate }
-app.config.globalProperties.$httpMessageState = $httpMessageState
+// 全域註冊發送吐司訊息
+// app.config.globalProperties.$httpMessageState = $httpMessageState
+app.use(pinia)
 app.use(VueAxios, axios)
 app.use(router)
 app.component('OverLoading', Loading)

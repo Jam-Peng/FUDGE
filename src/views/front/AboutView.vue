@@ -36,15 +36,26 @@
           >
         </div>
         <div>
-          <form action="">
+          <form>
             <div>
               <input
                 type="email"
                 class="about_input border rounded px-3 py-1 me-2"
                 placeholder="info@example.con"
+                v-model.trim="userEmail"
               />
               <button
-                class="about_button border rounded px-3 py-1 bg-dark text-light"
+                class="about_button border rounded px-3 py-1 bg-dark text-light about_Newsletter"
+                type="button"
+                v-if="userEmail === ''"
+                style="cursor: inherit"
+              >
+                請先填寫 E-mail
+              </button>
+              <button
+                class="about_button border rounded px-3 py-1 bg-dark text-light about_Newsletter"
+                @click.prevent="about_Newsletter"
+                v-else
               >
                 訂閱
               </button>
@@ -55,12 +66,28 @@
     </div>
   </div>
   <Footer />
+  <NewsletterModal ref="NewsletterModal" :tempEmail="tempEmail" />
 </template>
 
 <script>
 import Footer from '@/components/user/UserFooter.vue'
+import NewsletterModal from '@/components/user/about_NewsletterModal.vue'
+
 export default {
-  components: { Footer }
+  components: { Footer, NewsletterModal },
+  data() {
+    return {
+      userEmail: '',
+      tempEmail: ''
+    }
+  },
+  methods: {
+    about_Newsletter() {
+      this.tempEmail = this.userEmail
+      this.$refs.NewsletterModal.showModel()
+      this.userEmail = ''
+    }
+  }
 }
 </script>
 

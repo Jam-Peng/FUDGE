@@ -9,20 +9,30 @@
 
 <script>
 import Toast from '@/components/ToastView.vue'
+import { storeToRefs } from 'pinia'
+import statusStore from '@/stores/statusStores'
 
 export default {
-  data() {
-    return {
-      messages: []
-    }
-  },
   components: { Toast },
-  inject: ['emitter'],
-  mounted() {
-    this.emitter.on('pushMessages', (messageData) => {
-      const { style, title, content } = messageData
-      this.messages.push({ style, title, content })
-    })
+  setup() {
+    const status = statusStore()
+    const { messages } = storeToRefs(status)
+
+    return { messages }
   }
+
+  // 原本使用 Option API emitter 傳送吐司訊息
+  // data() {
+  //   return {
+  //     messages: []
+  //   }
+  // }
+  // inject: ['emitter'],
+  // mounted() {
+  //   this.emitter.on('pushMessages', (messageData) => {
+  //     const { style, title, content } = messageData
+  //     this.messages.push({ style, title, content })
+  //   })
+  // }
 }
 </script>

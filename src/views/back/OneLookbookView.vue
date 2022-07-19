@@ -1,4 +1,5 @@
 <template>
+  <OverLoading :active="isLoading"></OverLoading>
   <div class="row justify-content-between px-3 mt-4">
     <div class="col-8 mt-2">
       <div class="card-body">
@@ -180,6 +181,8 @@
 
 <script>
 import LookbookModal from '@/components/LookbookModal.vue'
+import statusStore from '@/stores/statusStores'
+import { mapActions } from 'pinia'
 
 export default {
   components: { LookbookModal },
@@ -199,32 +202,39 @@ export default {
       contentEight: [],
       contentNine: [],
       contentTen: [],
-      tempArticle: {}
+      tempArticle: {},
+      isLoading: false
     }
   },
   methods: {
+    ...mapActions(statusStore, ['pushMessage']),
     getOneLookbook() {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/article/${this.id}`
+      this.isLoading = true
       this.$http
         .get(url)
         .then((res) => {
+          setTimeout(() => {
+            this.isLoading = false
+          }, 500)
           // console.log(res)
-          this.article = res.data.article
-          this.content = res.data.article.content.split(',')
-          this.contentTwo = res.data.article.contentTwo.split(',')
-          this.contentThree = res.data.article.contentThree.split(',')
-          this.contentFour = res.data.article.contentFour.split(',')
-          this.contentFive = res.data.article.contentFive.split(',')
-          this.contentSix = res.data.article.contentSix.split(',')
-          this.contentSeven = res.data.article.contentSeven.split(',')
-          this.contentEight = res.data.article.contentEight.split(',')
-          this.contentNine = res.data.article.contentNine.split(',')
-          this.contentTen = res.data.article.contentTen.split(',')
-
+          if (res.data.success) {
+            this.article = res.data.article
+            this.content = res.data.article.content.split(',')
+            this.contentTwo = res.data.article.contentTwo.split(',')
+            this.contentThree = res.data.article.contentThree.split(',')
+            this.contentFour = res.data.article.contentFour.split(',')
+            this.contentFive = res.data.article.contentFive.split(',')
+            this.contentSix = res.data.article.contentSix.split(',')
+            this.contentSeven = res.data.article.contentSeven.split(',')
+            this.contentEight = res.data.article.contentEight.split(',')
+            this.contentNine = res.data.article.contentNine.split(',')
+            this.contentTen = res.data.article.contentTen.split(',')
+          }
           // console.log(this.article)
         })
         .catch((err) => {
-          console.log(err.response)
+          console.log(err.res)
         })
     },
     // 打開更新文章 Modal
@@ -243,6 +253,7 @@ export default {
           if (res.data.success) {
             this.$refs.articleModal.hideModal()
             this.getOneLookbook()
+            this.pushMessage(res.data.success, '更新文章', res.data.message)
           }
         })
         .catch((err) => {
@@ -251,7 +262,7 @@ export default {
     }
   },
   created() {
-    this.id = this.$route.params.lookbokId
+    this.id = this.$route.params.lookbooksId
     this.getOneLookbook()
   }
 }

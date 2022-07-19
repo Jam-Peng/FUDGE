@@ -215,7 +215,7 @@
                 <button
                   type="button"
                   class="btn btn-primary"
-                  @click="$emit('new-Article', tempArticle)"
+                  @click="emitNewArticke"
                   v-if="!tempArticle.description"
                 >
                   確定
@@ -223,7 +223,7 @@
                 <button
                   type="button"
                   class="btn btn-primary"
-                  @click="$emit('updat-Article', tempArticle)"
+                  @click="$emit('updatArticle', tempArticle)"
                   v-else
                 >
                   更新文章
@@ -269,12 +269,20 @@
       </div>
     </div>
   </div>
+  <lbALLImgLimitModal ref="lbALLImgLimitModal" />
+  <lookbookImgLimitModal ref="lookbookImgLimitModal" />
 </template>
 
 <script>
 import modalMixin from '@/mixins/modalMixin'
+import lbALLImgLimitModal from '@/components/lbALLImgLimitModal.vue'
+import lookbookImgLimitModal from '@/components/lookbookImgLimitModal.vue'
 
 export default {
+  components: {
+    lbALLImgLimitModal,
+    lookbookImgLimitModal
+  },
   data() {
     return {
       modal: {},
@@ -291,7 +299,7 @@ export default {
     },
     updateArticle: {}
   },
-  emits: ['new-Article', 'updat-Article'],
+  emits: ['newArticle', 'updatArticle'],
   watch: {
     // 新增文章
     article() {
@@ -319,6 +327,14 @@ export default {
     }
   },
   methods: {
+    // 傳遞新增的文章時最少須先新增一張照片
+    emitNewArticke() {
+      if (this.tempArticle.firstImage === '') {
+        this.$refs.lookbookImgLimitModal.showModel()
+      } else {
+        this.$emit('newArticle', this.tempArticle)
+      }
+    },
     // 上傳多圖
     uploadLookbook() {
       if (
@@ -327,7 +343,8 @@ export default {
           this.tempArticle.images.length >
         8
       ) {
-        alert('照片多餘8張')
+        // alert('照片多餘8張')
+        this.$refs.lbALLImgLimitModal.showModel()
       } else {
         const imgId = this.$refs.lookbookFile.id
         Array.from(this.$refs.lookbookFile.files).forEach((item) => {

@@ -78,6 +78,8 @@
 import CouponModal from '@/components/CouponModal.vue'
 import DeleteCouponModal from '@/components/DeleteCouponModal.vue'
 import PagiNation from '@/components/PagiNation.vue'
+import statusStore from '@/stores/statusStores'
+import { mapActions } from 'pinia'
 
 export default {
   data() {
@@ -91,6 +93,7 @@ export default {
   },
   components: { CouponModal, DeleteCouponModal, PagiNation },
   methods: {
+    ...mapActions(statusStore, ['pushMessage']),
     // 取得優惠卷列表
     getCoupons(page) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/coupons?page=${page}`
@@ -136,7 +139,10 @@ export default {
         .then((res) => {
           this.$refs.CouponModal.hideModal()
           this.getCoupons()
-          this.$httpMessageState(res, '更新優惠卷')
+          this.pushMessage(res.data.success, '更新優惠卷', res.data.message)
+
+          // 全域屬性發送吐司訊息寫法
+          // this.$httpMessageState(res, '更新優惠卷')
         })
         .catch((err) => {
           console.log(err.response)
@@ -155,7 +161,10 @@ export default {
         .then((res) => {
           this.$refs.DeleteCouponModal.hideModal()
           this.getCoupons()
-          this.$httpMessageState(res, '刪除優惠卷')
+          this.pushMessage(res.data.success, '刪除優惠卷', res.data.message)
+
+          // 全域屬性發送吐司訊息寫法
+          // this.$httpMessageState(res, '刪除優惠卷')
         })
         .catch((err) => {
           console.log(err.response)

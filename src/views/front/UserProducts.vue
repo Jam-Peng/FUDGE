@@ -1,10 +1,42 @@
 <template>
-  <ToastMessages class="top-10 end-0 me-3" />
-  <div class="container mt-4 position-relative px-4">
-    <div class="row">
+  <div class="container mt-4 px-4">
+    <div class="row position-relative">
       <!-- breadcrumb麵包屑 -->
-      <div class="container px-3">
-        <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb">
+      <!-- 桌機、平板 -->
+      <div class="text-start px-3 d-none d-md-block d-lg-block">
+        <nav
+          style="--bs-breadcrumb-divider: '>'"
+          aria-label="breadcrumb"
+          class="col-lg-12 col-md-12 ps-2"
+        >
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <router-link to="/" class="link-dark">首頁</router-link>
+            </li>
+            <li class="breadcrumb-item">
+              <router-link to="/productList" class="link-dark"
+                >產品列表</router-link
+              >
+            </li>
+            <li
+              class="breadcrumb-item"
+              @click.prevent="CategoryProduct(product.category)"
+            >
+              <a>{{ product.category }}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">
+              {{ product.title }}
+            </li>
+          </ol>
+        </nav>
+      </div>
+      <!-- 手機顯示 -->
+      <div class="text-start px-4 d-block d-sm-none">
+        <nav
+          style="--bs-breadcrumb-divider: '>'"
+          aria-label="breadcrumb"
+          class="col ps-1"
+        >
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
               <router-link to="/" class="link-dark">首頁</router-link>
@@ -28,14 +60,14 @@
       </div>
 
       <!-- 左邊照片 -->
-      <div class="col-lg-8 mb-3 px-3">
+      <div class="col-lg-8 mb-3 px-3 order-2 order-sm-2 order-lg-1 order-md-2">
         <div class="" v-for="img in product.images" :key="img">
           <img :src="img" class="img-fluid img-default mb-4" alt="..." />
         </div>
       </div>
       <!-- 右邊 -->
-      <div class="col-lg-4 px-3">
-        <div class="container">
+      <div class="col-lg-4 px-3 order-1 order-sm-1 order-lg-2 order-md-1">
+        <div class="container sticky_SideInfo">
           <div class="row">
             <div class="col">
               <article>
@@ -136,12 +168,13 @@
 
 <script>
 import ProductScript from '@/components/user/ProductScript.vue'
-import ToastMessages from '@/components/ToastMessages.vue'
 import favoriteLocalStorage from '@/mixins/userFavoriteMethod'
 import Footer from '@/components/user/UserFooter.vue'
+import statusStore from '@/stores/statusStores'
+import { mapActions } from 'pinia'
 
 export default {
-  components: { ProductScript, ToastMessages, Footer },
+  components: { ProductScript, Footer },
   inject: ['emitter'],
   data() {
     return {
@@ -162,6 +195,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(statusStore, ['pushMessage']),
     // 取得單一指定商品資料
     getProduct() {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/product/${this.id}`
@@ -198,7 +232,8 @@ export default {
           this.status.loadingItem = ''
           this.qtyNumber = 1
           this.selectSize = ''
-          this.$httpMessageState(res, '加入購物車')
+          this.pushMessage(res.data.success, '加入購物車', res.data.message)
+
           // 重新觸發navBar元件的badge數量
           this.emitter.emit('update_cart')
         })
@@ -273,5 +308,9 @@ export default {
 .size_box {
   font-size: 0.88rem;
   padding: 0.25rem 0.5rem;
+}
+.sticky_SideInfo {
+  position: sticky;
+  top: 10rem;
 }
 </style>

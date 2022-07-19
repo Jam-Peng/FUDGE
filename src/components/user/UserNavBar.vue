@@ -496,7 +496,7 @@ export default {
   },
   // 不知道為何要加 unmounted 生命週期
   // unmounted() {
-  //   emitter.off('update_cart', this.getCartOrder)
+  //   this.emitter.off('update_cart', this.getCartOrder)
   // },
   created() {
     this.getCartOrder()

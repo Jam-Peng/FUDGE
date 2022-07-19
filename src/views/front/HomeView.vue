@@ -9,6 +9,7 @@
   </div>
 
   <div>
+    <ToastMessages />
     <router-view />
   </div>
 
@@ -25,10 +26,11 @@
 <script>
 import NavBar from '@/components/user/UserNavBar.vue'
 import ButtonNavBar from '@/components/user/UserButtonNavBar.vue'
+import ToastMessages from '@/components/ToastMessages.vue'
 import emitter from '@/methods/emitter'
 
 export default {
-  components: { NavBar, ButtonNavBar },
+  components: { NavBar, ButtonNavBar, ToastMessages },
   provide() {
     return {
       emitter

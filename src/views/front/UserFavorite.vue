@@ -1,6 +1,6 @@
 <template>
   <OverLoading :active="isLoading"></OverLoading>
-  <ToastMessages class="top-10 end-0 me-3" />
+  <!-- <ToastMessages class="top-10 end-0 me-3" /> -->
 
   <div class="p-4 d-flex justify-content-center">
     <!-- 桌機、平板 -->
@@ -135,11 +135,12 @@
 <script>
 import favoriteLocalStorage from '@/mixins/userFavoriteMethod'
 import CartModal from '@/components/user/FavoriteToCartModal.vue'
-import ToastMessages from '@/components/ToastMessages.vue'
 import Footer from '@/components/user/UserFooter.vue'
+import statusStore from '@/stores/statusStores'
+import { mapActions } from 'pinia'
 
 export default {
-  components: { CartModal, ToastMessages, Footer },
+  components: { CartModal, Footer },
   inject: ['emitter'],
   data() {
     return {
@@ -150,6 +151,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(statusStore, ['pushMessage']),
     // 取得我的最愛
     getFavorite() {
       // 先執行取得LocalStorage裡的ID
@@ -210,8 +212,8 @@ export default {
         .post(url, { data: cart })
         .then((res) => {
           // console.log(res)
-          this.$httpMessageState(res, '加入購物車')
-          // this.$refs.cartModal.hideModal()
+          this.pushMessage(res.data.success, '加入購物車', res.data.message)
+          this.emitter.emit('update_cart')
         })
         .catch((err) => {
           console.log(err.response)

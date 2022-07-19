@@ -93,7 +93,7 @@ const routes = [
         component: () => import('../views/back/LookbooksView.vue')
       },
       {
-        path: 'lookbooks/:lookbokId',
+        path: 'lookbooks/:lookbooksId',
         component: () => import('../views/back/OneLookbookView.vue')
       }
     ]

@@ -33,7 +33,9 @@ export default {
   },
   mounted() {
     const toastEL = this.$refs.toast
-    const toast = new Toast(toastEL, { delay: 5000 })
+    const toast = new Toast(toastEL)
+    // 使用pinia整理狀態後，setTimeout寫在store裡控制
+    // const toast = new Toast(toastEL, { delay: 4000 })
     toast.show()
   }
 }

@@ -84,6 +84,8 @@
 import ProductModal from '../../components/ProductModal.vue'
 import DeleteModal from '../../components/DeleteModal.vue'
 import PagiNation from '@/components/PagiNation.vue'
+import statusStore from '@/stores/statusStores'
+import { mapActions } from 'pinia'
 
 export default {
   data() {
@@ -96,8 +98,9 @@ export default {
     }
   },
   components: { ProductModal, DeleteModal, PagiNation },
-  inject: ['emitter'],
+  // inject: ['emitter'],
   methods: {
+    ...mapActions(statusStore, ['pushMessage']),
     // 取得商品列表
     getProudcts(page = 1) {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`
@@ -150,8 +153,10 @@ export default {
           // console.log(res)
           this.$refs.ProductModal.hideModal()
           this.getProudcts()
-          // 全域屬性發送吐司訊息
-          this.$httpMessageState(res)
+          this.pushMessage(res.data.success, '更新', res.data.message)
+
+          // 全域屬性發送吐司訊息寫法
+          // this.$httpMessageState(res)
         })
         .catch((err) => {
           console.log(err.response)
@@ -172,8 +177,10 @@ export default {
         .then((res) => {
           this.$refs.DeleteProductModal.hideModal()
           this.getProudcts()
+          this.pushMessage(res.data.success, '刪除商品', res.data.message)
+
           // 全域屬性發送吐司訊息
-          this.$httpMessageState(res, '刪除商品')
+          // this.$httpMessageState(res, '刪除商品')
         })
         .catch((err) => {
           console.log(err.response)

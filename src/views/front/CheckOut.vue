@@ -1,5 +1,5 @@
 <template>
-  <ToastMessages class="top-10 end-0 me-3" />
+  <!-- <ToastMessages class="top-10 end-0 me-3" /> -->
   <div class="container mt-4">
     <!-- Check out步驟 -->
     <!-- 桌機、平板 -->
@@ -440,8 +440,9 @@ import CouponModal from '@/components/user/UserCouponModal.vue'
 import UserLocationModal from '@/components/user/UserLocationModal.vue'
 import NoCartModal from '@/components/user/NoCartModal.vue'
 import NoPayMethodModal from '@/components/user/NoPayMethodModal.vue'
-import ToastMessages from '@/components/ToastMessages.vue'
 import Footer from '@/components/user/UserFooter.vue'
+import statusStore from '@/stores/statusStores'
+import { mapActions } from 'pinia'
 
 export default {
   components: {
@@ -449,7 +450,6 @@ export default {
     UserLocationModal,
     NoCartModal,
     NoPayMethodModal,
-    ToastMessages,
     Footer
   },
   inject: ['emitter'],
@@ -476,6 +476,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(statusStore, ['pushMessage']),
     // 取得購物車列表
     getCheckOut() {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
@@ -506,7 +507,7 @@ export default {
           // 重新觸發刪除navBar元件的badge數量
           this.emitter.emit('delete-cart')
           this.getCheckOut()
-          this.$httpMessageState(res, '刪除商品')
+          this.pushMessage(res.data.success, '刪除商品', res.data.message)
         })
         .catch((err) => {
           console.log(err.response)
@@ -529,6 +530,7 @@ export default {
           // console.log(res)
           if (res.data.success) {
             this.getCheckOut()
+            this.pushMessage(res.data.success, '更新數量', res.data.message)
           }
         })
         .catch((err) => {

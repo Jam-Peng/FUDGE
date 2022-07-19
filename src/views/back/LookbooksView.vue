@@ -1,4 +1,5 @@
 <template>
+  <OverLoading :active="isLoading"></OverLoading>
   <div class="shadow-sm p-3 mt-2 bg-body rounded">
     <div>
       <div class="d-flex justify-content-between px-3">
@@ -69,30 +70,45 @@
     @emit-Pre="getlookbook"
     @emit-Next="getlookbook"
   />
+  <!-- <lookbookImgLimitModal ref="lookbookImgLimitModal" /> -->
 </template>
 
 <script>
 import LookbookModal from '@/components/LookbookModal.vue'
 import DeletebookModal from '@/components/DeleteLookbookModal.vue'
 import PagiNation from '@/components/PagiNation.vue'
+// import lookbookImgLimitModal from '@/components/lookbookImgLimitModal.vue'
+import statusStore from '@/stores/statusStores'
+import { mapActions } from 'pinia'
 
 export default {
-  components: { LookbookModal, DeletebookModal, PagiNation },
+  components: {
+    LookbookModal,
+    DeletebookModal,
+    PagiNation
+    // lookbookImgLimitModal
+  },
   data() {
     return {
       articles: [],
       pagination: {},
-      tempArticle: {}
+      tempArticle: {},
+      isLoading: false
       // isNew: false
     }
   },
   methods: {
+    ...mapActions(statusStore, ['pushMessage']),
     // 取得文章列表
     getlookbook(page = 1) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/articles?page=${page}`
+      this.isLoading = true
       this.$http
         .get(url)
         .then((res) => {
+          setTimeout(() => {
+            this.isLoading = false
+          }, 500)
           // console.log(res)
           // this.articles = res.data.articles.reverse()
           this.articles = res.data.articles
@@ -114,12 +130,17 @@ export default {
     newLookbook(data) {
       this.tempArticle = data
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/article`
+      // 限制新增時一定要先傳入一張照片
+      // if (this.tempArticle.firstImage === '') {
+      //   this.$refs.lookbookImgLimitModal.showModel()
+      // }
       this.$http
         .post(url, { data: this.tempArticle })
         .then((res) => {
           // console.log(res)
           this.$refs.lookbookModal.hideModal()
           this.getlookbook()
+          this.pushMessage(res.data.success, '新增文章', res.data.message)
         })
         .catch((err) => {
           console.log(err.response)
@@ -138,6 +159,7 @@ export default {
         .then((res) => {
           this.$refs.deletebookModal.hideModal()
           this.getlookbook()
+          this.pushMessage(res.data.success, '刪除文章', res.data.message)
         })
         .catch((err) => {
           console.log(err.response)
