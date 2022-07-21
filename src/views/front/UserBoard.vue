@@ -1,12 +1,10 @@
 <template>
-  <ToastMessages class="top-10 end-0 me-3" />
-
   <div class="container-fluid mt-4 position-relative px-4">
     <div class="row">
       <div class="col-lg-2 col-md-3 col-sm-12 mb-3 position-relative">
         <!-- 側邊sideBar -->
         <div class="sticky_SideBar">
-          <SideBar
+          <!-- <SideBar
             @emit-All="filterProductAll"
             @emit-Clothes="filterCategory"
             @emit-Pants="filterCategory"
@@ -14,7 +12,25 @@
             @emit-Pack="filterCategory"
             @emit-Shoes="filterCategory"
             :breadcrumb="breadcrumb"
-          />
+          /> -->
+          <ul class="ps-3">
+            <li>
+              <a
+                href="#"
+                class="text-secondary"
+                @click.prevent="changeCategory('全部商品')"
+                >全部商品</a
+              >
+            </li>
+            <li v-for="item in productsCategory" :key="item">
+              <a
+                href="#"
+                class="text-secondary"
+                @click.prevent="changeCategory(item)"
+                >{{ item }}
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
 
@@ -24,8 +40,7 @@
             <!-- 搜尋結果的顯示 -->
             <ol class="breadcrumb" v-if="keyWord !== ''">
               <li class="breadcrumb-item text-secondary">
-                WE FOUND {{ keywordProudct.length }} RESULTS FOR "
-                {{ keyWord }} "
+                WE FOUND {{ filterData.length }} RESULTS FOR " {{ keyWord }} "
               </li>
             </ol>
 
@@ -90,28 +105,6 @@
                       NT.{{ $filters.currency(item.price) }}
                     </p>
                   </div>
-                  <!-- 刪除加到購物車功能 -->
-                  <!-- <div class="product-cart">
-                    <a
-                      href=""
-                      class="link-dark"
-                      @click.prevent="addToCart(item.id)"
-                      :disabled="this.status.loadingItem === item.id"
-                      ><font-awesome-icon
-                        class="icons icons-cart me-2"
-                        :icon="['fas', 'cart-shopping']"
-                      />
-                      加到購物車
-                    </a> -->
-                  <!--單一讀取效果 Spinner -->
-                  <!-- <div
-                      class="spinner-grow spinner-grow-sm text-success ms-2"
-                      role="status"
-                      v-if="this.status.loadingItem === item.id"
-                    >
-                      <span class="visually-hidden">Loading...</span>
-                    </div>
-                  </div> -->
                 </div>
               </div>
             </div>
@@ -126,55 +119,50 @@
 </template>
 
 <script>
-import ToastMessages from '@/components/ToastMessages.vue'
-// 將側邊商品的篩選功能匯入並加到 mixins裡
-import userFilterProduct from '@/mixins/userFilterProduct'
-import SideBar from '@/components/user/SideBar.vue'
 import Footer from '@/components/user/UserFooter.vue'
 
 export default {
-  components: { ToastMessages, SideBar, Footer },
+  components: { Footer },
   inject: ['emitter'],
   data() {
     return {
       products: [],
       filterProducts: [],
-      breadcrumb: '全部商品',
+      breadcrumb: this.$route.query.category || '全部商品',
       category: '',
-      status: {
-        loadingItem: '' // 狀態對應品項的 id
-      },
-      keyWord: '' // 搜尋的關鍵字
+      keyWord: '', // 搜尋的關鍵字
+      productsCategory: [] // 側邊產品類別選項 sideBar
     }
   },
   watch: {
-    // 渲染篩選的商品類別 這個判斷是為了讓全部商品的active可以正常運作
-    categoryProduct() {
-      this.filterProducts = this.categoryProduct
-      if (this.category !== undefined) {
-        this.breadcrumb = this.category
-      }
-    },
-    // 監聽搜尋的值，執行篩選
-    keywordProudct() {
-      this.filterProducts = this.keywordProudct
-    },
     $route() {
+      this.category = this.$route.query.category || ''
       this.keyWord = this.$route.query.keyword || ''
+    },
+    filterData() {
+      this.filterProducts = this.filterData
     }
   },
   computed: {
-    // 單一指定商品的麵包屑類別點選進來時，篩選對應的類別商品
-    categoryProduct() {
-      return this.products.filter((item) => {
-        return item.category.match(this.category)
+    filterData() {
+      let tempData = []
+      const filterProduct = []
+      // 依照分類按鈕篩選所有商品
+      if (this.category && this.category !== '全部商品') {
+        tempData = this.products.filter((item) =>
+          item.category?.match(this.category)
+        )
+      } else if (this.keyWord && this.keyWord !== '') {
+        tempData = this.products.filter((item) =>
+          item.title?.match(this.keyWord)
+        )
+      } else {
+        tempData = this.products
+      }
+      tempData.forEach((item) => {
+        filterProduct.push(item)
       })
-    },
-    // 執行關鍵字的商品篩選
-    keywordProudct() {
-      return this.products.filter((item) => {
-        return item.title.match(this.keyWord)
-      })
+      return filterProduct
     }
   },
   methods: {
@@ -185,10 +173,10 @@ export default {
         .get(url)
         .then((res) => {
           if (res.data.success) {
-            // console.log(res.data)
             this.products = res.data.products
             // 將原本的資料放到另一個陣列中 filterProducts 方便做篩選功能
             this.filterProducts = this.products
+            this.createCategory()
           }
         })
         .catch((err) => {
@@ -198,33 +186,31 @@ export default {
     // 進入特定商品詳細頁面
     intoProduct(id) {
       this.$router.push(`/productList/${id}`)
+    },
+    // 取得側邊產品類別選項
+    createCategory() {
+      this.products.forEach((item) => {
+        if (!this.productsCategory.includes(item.category)) {
+          this.productsCategory.push(item.category)
+        }
+      })
+    },
+    // 側邊產品類別選項觸發事件取得商品
+    changeCategory(selCategory) {
+      this.$router.push(`/productList?category=${selCategory}`)
+      this.category = selCategory
+      this.breadcrumb = selCategory
     }
-    // 加入購物車serve
-    // addToCart(id, qty = 1) {
-    //   const cart = { product_id: id, qty }
-    //   const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
-    //   this.status.loadingItem = id
-    //   this.$http
-    //     .post(url, { data: cart })
-    //     .then((res) => {
-    //       // console.log(res)
-    //       this.status.loadingItem = ''
-    //       this.$httpMessageState(res, '加入購物車')
-    //     })
-    //     .catch((err) => {
-    //       console.log(err.response)
-    //     })
-    // }
   },
-  mixins: [userFilterProduct], // 將側邊商品的篩選功能
+
   mounted() {
+    this.category = this.$route.query.category || ''
     // 取得 UserNavBar中的 search關鍵字
     this.keyWord = this.$route.query.keyword || ''
   },
+
   created() {
     this.getProduct()
-    // 從單一指定商品的類別中將類別的參數經路由搜尋參數過來
-    this.category = this.$route.query.category
   }
 }
 </script>
@@ -240,14 +226,17 @@ img {
 p {
   font-size: 0.9rem;
 }
-a {
-  text-decoration: none;
-  font-size: 0.9rem;
-  cursor: pointer;
-  .icons-cart {
+ul li {
+  list-style-type: none;
+  padding-bottom: 0.5rem;
+
+  a {
+    text-decoration: none;
     font-size: 0.9rem;
+    cursor: pointer;
   }
 }
+
 .breadcrumb-item {
   font-size: 0.9rem;
 }

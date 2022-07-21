@@ -113,7 +113,7 @@
         id="navbarNav"
       >
         <ul class="navbar-nav">
-          <li class="nav-item me-2">
+          <li class="nav-item me-1 pb-0">
             <div @="{mouseenter: aboutDisplay,mouseleave: aboutNone}">
               <router-link to="/about" class="nav-link" v-show="aboutIsable">
                 <span class="border-bottom border-secondary">關於我們</span>
@@ -126,7 +126,7 @@
               </router-link>
             </div>
           </li>
-          <li class="nav-item me-2">
+          <li class="nav-item me-1 pb-0">
             <div @="{mouseenter: productsDisplay,mouseleave: productsNone}">
               <router-link
                 to="/productList"
@@ -167,23 +167,21 @@
               class="d-flex flex-column align-items-center position-relative"
               role="search"
             >
-              <label for="search">
-                <input
-                  class="search me-0 ps-1 pe-4"
-                  type="search"
-                  placeholder="Search"
-                  aria-label="Search"
-                  id="search"
-                  @keyup.enter="searchKeyword($event)"
-                  :value="keyword"
-                />
-
+              <input
+                id="search"
+                class="search me-0 ps-1 pe-4"
+                type="search"
+                placeholder="Search"
+                aria-label="Search"
+                @keyup.enter="getSearch"
+                v-model.trim="this.searchKeyword"
+              />
+              <a href="#" @click.prevent="getSearch">
                 <font-awesome-icon
                   class="icons icons-search position-absolute"
                   :icon="['fas', 'magnifying-glass']"
-                  @click="searchKeyword($event)"
                 />
-              </label>
+              </a>
             </div>
             <div class="d-none d-lg-block">
               <ul class="navbar-nav d-flex flex-row justify-content-start">
@@ -358,7 +356,7 @@ import favoriteLocalStorage from '@/mixins/userFavoriteMethod'
 export default {
   data() {
     return {
-      keyword: '',
+      searchKeyword: '',
       cartBag: {},
       cartIsable: false,
       favoriteIsable: false,
@@ -381,15 +379,18 @@ export default {
   inject: ['emitter'],
   methods: {
     // 搜尋功能
-    searchKeyword(e) {
-      this.keyword = e.target.value
-      this.$router.replace({
-        name: this.$route.name,
-        query: { keyword: e.target.value },
-        path: '/productList'
-      })
-      this.keyword = ''
-      // console.log(this.$route)
+    // searchKeyword(e) {
+    //   this.keyword = e.target.value
+    //   this.$router.replace({
+    //     query: { keyword: e.target.value },
+    //     path: '/productList'
+    //   })
+    //   this.keyword = ''
+    // },
+    getSearch() {
+      this.$router.replace(`/productList?keyword=${this.searchKeyword}`)
+
+      this.searchKeyword = ''
     },
     // 購物車購買流程
     toCheckOut() {

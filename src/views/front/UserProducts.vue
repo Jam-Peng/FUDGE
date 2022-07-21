@@ -11,7 +11,7 @@
         >
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <router-link to="/" class="link-dark">首頁</router-link>
+              <router-link to="/zh-tw" class="link-dark">首頁</router-link>
             </li>
             <li class="breadcrumb-item">
               <router-link to="/productList" class="link-dark"
@@ -22,7 +22,7 @@
               class="breadcrumb-item"
               @click.prevent="CategoryProduct(product.category)"
             >
-              <a>{{ product.category }}</a>
+              <a class="categoryLink link-dark">{{ product.category }}</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
               {{ product.title }}
@@ -39,7 +39,7 @@
         >
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <router-link to="/" class="link-dark">首頁</router-link>
+              <router-link to="/zh-tw" class="link-dark">首頁</router-link>
             </li>
             <li class="breadcrumb-item">
               <router-link to="/productList" class="link-dark"
@@ -283,6 +283,9 @@ export default {
 </script>
 
 <style lang="scss">
+.categoryLink {
+  cursor: pointer;
+}
 .size_select {
   cursor: pointer;
 }

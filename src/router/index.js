@@ -18,11 +18,11 @@ const routes = [
       },
       {
         path: 'about',
-        name: 'about',
         component: () => import('../views/front/AboutView.vue')
       },
       {
         path: 'productList',
+        // name: 'productList',
         component: () => import('../views/front/UserBoard.vue')
       },
       {
