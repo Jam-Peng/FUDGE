@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import NavBar from '../../components/NavBar.vue'
+import NavBar from '../../components/adminer/NavBar.vue'
 import emitter from '@/methods/emitter'
 import ToastMessages from '@/components/ToastMessages.vue'
 

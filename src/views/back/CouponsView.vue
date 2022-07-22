@@ -75,9 +75,9 @@
 </template>
 
 <script>
-import CouponModal from '@/components/CouponModal.vue'
-import DeleteCouponModal from '@/components/DeleteCouponModal.vue'
-import PagiNation from '@/components/PagiNation.vue'
+import CouponModal from '@/components/adminer/CouponModal.vue'
+import DeleteCouponModal from '@/components/adminer/DeleteCouponModal.vue'
+import PagiNation from '@/components/adminer/PagiNation.vue'
 import statusStore from '@/stores/statusStores'
 import { mapActions } from 'pinia'
 

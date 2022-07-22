@@ -89,9 +89,9 @@
 </template>
 
 <script>
-import OrderModal from '@/components/OrderModal.vue'
-import DeleteOrderModal from '@/components/DeleteOrderModal.vue'
-import PagiNation from '@/components/PagiNation.vue'
+import OrderModal from '@/components/adminer/OrderModal.vue'
+import DeleteOrderModal from '@/components/adminer/DeleteOrderModal.vue'
+import PagiNation from '@/components/adminer/PagiNation.vue'
 import { mapActions } from 'pinia'
 import statusStore from '@/stores/statusStores'
 

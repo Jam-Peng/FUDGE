@@ -275,8 +275,8 @@
 
 <script>
 import modalMixin from '@/mixins/modalMixin'
-import lbALLImgLimitModal from '@/components/lbALLImgLimitModal.vue'
-import lookbookImgLimitModal from '@/components/lookbookImgLimitModal.vue'
+import lbALLImgLimitModal from '@/components/adminer/lbALLImgLimitModal.vue'
+import lookbookImgLimitModal from '@/components/adminer/lookbookImgLimitModal.vue'
 
 export default {
   components: {

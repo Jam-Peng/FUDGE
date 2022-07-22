@@ -180,7 +180,7 @@
 </template>
 
 <script>
-import LookbookModal from '@/components/LookbookModal.vue'
+import LookbookModal from '@/components/adminer/LookbookModal.vue'
 import statusStore from '@/stores/statusStores'
 import { mapActions } from 'pinia'
 

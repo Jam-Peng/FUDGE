@@ -74,9 +74,9 @@
 </template>
 
 <script>
-import LookbookModal from '@/components/LookbookModal.vue'
-import DeletebookModal from '@/components/DeleteLookbookModal.vue'
-import PagiNation from '@/components/PagiNation.vue'
+import LookbookModal from '@/components/adminer/LookbookModal.vue'
+import DeletebookModal from '@/components/adminer/DeleteLookbookModal.vue'
+import PagiNation from '@/components/adminer/PagiNation.vue'
 // import lookbookImgLimitModal from '@/components/lookbookImgLimitModal.vue'
 import statusStore from '@/stores/statusStores'
 import { mapActions } from 'pinia'
