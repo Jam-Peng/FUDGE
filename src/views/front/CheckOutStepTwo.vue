@@ -250,7 +250,6 @@
 
               <div class="row">
                 <div class="col-md-6 mb-3 orderItem_text">
-                  <!-- <label for="nation" class="form-label">地區</label> -->
                   <v-field
                     id="nation"
                     name="訂購人國家"
@@ -274,7 +273,6 @@
                 </div>
 
                 <div class="col-md-6 mb-3 orderItem_text">
-                  <!-- <label for="tel" class="form-label">收件人電話</label> -->
                   <v-field
                     id="tel"
                     name="訂購人電話"
@@ -294,7 +292,6 @@
 
               <div class="row">
                 <div class="col-md-6 mb-3 orderItem_text">
-                  <!-- <label for="city" class="form-label">縣市</label> -->
                   <v-field
                     id="city"
                     name="訂購人縣市"
@@ -319,7 +316,6 @@
                   class="col-md-6 mb-3 orderItem_text"
                   v-if="form.user.city === '台北市'"
                 >
-                  <!-- <label for="tpeZipCode" class="form-label">地區</label> -->
                   <v-field
                     id="tpeZipCode"
                     name="訂購人地區"
@@ -356,7 +352,6 @@
                   class="col-md-6 mb-3 orderItem_text"
                   v-if="form.user.city === '基隆市'"
                 >
-                  <!-- <label for="kelZipCode" class="form-label">地區</label> -->
                   <v-field
                     id="kelZipCode"
                     name="訂購人地區"
@@ -386,7 +381,6 @@
               </div>
 
               <div class="col-md-12 mb-3 orderItem_text">
-                <!-- <label for="address" class="form-label">收件人地址</label> -->
                 <v-field
                   id="address"
                   name="訂購人地址"
@@ -405,7 +399,6 @@
               </div>
 
               <div class="col-md-12 mb-3 orderItem_text">
-                <!-- <label for="email" class="form-label">Email</label> -->
                 <v-field
                   id="email"
                   name="訂購人 E-mail"
@@ -463,7 +456,6 @@
                 v-if="form.user.receiverInput === '不同購買人'"
               >
                 <div class="col-md-12 my-3 orderItem_text">
-                  <!-- <label for="name" class="form-label">收件人姓名</label> -->
                   <v-field
                     id="receiverName"
                     name="收件人姓名"
@@ -482,7 +474,6 @@
 
                 <div class="row">
                   <div class="col-md-6 mb-3 orderItem_text">
-                    <!-- <label for="nation" class="form-label">地區</label> -->
                     <v-field
                       id="receiverNation"
                       name="收件人國家"
@@ -492,9 +483,6 @@
                       v-model="form.user.receiverNation"
                       :class="{ 'is-invalid': errors['收件人國家'] }"
                     >
-                      <!-- <option value="請選擇國家" disabled selected>
-                        請選擇國家
-                      </option> -->
                       <option value="台灣本島">台灣本島</option>
                       <option value="澎湖">澎湖</option>
                       <option value="金門">金門</option>
@@ -508,7 +496,6 @@
                   </div>
 
                   <div class="col-md-6 mb-3 orderItem_text">
-                    <!-- <label for="tel" class="form-label">收件人電話</label> -->
                     <v-field
                       id="receiverTel"
                       name="收件人電話"
@@ -528,7 +515,6 @@
 
                 <div class="row">
                   <div class="col-md-6 mb-3 orderItem_text">
-                    <!-- <label for="city" class="form-label">縣市</label> -->
                     <v-field
                       id="receiverCity"
                       name="收件人縣市"
@@ -538,7 +524,6 @@
                       v-model="form.user.receiverCity"
                       :class="{ 'is-invalid': errors['收件人縣市'] }"
                     >
-                      <!-- <option value="" disabled selected>請選擇縣市</option> -->
                       <option value="台北市">台北市</option>
                       <option value="基隆市">基隆市</option>
                     </v-field>
@@ -553,7 +538,6 @@
                     class="col-md-6 mb-3 orderItem_text"
                     v-if="form.user.receiverCity === '台北市'"
                   >
-                    <!-- <label for="tpeZipCode" class="form-label">地區</label> -->
                     <v-field
                       id="receiverTpeZipCode"
                       name="收件人地區"
@@ -590,7 +574,6 @@
                     class="col-md-6 mb-3 orderItem_text"
                     v-if="form.user.receiverCity === '基隆市'"
                   >
-                    <!-- <label for="kelZipCode" class="form-label">地區</label> -->
                     <v-field
                       id="receiverKelZipCode"
                       name="收件人地區"
@@ -620,7 +603,6 @@
                 </div>
 
                 <div class="col-md-12 mb-3 orderItem_text">
-                  <!-- <label for="address" class="form-label">收件人地址</label> -->
                   <v-field
                     id="receiverAddress"
                     name="收件人地址"
@@ -639,7 +621,6 @@
                 </div>
 
                 <div class="col-md-12 mb-3 orderItem_text">
-                  <!-- <label for="email" class="form-label">Email</label> -->
                   <v-field
                     id="receiverEmail"
                     name="收件人 E-mail"
@@ -674,7 +655,6 @@
               <!-- 收件人表單 -->
               <div class="receiverForm">
                 <div class="col-md-12 my-3 orderItem_text">
-                  <!-- <label for="name" class="form-label">收件人姓名</label> -->
                   <v-field
                     id="receiverName"
                     name="收件人姓名"
@@ -693,7 +673,6 @@
 
                 <div class="row">
                   <div class="col-md-6 mb-3 orderItem_text">
-                    <!-- <label for="nation" class="form-label">地區</label> -->
                     <v-field
                       id="receiverNation"
                       name="收件人國家"
@@ -703,7 +682,6 @@
                       v-model="form.user.receiverShopNation"
                       :class="{ 'is-invalid': errors['收件人國家'] }"
                     >
-                      <!-- <option value="" disabled selected>請選擇國家</option> -->
                       <option value="台灣本島">台灣本島</option>
                       <option value="澎湖">澎湖</option>
                       <option value="金門">金門</option>
@@ -717,7 +695,6 @@
                   </div>
 
                   <div class="col-md-6 mb-3 orderItem_text">
-                    <!-- <label for="tel" class="form-label">收件人電話</label> -->
                     <v-field
                       id="receiverTel"
                       name="收件人電話"
@@ -1080,6 +1057,8 @@
 <script>
 import NolocationModal from '@/components/user/NoLocationModal.vue'
 import Footer from '@/components/user/UserFooter.vue'
+import statusStore from '@/stores/statusStores'
+import { mapActions } from 'pinia'
 
 export default {
   components: { NolocationModal, Footer },
@@ -1140,6 +1119,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(statusStore, ['pushMessage']),
     // 取得購物車列表
     getCheckOut() {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/cart`
@@ -1159,8 +1139,8 @@ export default {
           }
           // console.log(this.cart)
         })
-        .catch((err) => {
-          console.log(err.response)
+        .catch(() => {
+          this.pushMessage(false, '讀取', '發生錯誤，請重新整理頁面再試一次')
         })
     },
     // 轉跳CheckOut第一步驟
@@ -1187,8 +1167,8 @@ export default {
               this.emitter.emit('delete-cart')
             }
           })
-          .catch((err) => {
-            console.log(err.response)
+          .catch(() => {
+            this.pushMessage(false, '載入', '發生錯誤，請重新整理頁面')
           })
       }
     },

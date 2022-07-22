@@ -175,8 +175,8 @@ export default {
                 // console.log(this.favoriteItems)
               }
             })
-            .catch((err) => {
-              console.log(err.response)
+            .catch(() => {
+              this.pushMessage(false, '載入', '發生錯誤，請重新整理頁面')
             })
         })
       }
@@ -215,8 +215,8 @@ export default {
           this.pushMessage(res.data.success, '加入購物車', res.data.message)
           this.emitter.emit('update_cart')
         })
-        .catch((err) => {
-          console.log(err.response)
+        .catch(() => {
+          this.pushMessage(false, '加入購物車', '發生錯誤，請重新整理頁面')
         })
     }
 

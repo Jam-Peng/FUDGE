@@ -315,6 +315,8 @@ import SwiperCore, {
 import 'swiper/css'
 import 'swiper/css/bundle'
 import Footer from '@/components/user/UserFooter.vue'
+import statusStore from '@/stores/statusStores'
+import { mapActions } from 'pinia'
 
 SwiperCore.use([Navigation, Pagination, Autoplay, EffectFade, Virtual])
 
@@ -338,6 +340,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(statusStore, ['pushMessage']),
     // 取得商品列表
     getProduct() {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`
@@ -349,8 +352,8 @@ export default {
             this.products = res.data.products
           }
         })
-        .catch((err) => {
-          console.log(err.response)
+        .catch(() => {
+          this.pushMessage(false, '讀取', '發生錯誤，請重新整理頁面再試一次')
         })
     }
   },

@@ -292,6 +292,8 @@
 <script>
 import PagiNation from '@/components/user/UserPagiNation.vue'
 import Footer from '@/components/user/UserFooter.vue'
+import statusStore from '@/stores/statusStores'
+import { mapActions } from 'pinia'
 
 export default {
   components: { PagiNation, Footer },
@@ -311,6 +313,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(statusStore, ['pushMessage']),
     // 取得文章列表
     getLookbookItem(page = 1) {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/articles?page=${page}`
@@ -324,8 +327,8 @@ export default {
             // console.log(this.articles)
           }
         })
-        .catch((err) => {
-          console.log(err.response)
+        .catch(() => {
+          this.pushMessage(false, '讀取', '發生錯誤，請重新整理頁面再試一次')
         })
     },
     intoLookbookId(itemId) {

@@ -4,15 +4,6 @@
       <div class="col-lg-2 col-md-3 col-sm-12 mb-3 position-relative">
         <!-- 側邊sideBar -->
         <div class="sticky_SideBar">
-          <!-- <SideBar
-            @emit-All="filterProductAll"
-            @emit-Clothes="filterCategory"
-            @emit-Pants="filterCategory"
-            @emit-Hats="filterCategory"
-            @emit-Pack="filterCategory"
-            @emit-Shoes="filterCategory"
-            :breadcrumb="breadcrumb"
-          /> -->
           <ul class="ps-3">
             <li>
               <a
@@ -120,6 +111,8 @@
 
 <script>
 import Footer from '@/components/user/UserFooter.vue'
+import statusStore from '@/stores/statusStores'
+import { mapActions } from 'pinia'
 
 export default {
   components: { Footer },
@@ -166,6 +159,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(statusStore, ['pushMessage']),
     // 取得商品列表
     getProduct() {
       const url = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`

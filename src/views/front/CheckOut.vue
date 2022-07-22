@@ -483,7 +483,6 @@ export default {
       this.$http
         .get(url)
         .then((res) => {
-          // console.log(res)
           if (res.data.success) {
             this.cart = res.data.data
             this.total = this.cart.total
@@ -492,10 +491,9 @@ export default {
               this.shippingFee = 80
             }
           }
-          // console.log(this.cart)
         })
-        .catch((err) => {
-          console.log(err.response)
+        .catch(() => {
+          this.pushMessage(false, '讀取', '發生錯誤，請重新整理頁面再試一次')
         })
     },
     // 刪除特定一筆購物車資料
@@ -527,14 +525,13 @@ export default {
       this.$http
         .put(url, { data: cart })
         .then((res) => {
-          // console.log(res)
           if (res.data.success) {
             this.getCheckOut()
-            this.pushMessage(res.data.success, '更新數量', res.data.message)
+            this.pushMessage(res.data.success, '更新', res.data.message)
           }
         })
-        .catch((err) => {
-          console.log(err.response)
+        .catch(() => {
+          this.pushMessage(false, '載入', '發生錯誤，請重新整理頁面')
         })
     },
     // 打開折價卷Modal
@@ -552,14 +549,14 @@ export default {
       this.$http
         .post(url, { data: coupon })
         .then((res) => {
-          // console.log(res)
           if (res.data.success) {
             this.getCheckOut()
           }
           this.$refs.CouponModal.hideModal()
+          this.pushMessage(res.data.success, '使用折價卷', res.data.message)
         })
-        .catch((err) => {
-          console.log(err.response)
+        .catch(() => {
+          this.pushMessage(false, '載入', '發生錯誤，請重新整理頁面')
         })
     },
     // 打開選擇門市Modal

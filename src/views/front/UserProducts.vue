@@ -213,8 +213,9 @@ export default {
             // console.log(this.product)
           }
         })
-        .catch((err) => {
-          console.log(err.response)
+        .catch(() => {
+          // console.log(err.response)
+          this.pushMessage(false, '讀取', '發生錯誤，請重新整理頁面再試一次')
         })
     },
 
@@ -237,8 +238,9 @@ export default {
           // 重新觸發navBar元件的badge數量
           this.emitter.emit('update_cart')
         })
-        .catch((err) => {
-          console.log(err.response)
+        .catch(() => {
+          // console.log(err.response)
+          this.pushMessage(false, '加入購物車', '發生錯誤，請重新整理頁面')
         })
     },
 

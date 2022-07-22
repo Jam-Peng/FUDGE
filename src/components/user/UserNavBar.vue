@@ -378,18 +378,8 @@ export default {
   },
   inject: ['emitter'],
   methods: {
-    // 搜尋功能
-    // searchKeyword(e) {
-    //   this.keyword = e.target.value
-    //   this.$router.replace({
-    //     query: { keyword: e.target.value },
-    //     path: '/productList'
-    //   })
-    //   this.keyword = ''
-    // },
     getSearch() {
       this.$router.replace(`/productList?keyword=${this.searchKeyword}`)
-
       this.searchKeyword = ''
     },
     // 購物車購買流程
