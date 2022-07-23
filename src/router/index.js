@@ -97,6 +97,10 @@ const routes = [
         component: () => import('../views/back/OneLookbookView.vue')
       }
     ]
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('../views/NotFound.vue')
   }
 ]
 
