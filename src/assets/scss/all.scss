@@ -1,0 +1,29 @@
+@import "~bootstrap/scss/functions";
+@import "../helpers/variables";
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";  
+@import "~bootstrap/scss/root";
+
+// Custom.scss
+// Option A: Include all of Bootstrap
+
+// Include any default variable overrides here (though functions won't be available)
+
+@import "~bootstrap/scss/bootstrap";
+
+@import "UserNavBar";
+@import "UserBoard";
+@import "UserProducts";
+@import "CheckOut";
+@import "CheckOutStepTwo";
+@import "CheckOutStepThree.scss";
+@import "CheckOrdersView";
+@import "CheckOneOrder";
+@import "UserFavorite";
+@import "UserLookbooks";
+@import "UserOneLookbook";
+@import "UserLogin";
+@import "BrandHome.scss";
+@import "AboutView";
+@import "NotFound";
+

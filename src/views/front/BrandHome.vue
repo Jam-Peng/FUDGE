@@ -20,28 +20,28 @@
         <swiper-slide>
           <router-link to="/productList">
             <div>
-              <img src="../../assets/img/banner2.jpeg" class="w-100" />
+              <img src="../../assets/img/banner2.jpeg" class="w-100" alt="" />
             </div>
           </router-link>
         </swiper-slide>
         <swiper-slide>
           <router-link to="/productList">
             <div>
-              <img src="../../assets/img/banner3.jpeg" class="w-100" />
+              <img src="../../assets/img/banner3.jpeg" class="w-100" alt="" />
             </div>
           </router-link>
         </swiper-slide>
         <swiper-slide>
           <router-link to="/productList">
             <div>
-              <img src="../../assets/img/banner4.jpeg" class="w-100" />
+              <img src="../../assets/img/banner4.jpeg" class="w-100" alt="" />
             </div>
           </router-link>
         </swiper-slide>
         <swiper-slide>
           <router-link to="/productList">
             <div>
-              <img src="../../assets/img/banner5.jpeg" class="w-100" />
+              <img src="../../assets/img/banner5.jpeg" class="w-100" alt="" />
             </div>
           </router-link>
         </swiper-slide>
@@ -363,106 +363,108 @@ export default {
 }
 </script>
 
+//
 <style lang="scss">
-.products_slider {
-  position: relative;
-}
-.products_slider_navigation {
-  position: absolute;
-  top: 43%;
-  z-index: 2;
-  left: 0;
-  right: 0;
-  // border: 1px solid red;
-}
+// .products_slider {
+//   position: relative;
+// }
+// .products_slider_navigation {
+//   position: absolute;
+//   top: 43%;
+//   z-index: 2;
+//   left: 0;
+//   right: 0;
+//   // border: 1px solid red;
+// }
 
-.nav_indicator {
-  height: 2rem;
-  width: 2rem;
-  font-size: 2rem;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  // background-color: #6b77f6;
-  color: rgb(103, 103, 103);
-  border-radius: 2rem;
-  cursor: pointer;
-}
-.prevArrow {
-  margin-left: 2rem;
-}
-.nextArrow {
-  margin-right: 2rem;
-}
-.index_text {
-  font-size: 0.9rem;
-}
-.indexPdList_img {
-  cursor: pointer;
-  &:hover {
-    opacity: 0.9;
-  }
-}
-// 平板
-.mdproducts_slider {
-  position: relative;
-}
-.mdproducts_slider_navigation {
-  position: absolute;
-  top: 40%;
-  z-index: 2;
-  left: 0;
-  right: 0;
-}
-.mdNav_indicator {
-  height: 2rem;
-  width: 2rem;
-  font-size: 2rem;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  // background-color: #6b77f6;
-  color: rgb(103, 103, 103);
-  border-radius: 2rem;
-}
-.mdprevArrow {
-  margin-left: 1rem;
-}
-.mdnextArrow {
-  margin-right: 1rem;
-}
-.mdIndex_text {
-  font-size: 0.75rem;
-}
-// 手機
-.smproducts_slider {
-  position: relative;
-}
-.smproducts_slider_navigation {
-  position: absolute;
-  top: 35%;
-  z-index: 2;
-  left: 0;
-  right: 0;
-}
-.smNav_indicator {
-  height: 2rem;
-  width: 2rem;
-  font-size: 2rem;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  // background-color: #6b77f6;
-  color: rgb(103, 103, 103);
-  border-radius: 2rem;
-}
-.smprevArrow {
-  margin-left: 0rem;
-}
-.smnextArrow {
-  margin-right: 0rem;
-}
-.smIndex_text {
-  font-size: 0.65rem;
-}
+// .nav_indicator {
+//   height: 2rem;
+//   width: 2rem;
+//   font-size: 2rem;
+//   display: inline-flex;
+//   justify-content: center;
+//   align-items: center;
+//   // background-color: #6b77f6;
+//   color: rgb(103, 103, 103);
+//   border-radius: 2rem;
+//   cursor: pointer;
+// }
+// .prevArrow {
+//   margin-left: 2rem;
+// }
+// .nextArrow {
+//   margin-right: 2rem;
+// }
+// .index_text {
+//   font-size: 0.9rem;
+// }
+// .indexPdList_img {
+//   cursor: pointer;
+//   &:hover {
+//     opacity: 0.9;
+//   }
+// }
+// // 平板
+// .mdproducts_slider {
+//   position: relative;
+// }
+// .mdproducts_slider_navigation {
+//   position: absolute;
+//   top: 40%;
+//   z-index: 2;
+//   left: 0;
+//   right: 0;
+// }
+// .mdNav_indicator {
+//   height: 2rem;
+//   width: 2rem;
+//   font-size: 2rem;
+//   display: inline-flex;
+//   justify-content: center;
+//   align-items: center;
+//   // background-color: #6b77f6;
+//   color: rgb(103, 103, 103);
+//   border-radius: 2rem;
+// }
+// .mdprevArrow {
+//   margin-left: 1rem;
+// }
+// .mdnextArrow {
+//   margin-right: 1rem;
+// }
+// .mdIndex_text {
+//   font-size: 0.75rem;
+// }
+// // 手機
+// .smproducts_slider {
+//   position: relative;
+// }
+// .smproducts_slider_navigation {
+//   position: absolute;
+//   top: 35%;
+//   z-index: 2;
+//   left: 0;
+//   right: 0;
+// }
+// .smNav_indicator {
+//   height: 2rem;
+//   width: 2rem;
+//   font-size: 2rem;
+//   display: inline-flex;
+//   justify-content: center;
+//   align-items: center;
+//   // background-color: #6b77f6;
+//   color: rgb(103, 103, 103);
+//   border-radius: 2rem;
+// }
+// .smprevArrow {
+//   margin-left: 0rem;
+// }
+// .smnextArrow {
+//   margin-right: 0rem;
+// }
+// .smIndex_text {
+//   font-size: 0.65rem;
+// }
+//
 </style>

@@ -284,38 +284,40 @@ export default {
 }
 </script>
 
+//
 <style lang="scss">
-.categoryLink {
-  cursor: pointer;
-}
-.size_select {
-  cursor: pointer;
-}
-.countSelector {
-  border: 1px solid #ced4da;
-}
-.img-default {
-  cursor: default;
-}
-.icons-minus,
-.icons-plus,
-.skills__header {
-  font-size: 1rem;
-  cursor: pointer;
-}
-.icon-star {
-  cursor: pointer;
-  color: #6f7479;
-  :hover {
-    color: #ffc107;
-  }
-}
-.size_box {
-  font-size: 0.88rem;
-  padding: 0.25rem 0.5rem;
-}
-.sticky_SideInfo {
-  position: sticky;
-  top: 10rem;
-}
+// .categoryLink {
+//   cursor: pointer;
+// }
+// .size_select {
+//   cursor: pointer;
+// }
+// .countSelector {
+//   border: 1px solid #ced4da;
+// }
+// .img-default {
+//   cursor: default;
+// }
+// .icons-minus,
+// .icons-plus,
+// .skills__header {
+//   font-size: 1rem;
+//   cursor: pointer;
+// }
+// .icon-star {
+//   cursor: pointer;
+//   color: #6f7479;
+//   :hover {
+//     color: #ffc107;
+//   }
+// }
+// .size_box {
+//   font-size: 0.88rem;
+//   padding: 0.25rem 0.5rem;
+// }
+// .sticky_SideInfo {
+//   position: sticky;
+//   top: 10rem;
+// }
+//
 </style>

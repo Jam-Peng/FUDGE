@@ -1,0 +1,64 @@
+ul {
+  list-style-type: none;
+}
+.step_text,
+.couponModal_text {
+  font-size: 0.9rem;
+}
+.price_text {
+  font-size: 0.85rem;
+}
+.cart_img {
+  max-width: 80px;
+  cursor: default;
+}
+.cartNullMessage {
+  height: 150px;
+  font-size: 0.95rem;
+}
+.couponLink {
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+.coupon_delete {
+  height: 25px;
+  width: 25px;
+}
+.payment_list {
+  position: relative;
+  font-size: 0.9rem;
+  .payment_title {
+    position: absolute;
+    top: -15px;
+  }
+}
+.coupon_Modal {
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  right: 0;
+  top: -12px;
+}
+.couponInput,
+.search_location {
+  outline: none;
+}
+.selectShop {
+  margin-top: -5px;
+}
+.deliverWarn,
+.locationWarn {
+  font-size: 0.7rem;
+  display: none;
+}
+.openDeliverWarn,
+.openLocationWarn {
+  display: block;
+}
+// 手機
+.smStep_text {
+  font-size: 0.85rem;
+}
+.smPrice_text {
+  font-size: 0.8rem;
+}
