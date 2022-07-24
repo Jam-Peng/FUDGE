@@ -24,7 +24,7 @@
             <div
               class="col-sm-12 d-flex justify-content-center align-items-center"
             >
-              <span class="fs-5">請確認您的門市</span>
+              <span class="fs-5">請確認寄送門市</span>
             </div>
           </div>
         </div>

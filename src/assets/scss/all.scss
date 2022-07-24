@@ -24,17 +24,14 @@
 @import 'back/OrdersView';
 
 @import "user/UserNavBar";
+@import "user/UserButtonNavBar";
+@import "user/UserFooter";
 @import "user/about_NewsletterModal";
 @import "user/CompletePayModal";
 @import "user/FavoriteToCartModal";
-@import "user/NoCartModal";
-@import "user/NoLocationModal";
-@import "user/NoPayMethodModal";
 @import "user/ProductScript";
 @import "user/SizeGuideModal";
-@import "user/UserButtonNavBar";
-@import "user/UserCouponModal";
-@import "user/UserFooter";
+@import "user/checkOutModal";
 
 @import 'adminer/NavBar';
 @import 'adminer/lbALLImgLimitModal';
