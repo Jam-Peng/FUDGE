@@ -177,20 +177,3 @@ export default {
   }
 }
 </script>
-
-//
-<style lang="scss">
-// .icons_user,
-// .icons_star,
-// .icons_cart {
-//   font-size: 1.1rem;
-//   cursor: pointer;
-// }
-// .offcanvas_text {
-//   font-size: 0.9rem;
-// }
-// .box_badge {
-//   font-size: 0.55rem;
-// }
-//
-</style>

@@ -267,15 +267,3 @@ export default {
   }
 }
 </script>
-
-// <style lang="scss">
-// .article_date {
-//   font-size: 0.9rem;
-// }
-// .article_content {
-//   font-size: 0.9rem;
-// }
-// .article_img {
-//   width: 500px;
-// }
-</style>

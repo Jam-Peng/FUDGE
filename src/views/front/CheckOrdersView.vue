@@ -209,18 +209,3 @@ export default {
   }
 }
 </script>
-
-//
-<style lang="scss">
-// body {
-//   height: 100vh;
-// }
-// .checkOrder_text {
-//   font-size: 0.9rem;
-// }
-// .smCheckOrder_text {
-//   font-size: 0.7rem;
-//   height: 100vh;
-// }
-//
-</style>

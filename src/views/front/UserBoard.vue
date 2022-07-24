@@ -208,32 +208,3 @@ export default {
   }
 }
 </script>
-
-//
-<style lang="scss">
-// .sticky_SideBar {
-//   position: sticky;
-//   top: 7.6rem;
-// }
-// img {
-//   cursor: pointer;
-// }
-// p {
-//   font-size: 0.9rem;
-// }
-// ul li {
-//   list-style-type: none;
-//   padding-bottom: 0.5rem;
-
-//   a {
-//     text-decoration: none;
-//     font-size: 0.9rem;
-//     cursor: pointer;
-//   }
-// }
-
-// .breadcrumb-item {
-//   font-size: 0.9rem;
-// }
-//
-</style>

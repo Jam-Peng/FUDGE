@@ -236,15 +236,3 @@ export default {
   }
 }
 </script>
-
-//
-<style lang="scss">
-// .favorite_text {
-//   font-size: 0.9rem;
-// }
-// .favorite_img {
-//   max-width: 80px;
-//   cursor: pointer;
-// }
-//
-</style>

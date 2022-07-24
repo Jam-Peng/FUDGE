@@ -158,26 +158,3 @@ export default {
   created() {}
 }
 </script>
-
-//
-<style lang="scss">
-// .favorite_delModal {
-//   height: 25px;
-//   width: 25px;
-//   position: absolute;
-//   right: 12px;
-//   top: 0px;
-// }
-// .favoriteCount {
-//   border: 1px solid #ced4da;
-// }
-// .icon_minus,
-// .icon_plus {
-//   font-size: 1rem;
-//   cursor: pointer;
-// }
-// .favorite_text {
-//   font-size: 0.9rem;
-// }
-//
-</style>

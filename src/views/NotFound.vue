@@ -108,26 +108,3 @@ export default {
   }
 }
 </script>
-
-//
-<style lang="scss">
-// .not_found {
-//   height: 500px;
-// }
-// .mdNot_found {
-//   height: 400px;
-// }
-// .mdNot_foundBox {
-//   height: 69vh;
-// }
-// .smNot_found {
-//   height: 210px;
-// }
-// .smNot_foundBox {
-//   height: 62vh;
-// }
-// .smNot_foundText {
-//   font-size: 1rem;
-// }
-//
-</style>

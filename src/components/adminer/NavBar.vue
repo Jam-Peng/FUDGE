@@ -91,17 +91,3 @@ export default {
   }
 }
 </script>
-
-//
-<style lang="scss">
-// .nav_product,
-// .nav_orders,
-// .nav_coupons,
-// .nav_lookbooks,
-// .nav_front {
-//   &:hover {
-//     transform: translateX(1rem);
-//   }
-// }
-//
-</style>

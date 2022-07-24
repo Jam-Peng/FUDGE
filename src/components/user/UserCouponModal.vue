@@ -94,11 +94,3 @@ export default {
   mixins: [modalMixin]
 }
 </script>
-
-//
-<style lang="scss">
-// .test_couponCode {
-//   font-size: 0.8rem;
-// }
-//
-</style>

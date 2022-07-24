@@ -376,37 +376,3 @@ export default {
   }
 }
 </script>
-
-//
-<style lang="scss">
-// ul li {
-//   list-style-type: none;
-// }
-// .sticky_Newsposition {
-//   position: sticky;
-//   top: 8rem;
-// }
-
-// .article_date {
-//   font-size: 0.9rem;
-// }
-// .article_content {
-//   font-size: 0.9rem;
-// }
-// .article_img {
-//   width: 500px;
-// }
-// .onelookbook_title {
-//   font-size: 0.8rem;
-// }
-// .onelookbook_date {
-//   font-size: 0.9rem;
-// }
-// .news_lookbook {
-//   cursor: pointer;
-//   &:hover {
-//     opacity: 0.9;
-//   }
-// }
-//
-</style>

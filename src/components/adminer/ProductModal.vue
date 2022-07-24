@@ -311,11 +311,3 @@ export default {
   mixins: [modalMixin]
 }
 </script>
-
-//
-<style lang="scss">
-// .sizeGuide_text {
-//   font-size: 0.9rem;
-// }
-//
-</style>

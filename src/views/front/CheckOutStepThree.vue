@@ -473,27 +473,3 @@ export default {
   }
 }
 </script>
-
-//
-<style lang="scss">
-// .step_text,
-// .orderItem_text {
-//   font-size: 0.9rem;
-// }
-// .deliverTicketLink {
-//   font-size: 0.7rem;
-//   cursor: pointer;
-// }
-// .ticket_dress {
-//   font-size: 0.7rem;
-// }
-// .cart_img {
-//   max-width: 80px;
-//   cursor: default;
-// }
-
-// .serve_deed {
-//   cursor: pointer;
-// }
-//
-</style>

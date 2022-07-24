@@ -90,35 +90,3 @@ export default {
   }
 }
 </script>
-
-//
-<style lang="scss">
-// .about_text {
-//   font-size: 0.9rem;
-// }
-// .about_img {
-//   height: 450px;
-//   overflow: hidden;
-// }
-// .mdabout_img {
-//   height: 320px;
-//   overflow: hidden;
-// }
-// .smabout_img {
-//   height: 170px;
-//   overflow: hidden;
-// }
-// .about_input,
-// .about_button {
-//   border: none;
-//   outline: none;
-//   font-size: 0.9rem;
-// }
-// ::placeholder {
-//   color: rgba(21, 21, 21, 0.4);
-// }
-// .about_Newsletter {
-//   font-size: 0.85rem;
-// }
-//
-</style>
