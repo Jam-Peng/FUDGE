@@ -185,8 +185,10 @@ export default {
 }
 </script>
 
+//
 <style lang="scss">
-.itemContain_text {
-  font-size: 0.9rem;
-}
+// .itemContain_text {
+//   font-size: 0.9rem;
+// }
+//
 </style>

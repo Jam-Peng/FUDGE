@@ -56,15 +56,17 @@ export default {
 }
 </script>
 
+//
 <style lang="scss">
-.noPay_Modal {
-  height: 25px;
-  width: 25px;
-  position: absolute;
-  right: 0;
-  top: -12px;
-}
-.noCart_text {
-  font-size: 0.9rem;
-}
+// .noPay_Modal {
+//   height: 25px;
+//   width: 25px;
+//   position: absolute;
+//   right: 0;
+//   top: -12px;
+// }
+// .noCart_text {
+//   font-size: 0.9rem;
+// }
+//
 </style>

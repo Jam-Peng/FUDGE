@@ -95,8 +95,10 @@ export default {
 }
 </script>
 
+//
 <style lang="scss">
-.test_couponCode {
-  font-size: 0.8rem;
-}
+// .test_couponCode {
+//   font-size: 0.8rem;
+// }
+//
 </style>

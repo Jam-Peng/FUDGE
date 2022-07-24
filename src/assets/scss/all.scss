@@ -3,27 +3,42 @@
 @import "~bootstrap/scss/maps";
 @import "~bootstrap/scss/mixins";  
 @import "~bootstrap/scss/root";
-
-// Custom.scss
-// Option A: Include all of Bootstrap
-
-// Include any default variable overrides here (though functions won't be available)
-
 @import "~bootstrap/scss/bootstrap";
 
-@import "UserNavBar";
-@import "UserBoard";
-@import "UserProducts";
-@import "CheckOut";
-@import "CheckOutStepTwo";
-@import "CheckOutStepThree.scss";
-@import "CheckOrdersView";
-@import "CheckOneOrder";
-@import "UserFavorite";
-@import "UserLookbooks";
-@import "UserOneLookbook";
-@import "UserLogin";
-@import "BrandHome.scss";
-@import "AboutView";
 @import "NotFound";
+@import "front/UserBoard";
+@import "front/UserProducts";
+@import "front/CheckOut";
+@import "front/CheckOutStepTwo";
+@import "front/CheckOutStepThree.scss";
+@import "front/CheckOrdersView";
+@import "front/CheckOneOrder";
+@import "front/UserFavorite";
+@import "front/UserLookbooks";
+@import "front/UserOneLookbook";
+@import "front/UserLogin";
+@import "front/BrandHome.scss";
+@import "front/AboutView";
+
+@import 'back/OneLookbookView';
+@import 'back/OrdersView';
+
+@import "user/UserNavBar";
+@import "user/about_NewsletterModal";
+@import "user/CompletePayModal";
+@import "user/FavoriteToCartModal";
+@import "user/NoCartModal";
+@import "user/NoLocationModal";
+@import "user/NoPayMethodModal";
+@import "user/ProductScript";
+@import "user/SizeGuideModal";
+@import "user/UserButtonNavBar";
+@import "user/UserCouponModal";
+@import "user/UserFooter";
+
+@import 'adminer/NavBar';
+@import 'adminer/lbALLImgLimitModal';
+@import 'adminer/lookbookImgLimitModal';
+@import 'adminer/OrderModal';
+@import 'adminer/ProductModal';
 

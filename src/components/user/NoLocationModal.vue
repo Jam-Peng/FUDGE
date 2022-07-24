@@ -69,15 +69,17 @@ export default {
 }
 </script>
 
+//
 <style lang="scss">
-.nolocation_Modal {
-  height: 25px;
-  width: 25px;
-  position: absolute;
-  right: 0;
-  top: -12px;
-}
-.noLocation_text {
-  font-size: 0.9rem;
-}
+// .nolocation_Modal {
+//   height: 25px;
+//   width: 25px;
+//   position: absolute;
+//   right: 0;
+//   top: -12px;
+// }
+// .noLocation_text {
+//   font-size: 0.9rem;
+// }
+//
 </style>

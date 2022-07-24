@@ -137,17 +137,19 @@
   </div>
 </template>
 
+//
 <style lang="scss">
-.icons_fb,
-.icons_ig,
-.icons_line,
-.icons_yt {
-  font-size: 1.2rem;
-}
-.footer_text {
-  font-size: 0.85rem;
-}
-a {
-  text-decoration: none;
-}
+// .icons_fb,
+// .icons_ig,
+// .icons_line,
+// .icons_yt {
+//   font-size: 1.2rem;
+// }
+// .footer_text {
+//   font-size: 0.85rem;
+// }
+// a {
+//   text-decoration: none;
+// }
+//
 </style>

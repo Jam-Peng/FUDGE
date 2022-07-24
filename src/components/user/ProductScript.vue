@@ -170,33 +170,35 @@ export default {
 }
 </script>
 
+//
 <style lang="scss">
-.icons-arrow {
-  transition: 0.4s;
-  font-size: 0.9rem;
-  cursor: pointer;
-}
-.sizeIcons-arrow {
-  font-size: 0.9rem;
-}
-.sizeGuide_box {
-  cursor: pointer;
-}
-.descript_title,
-.wash_title,
-.sizeGuide_title {
-  font-size: 0.9rem;
-}
-.descript_open {
-  transform: rotate(0deg);
-}
-.descript_close {
-  transform: rotate(-180deg);
-}
-.wash_open {
-  transform: rotate(0deg);
-}
-.wash_close {
-  transform: rotate(-180deg);
-}
+// .icons-arrow {
+//   transition: 0.4s;
+//   font-size: 0.9rem;
+//   cursor: pointer;
+// }
+// .sizeIcons-arrow {
+//   font-size: 0.9rem;
+// }
+// .sizeGuide_box {
+//   cursor: pointer;
+// }
+// .descript_title,
+// .wash_title,
+// .sizeGuide_title {
+//   font-size: 0.9rem;
+// }
+// .descript_open {
+//   transform: rotate(0deg);
+// }
+// .descript_close {
+//   transform: rotate(-180deg);
+// }
+// .wash_open {
+//   transform: rotate(0deg);
+// }
+// .wash_close {
+//   transform: rotate(-180deg);
+// }
+//
 </style>

@@ -312,8 +312,10 @@ export default {
 }
 </script>
 
+//
 <style lang="scss">
-.sizeGuide_text {
-  font-size: 0.9rem;
-}
+// .sizeGuide_text {
+//   font-size: 0.9rem;
+// }
+//
 </style>

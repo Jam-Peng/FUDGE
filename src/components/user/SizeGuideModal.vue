@@ -435,37 +435,6 @@
                 </div>
               </div>
             </div>
-
-            <!--================ 模特雃參考 三個收合的功能尺寸dash Icon有問題 =================-->
-            <!-- <div class="border-bottom border-muted" @click="toggleModel">
-              <div
-                class="d-flex align-items-center collapsed"
-                data-bs-toggle="collapse"
-                data-bs-target="#modelsReference"
-                aria-expanded="false"
-                aria-controls="modelsReference"
-              >
-                <i class="bi bi-plus model_plus"></i>
-                <i class="bi bi-dash model_dash"></i>
-
-                <span class="sizeGuide_title my-2 ms-1"
-                  >Models Reference 模特雃參考</span
-                >
-              </div>
-
-              <div
-                class="accordion-collapse collapse pb-2"
-                id="modelsReference"
-                data-bs-parent="#accordionSizeExample"
-              >
-                <div class="model_contain">
-                  <div class="row">
-                    <span class="mb-2">資料內容3 </span>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-            <!--================ 模特雃參考 end =================-->
           </div>
         </div>
       </div>
@@ -970,100 +939,71 @@ export default {
         fittingDash.classList.toggle('fitting_dashBlock')
         fittingPlus.classList.remove('fitting_plusBlock')
       }
-    },
-    // 模特雃參考 暫時不使用
-    toggleModel() {
-      //   const modelPlus = document.querySelector('.model_plus')
-      //   const modelDash = document.querySelector('.model_dash')
-      //   const sizePlus = document.querySelector('.size_plus')
-      //   const sizeDash = document.querySelector('.size_dash')
-      //   if (modelPlus.className === 'bi bi-plus model_plus') {
-      //     modelPlus.classList.add('model_plusNone')
-      //     modelDash.classList.toggle('model_dashBlock')
-      //     sizePlus.classList.add('size_plusBlock')
-      //     sizeDash.classList.toggle('size_dashNone')
-      //   } else if (
-      //     modelPlus.className === 'bi bi-plus model_plus model_plusNone'
-      //   ) {
-      //     modelPlus.classList.remove('model_plusNone')
-      //     modelDash.classList.remove('model_dashBlock')
-      //     modelPlus.classList.add('model_plusBlock')
-      //   } else if (
-      //     modelPlus.className === 'bi bi-plus model_plus model_plusBlock'
-      //   ) {
-      //     modelPlus.classList.add('model_plusNone')
-      //     modelDash.classList.toggle('model_dashBlock')
-      //     modelPlus.classList.remove('model_plusBlock')
-      //     sizePlus.classList.add('size_plusBlock')
-      //     sizeDash.classList.toggle('size_dashNone')
-      //   }
     }
   },
   mixins: [modalMixin]
 }
 </script>
 
+//
 <style lang="scss">
-.sizeClose_Modal {
-  height: 25px;
-  width: 25px;
-  position: absolute;
-  right: 0;
-  top: -12px;
-}
-.sizeGuide_title,
-.sizeGuide_contain {
-  font-size: 0.8rem;
-  cursor: pointer;
-}
-.sizeModal_title,
-.fiting_contain,
-.model_contain {
-  font-size: 0.9rem;
-}
-// icon 旋轉功能
-.size_dashNone,
-.size_plus,
-.fitting_plusNone,
-.fitting_dash,
-.model_plusNone,
-.model_dash {
-  display: none;
-}
-
-.size_plusBlock {
-  display: block;
-  animation: rotateAdd 0.5s;
-}
-.fitting_dashBlock,
-.model_dashBlock {
-  animation: rotateDash 0.5s;
-  display: block;
-}
-
-.size_dashBlock {
-  animation: rotateDash 0.5s;
-}
-.fitting_plusBlock,
-.model_plusBlock {
-  animation: rotateAdd 0.5s;
-}
-@keyframes rotateDash {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(-180deg);
-  }
-}
-@keyframes rotateAdd {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(-90deg);
-  }
-}
-
-// icon 旋轉功能 end
+// .sizeClose_Modal {
+//   height: 25px;
+//   width: 25px;
+//   position: absolute;
+//   right: 0;
+//   top: -12px;
+// }
+// .sizeGuide_title,
+// .sizeGuide_contain {
+//   font-size: 0.8rem;
+//   cursor: pointer;
+// }
+// .sizeModal_title,
+// .fiting_contain,
+// .model_contain {
+//   font-size: 0.9rem;
+// }
+// // icon 旋轉功能
+// .size_dashNone,
+// .size_plus,
+// .fitting_plusNone,
+// .fitting_dash,
+// .model_plusNone,
+// .model_dash {
+//   display: none;
+// }
+// .size_plusBlock {
+//   display: block;
+//   animation: rotateAdd 0.5s;
+// }
+// .fitting_dashBlock,
+// .model_dashBlock {
+//   animation: rotateDash 0.5s;
+//   display: block;
+// }
+// .size_dashBlock {
+//   animation: rotateDash 0.5s;
+// }
+// .fitting_plusBlock,
+// .model_plusBlock {
+//   animation: rotateAdd 0.5s;
+// }
+// @keyframes rotateDash {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+//   100% {
+//     transform: rotate(-180deg);
+//   }
+// }
+// @keyframes rotateAdd {
+//   0% {
+//     transform: rotate(0deg);
+//   }
+//   100% {
+//     transform: rotate(-90deg);
+//   }
+// }
+//
 </style>
