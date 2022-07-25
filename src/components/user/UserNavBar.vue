@@ -351,7 +351,6 @@
 <script>
 // 為了讓Bootstrap的 Navbar 可以正常收合
 import 'bootstrap/dist/js/bootstrap.bundle'
-import emitter from '@/methods/emitter'
 import favoriteLocalStorage from '@/mixins/userFavoriteMethod'
 
 export default {
@@ -377,12 +376,7 @@ export default {
       favoriteId: [] // 取得儲存LocalStorage裡的ID
     }
   },
-  // inject: ['emitter'],
-  provide() {
-    return {
-      emitter
-    }
-  },
+  inject: ['emitter'],
   methods: {
     getSearch() {
       this.$router.replace(`/productList?keyword=${this.searchKeyword}`)
@@ -479,17 +473,18 @@ export default {
   },
   mixins: [favoriteLocalStorage],
   mounted() {
-    emitter.on('sendSignIn', (data) => {
+    this.emitter.on('sendSignIn', (data) => {
       this.userTestSignin = { ...data }
     })
     // 重新觸發加到購物車改變navBar的badge數量
-    emitter.on('update_cart', this.getCartOrder)
+    this.emitter.on('update_cart', this.getCartOrder)
     // 重新觸發刪除購物車改變navBar的badge數量
-    emitter.on('delete-cart', this.getCartOrder)
+    this.emitter.on('delete-cart', this.getCartOrder)
     // 重新觸發新增更新navBar的“我的最愛”badge數量
-    emitter.on('update_favorite', this.getFavorite)
+    this.emitter.on('update_favorite', this.getFavorite)
     // 重新觸發刪除更新navBar的“我的最愛”badge數量
-    emitter.on('delete_favorite', this.getFavorite)
+    this.emitter.on('delete_favorite', this.getFavorite)
+    this.getFavorite()
   },
   // 不知道為何要加 unmounted 生命週期
   // unmounted() {
@@ -497,7 +492,7 @@ export default {
   // },
   created() {
     this.getCartOrder()
-    this.getFavorite()
+    // this.getFavorite()
   }
 }
 </script>
