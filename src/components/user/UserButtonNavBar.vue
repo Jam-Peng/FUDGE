@@ -93,6 +93,7 @@
 <script>
 // 為了讓Bootstrap的 Navbar 可以正常收合
 import 'bootstrap/dist/js/bootstrap.bundle'
+import emitter from '@/methods/emitter'
 import favoriteLocalStorage from '@/mixins/userFavoriteMethod'
 
 export default {
@@ -112,7 +113,12 @@ export default {
       favoriteId: [] // 取得儲存LocalStorage裡的ID
     }
   },
-  inject: ['emitter'],
+  // inject: ['emitter'],
+  provide() {
+    return {
+      emitter
+    }
+  },
   methods: {
     // 購物車購買流程
     toCheckOut() {
@@ -159,17 +165,17 @@ export default {
   },
   mixins: [favoriteLocalStorage],
   mounted() {
-    this.emitter.on('sendSignIn', (data) => {
+    emitter.on('sendSignIn', (data) => {
       this.userTestSignin = { ...data }
     })
     // 重新觸發加到購物車改變navBar的badge數量
-    this.emitter.on('update_cart', this.getCartOrder)
+    emitter.on('update_cart', this.getCartOrder)
     // 重新觸發刪除購物車改變navBar的badge數量
-    this.emitter.on('delete-cart', this.getCartOrder)
+    emitter.on('delete-cart', this.getCartOrder)
     // 重新觸發新增更新navBar的“我的最愛”badge數量
-    this.emitter.on('update_favorite', this.getFavorite)
+    emitter.on('update_favorite', this.getFavorite)
     // 重新觸發刪除更新navBar的“我的最愛”badge數量
-    this.emitter.on('delete_favorite', this.getFavorite)
+    emitter.on('delete_favorite', this.getFavorite)
   },
   created() {
     this.getCartOrder()
