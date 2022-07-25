@@ -46,9 +46,9 @@
             <!-- badge -->
             <span
               class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger box_badge"
-              v-if="favoriteId.length"
             >
-              {{ favoriteId.length }}
+              <!-- {{ favoriteId.length }} -->
+              {{ favoriteLength }}
             </span>
           </li>
           <li class="nav-item ps-4 position-relative">
@@ -253,9 +253,8 @@
                   <!-- badge -->
                   <span
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger box_badge"
-                    v-if="favoriteId.length"
                   >
-                    {{ favoriteId.length }}
+                    {{ favoriteLength }}
                   </span>
                   <!-- 收藏清單 mouse事件 -->
                   <div class="d-flex flex-column cart_favorite">
@@ -375,7 +374,8 @@ export default {
         testPassword: ''
       },
       productsArr: [],
-      favoriteId: [] // 取得儲存LocalStorage裡的ID
+      favoriteId: [], // 取得儲存LocalStorage裡的ID
+      favoriteLength: ''
     }
   },
   inject: ['emitter'],
@@ -407,6 +407,7 @@ export default {
     // 取得我的最愛Id
     getFavorite() {
       this.favoriteId = this.getLocalStorage()
+      this.favoriteLength = this.favoriteId.length
     },
 
     // 進入登入頁面
