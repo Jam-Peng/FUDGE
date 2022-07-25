@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg bg-light p-4">
     <div class="container-fluid">
       <router-link
-        to="/zh-tw"
+        to="/"
         class="navbar-brand me-0 logo_title order-2 order-sm-2 order-md-2 order-lg-0"
         >FUDGE
       </router-link>
@@ -36,7 +36,7 @@
             </a>
           </li>
           <li class="nav-item ps-4 position-relative">
-            <a class="nav-link p-0" href="/zh-tw"
+            <a class="nav-link p-0" href="/"
               ><font-awesome-icon
                 class="icons icons_star"
                 :icon="['far', 'star']"
@@ -51,7 +51,7 @@
             </span>
           </li>
           <li class="nav-item ps-4 position-relative">
-            <a class="nav-link p-0" href="/zh-tw"
+            <a class="nav-link p-0" href="/"
               ><font-awesome-icon
                 class="icons icons_cart"
                 :icon="['fas', 'cart-shopping']"

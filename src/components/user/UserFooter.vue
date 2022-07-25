@@ -5,22 +5,22 @@
   >
     <div class="row px-4">
       <div class="col-md-12 d-flex pb-3">
-        <router-link to="/zh-tw" class="link-secondary pe-3">
+        <router-link to="/" class="link-secondary pe-3">
           <font-awesome-icon
             class="icons icons_fb"
             :icon="['fab', 'facebook-f']"
           />
         </router-link>
-        <router-link to="/zh-tw" class="link-secondary pe-3">
+        <router-link to="/" class="link-secondary pe-3">
           <font-awesome-icon
             class="icons icons_ig"
             :icon="['fab', 'instagram']"
           />
         </router-link>
-        <router-link to="/zh-tw" class="link-secondary pe-3">
+        <router-link to="/" class="link-secondary pe-3">
           <font-awesome-icon class="icons icons_line" :icon="['fab', 'line']" />
         </router-link>
-        <router-link to="/zh-tw" class="link-secondary pe-3">
+        <router-link to="/" class="link-secondary pe-3">
           <font-awesome-icon
             class="icons icons_yt"
             :icon="['fab', 'youtube']"
@@ -30,19 +30,13 @@
 
       <div class="col-12 col-md-6 d-flex">
         <div class="col pe-3">
-          <router-link
-            to="/zh-tw"
-            class="link-dark d-flex justify-content-between"
-          >
+          <router-link to="/" class="link-dark d-flex justify-content-between">
             <span>最新消息</span>
             <i class="bi bi-plus"></i>
           </router-link>
         </div>
         <div class="col pe-3">
-          <router-link
-            to="/zh-tw"
-            class="link-dark d-flex justify-content-between"
-          >
+          <router-link to="/" class="link-dark d-flex justify-content-between">
             <span>售後服務</span>
             <i class="bi bi-plus"></i>
           </router-link>
@@ -72,22 +66,22 @@
   <div class="container-fluid bg-light p-4 mt-4 footer_text d-block d-sm-none">
     <div class="row justify-content-center">
       <div class="col-10 pb-3 d-flex justify-content-evenly">
-        <router-link to="/zh-tw" class="link-secondary">
+        <router-link to="/" class="link-secondary">
           <font-awesome-icon
             class="icons icons_fb"
             :icon="['fab', 'facebook-f']"
           />
         </router-link>
-        <router-link to="/zh-tw" class="link-secondary">
+        <router-link to="/" class="link-secondary">
           <font-awesome-icon
             class="icons icons_ig"
             :icon="['fab', 'instagram']"
           />
         </router-link>
-        <router-link to="/zh-tw" class="link-secondary">
+        <router-link to="/" class="link-secondary">
           <font-awesome-icon class="icons icons_line" :icon="['fab', 'line']" />
         </router-link>
-        <router-link to="/zh-tw" class="link-secondary">
+        <router-link to="/" class="link-secondary">
           <font-awesome-icon
             class="icons icons_yt"
             :icon="['fab', 'youtube']"
@@ -97,19 +91,13 @@
 
       <div class="row d-flex pb-3">
         <div class="col-12 pe-3 pb-1">
-          <router-link
-            to="/zh-tw"
-            class="link-dark d-flex justify-content-between"
-          >
+          <router-link to="/" class="link-dark d-flex justify-content-between">
             <span>最新消息</span>
             <i class="bi bi-plus"></i>
           </router-link>
         </div>
         <div class="col-12 pe-3 pb-1">
-          <router-link
-            to="/zh-tw"
-            class="link-dark d-flex justify-content-between"
-          >
+          <router-link to="/" class="link-dark d-flex justify-content-between">
             <span>售後服務</span>
             <i class="bi bi-plus"></i>
           </router-link>

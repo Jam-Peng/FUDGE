@@ -5,7 +5,7 @@
 // })
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '/FUDGE/' : '/zh-tw'
+  publicPath: process.env.NODE_ENV === 'production' ? '/FUDGE/' : '/'
   // chainWebpack: (config) => {
   //   config.plugin('html').tap((args) => {
   //     const [meta] = args

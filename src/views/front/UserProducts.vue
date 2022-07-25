@@ -11,7 +11,7 @@
         >
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <router-link to="/zh-tw" class="link-dark">首頁</router-link>
+              <router-link to="/" class="link-dark">首頁</router-link>
             </li>
             <li class="breadcrumb-item">
               <router-link to="/productList" class="link-dark"
@@ -39,7 +39,7 @@
         >
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <router-link to="/zh-tw" class="link-dark">首頁</router-link>
+              <router-link to="/" class="link-dark">首頁</router-link>
             </li>
             <li class="breadcrumb-item">
               <router-link to="/productList" class="link-dark"

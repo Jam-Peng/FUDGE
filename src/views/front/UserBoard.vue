@@ -37,7 +37,7 @@
 
             <ol class="breadcrumb" v-else>
               <li class="breadcrumb-item">
-                <router-link to="/zh-tw" class="link-dark">首頁</router-link>
+                <router-link to="/" class="link-dark">首頁</router-link>
               </li>
 
               <li class="breadcrumb-item active">產品列表</li>

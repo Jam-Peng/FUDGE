@@ -49,7 +49,7 @@ export default {
         })
     },
     goShopping() {
-      this.$router.push('/zh-tw')
+      this.$router.push('/')
     }
   }
 }

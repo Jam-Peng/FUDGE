@@ -9,7 +9,7 @@ const routes = [
     component: HomeView,
     children: [
       {
-        path: 'zh-tw',
+        path: '',
         component: () => import('../views/front/BrandHome.vue')
       },
       {

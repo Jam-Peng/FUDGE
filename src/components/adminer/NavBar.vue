@@ -51,7 +51,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/zh-tw" class="nav-link nav_front">
+            <router-link to="/" class="nav-link nav_front">
               <i class="bi bi-house-door me-1"></i>
               往前台
             </router-link>

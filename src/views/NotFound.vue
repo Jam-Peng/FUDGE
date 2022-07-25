@@ -17,9 +17,7 @@
         將在
         <span class="fs-4">{{ count }}</span> 秒後自動跳轉回首頁
       </p>
-      <router-link
-        to="/zh-tw"
-        class="btn btn-sm btn-outline-secondary fs-6 mb-5"
+      <router-link to="/" class="btn btn-sm btn-outline-secondary fs-6 mb-5"
         >點擊回首頁</router-link
       >
     </div>
@@ -41,9 +39,7 @@
         將在
         <span class="fs-4">{{ count }}</span> 秒後自動跳轉回首頁
       </p>
-      <router-link
-        to="/zh-tw"
-        class="btn btn-sm btn-outline-secondary fs-6 mb-3"
+      <router-link to="/" class="btn btn-sm btn-outline-secondary fs-6 mb-3"
         >點擊回首頁</router-link
       >
     </div>
@@ -65,7 +61,7 @@
         將在
         <span class="fs-4">{{ count }}</span> 秒後自動跳轉回首頁
       </p>
-      <router-link to="/zh-tw" class="btn btn-sm btn-outline-secondary fs-6"
+      <router-link to="/" class="btn btn-sm btn-outline-secondary fs-6"
         >點擊回首頁</router-link
       >
     </div>
@@ -96,7 +92,7 @@ export default {
     redirectHome() {
       this.count--
       if (this.count === 0) {
-        this.$router.push('/zh-tw')
+        this.$router.push('/')
       }
       setTimeout(() => {
         this.redirectHome()

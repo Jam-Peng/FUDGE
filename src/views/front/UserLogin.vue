@@ -221,7 +221,7 @@ export default {
         this.singIn.userPassword === this.testSignIn.testPassword
       ) {
         this.emitter.emit('sendSignIn', this.testSignIn)
-        this.$router.push('/zh-tw')
+        this.$router.push('/')
         this.singIn.userAccount = ''
         this.singIn.userPassword = ''
       } else {
