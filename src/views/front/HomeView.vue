@@ -1,11 +1,9 @@
 <template>
   <div
-    class="container-fluid position-sticky top-0 start-0"
+    class="container-fluid position-sticky top-0 start-0 p-0"
     style="z-index: 1000"
   >
-    <div class="row">
-      <NavBar />
-    </div>
+    <NavBar />
   </div>
 
   <div>
