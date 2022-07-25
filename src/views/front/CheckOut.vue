@@ -328,7 +328,7 @@
                   class="col-md-6 locationWarn ps-1 text-danger"
                   ref="locationWarn"
                 >
-                  <span v-if="location === ''">※請確認您的門市位置</span>
+                  <span v-if="location.name === ''">※請確認您的門市位置</span>
                 </div>
 
                 <button
@@ -459,7 +459,10 @@ export default {
       total: 0,
       paymentMethod: '', // 選擇付費方式
       deliverMethod: '請選擇運送方式', // 預設選擇運送方式
-      location: '', // 取貨門市
+      location: {
+        name: '',
+        dress: ''
+      }, // 取貨門市
       shippingFee: 80, // 預設運費
       finalPayTotal: '', // 最後應付金額
       couponCode: '', // 建立空優惠卷代碼
@@ -584,7 +587,7 @@ export default {
         this.$refs.NoPayModal.showModel()
       } else if (this.deliverMethod === '請選擇運送方式') {
         this.$refs.deliverWarn.classList.add('openDeliverWarn')
-      } else if (this.deliverMethod !== '宅配' && this.location === '') {
+      } else if (this.deliverMethod !== '宅配' && this.location.name === '') {
         this.$refs.locationWarn.classList.add('openLocationWarn')
       } else {
         this.$router.push('/checkout/step2')

@@ -71,7 +71,7 @@ export default {
   data() {
     return {
       modal: {},
-      userloaction: '',
+      userloaction: {},
       locations: [
         { name: '中正店', dress: '台北市中正區中山北路一段100號' },
         { name: '大同店', dress: '台北市大同區中山北路三段88號' },
