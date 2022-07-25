@@ -46,6 +46,7 @@
             <!-- badge -->
             <span
               class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger box_badge"
+              v-if="favoriteId.length"
             >
               {{ favoriteId.length }}
             </span>
@@ -252,6 +253,7 @@
                   <!-- badge -->
                   <span
                     class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger box_badge"
+                    v-if="favoriteId.length"
                   >
                     {{ favoriteId.length }}
                   </span>
@@ -484,7 +486,6 @@ export default {
     this.emitter.on('update_favorite', this.getFavorite)
     // 重新觸發刪除更新navBar的“我的最愛”badge數量
     this.emitter.on('delete_favorite', this.getFavorite)
-    this.getFavorite()
   },
   // 不知道為何要加 unmounted 生命週期
   // unmounted() {
@@ -492,7 +493,7 @@ export default {
   // },
   created() {
     this.getCartOrder()
-    // this.getFavorite()
+    this.getFavorite()
   }
 }
 </script>
