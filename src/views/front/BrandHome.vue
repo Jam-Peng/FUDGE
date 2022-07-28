@@ -334,9 +334,12 @@ export default {
   },
   watch: {
     products() {
-      this.products.slice(0, 10).forEach((item) => {
-        this.productsItem.push(item)
-      })
+      this.products
+        .reverse()
+        .slice(0, 10)
+        .forEach((item) => {
+          this.productsItem.push(item)
+        })
     }
   },
   methods: {
