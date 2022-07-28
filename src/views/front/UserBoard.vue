@@ -133,7 +133,7 @@ export default {
       this.keyWord = this.$route.query.keyword || ''
     },
     filterData() {
-      this.filterProducts = this.filterData
+      this.filterProducts = this.filterData.reverse()
     }
   },
   computed: {
