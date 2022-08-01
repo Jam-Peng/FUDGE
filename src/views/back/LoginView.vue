@@ -56,7 +56,7 @@ export default {
         .then((res) => {
           if (res.data.success) {
             const { token, expired } = res.data
-            document.cookie = `pengToken=${token}; expires=${new Date(expired)}`
+            document.cookie = `Fudge=${token}; expires=${new Date(expired)}`
             this.$router.push('/dashboard/products')
           }
         })

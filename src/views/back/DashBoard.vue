@@ -30,7 +30,7 @@ export default {
   created() {
     // 取得 token
     const token = document.cookie.replace(
-      /(?:(?:^|.*;\s*)pengToken\s*=\s*([^;]*).*$)|^.*$/,
+      /(?:(?:^|.*;\s*)Fudge\s*=\s*([^;]*).*$)|^.*$/,
       '$1'
     )
     // 將 token 加到 headers

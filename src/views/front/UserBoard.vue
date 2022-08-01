@@ -142,12 +142,15 @@ export default {
       const filterProduct = []
       // 依照分類按鈕篩選所有商品
       if (this.category && this.category !== '全部商品') {
-        tempData = this.products.filter((item) =>
-          item.category?.match(this.category)
+        tempData = this.products.filter(
+          (item) =>
+            // item.category?.match(this.category)
+            item.category.match(this.category) // 有加問號跟沒加一樣
         )
       } else if (this.keyWord && this.keyWord !== '') {
         tempData = this.products.filter((item) =>
-          item.title?.match(this.keyWord)
+          // item.title?.match(this.keyWord)
+          item.title.match(this.keyWord)
         )
       } else {
         tempData = this.products
