@@ -1,10 +1,10 @@
  # FUDGE 服飾電商網站 (e-commerce-website)
-> Demo Website : [https://jam-peng.github.io/FUDGE/#/](https://jam-peng.github.io/FUDGE/#/)
+>⚠ Demo Website : [https://jam-peng.github.io/FUDGE/#/](https://jam-peng.github.io/FUDGE/#/)
 
 ## 專案說明
 以服飾電商為主題的網站。
 
----
+#
 ### 使用技術
 - 以 `Vue 3` 與 `Vue Cli` 架設開發。
 - 手刻 `CSS` 與使用 `Bootstrap 5` 框架，以進行切版。
